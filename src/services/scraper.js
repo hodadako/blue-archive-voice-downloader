@@ -10,8 +10,6 @@ const crypto = require('crypto');
 const cheerio = require('cheerio');
 
 const {
-  BLUE_UTILS_STUDENT_URLS,
-  BLUE_UTILS_KO_STUDENT_URLS,
   USER_AGENT,
 } = require('./constants');
 
@@ -27,82 +25,11 @@ function normalizeText(value) {
   return (value || '').replace(/\s+/g, ' ').trim();
 }
 
-function hasHangul(value) {
-  return /[가-힣]/.test(value || '');
-}
-
 function normalizeHref(href) {
   if (!href) {
     return '';
   }
   return href.replace(/^https?:\/\/[^/]+/i, '').replace(/\/$/, '');
-}
-
-function getHrefSlug(href) {
-  const normalized = normalizeHref(href);
-  return decodeURIComponent(normalized.split('/').filter(Boolean).pop() || '');
-}
-
-function toEnglishSlugName(href) {
-  const raw = normalizeText(getHrefSlug(href).toLowerCase());
-  if (!raw) {
-    return '';
-  }
-
-  const tokenAliases = {
-    arbeit: 'part_timer',
-  };
-
-  return raw
-    .split('_')
-    .filter(Boolean)
-    .flatMap((token) => (tokenAliases[token] || token).split('_'))
-    .join('_');
-}
-
-function toWikiSearchNameFromSlug(href) {
-  const slug = toEnglishSlugName(href);
-  if (!slug) {
-    return '';
-  }
-
-  const toTitleCase = (value) =>
-    value
-      .split(' ')
-      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-      .join(' ')
-      .trim();
-
-  const parts = slug.split('_').filter(Boolean);
-  if (!parts.length) {
-    return '';
-  }
-
-  const base = toTitleCase(parts[0].replace(/-/g, ' ')).replace(/ /g, '-');
-  const variant = parts
-    .slice(1)
-    .join(' ')
-    .replace(/_/g, ' ');
-
-  if (!variant) {
-    return base;
-  }
-
-  return `${base}_(${toTitleCase(variant).replace(/ /g, '-')})`;
-}
-
-function toKoreanNameFromBlueUtilsLabel(label) {
-  const words = normalizeText(label).split(' ').filter(Boolean);
-  if (!words.length) {
-    return null;
-  }
-
-  const base = words[1] || words[0];
-  const variant = words[words.length - 1];
-  if (variant && variant !== '없음') {
-    return `${base}_${variant}`;
-  }
-  return base;
 }
 
 async function fetchHtml(url) {
@@ -129,95 +56,6 @@ function toWikiPageUrl(baseUrl, title) {
   const normalizedTitle = normalizeText(title).replace(/\s+/g, '_');
   const encodedTitle = encodeURIComponent(normalizedTitle).replace(/%2F/g, '/');
   return `${baseUrl}/wiki/${encodedTitle}`;
-}
-
-function parseStudentLinks(html) {
-  const $ = cheerio.load(html);
-  const results = [];
-
-  $('a[href]').each((_idx, el) => {
-    const href = normalizeHref($(el).attr('href'));
-    const label = normalizeText($(el).text());
-
-    if (!label || !href) {
-      return;
-    }
-
-    const lowerHref = href.toLowerCase();
-    const seemsStudentPage =
-      lowerHref.includes('/student/') ||
-      lowerHref.includes('/students/') ||
-      /^\/(student|students)\b/.test(lowerHref);
-
-    if (!seemsStudentPage) {
-      return;
-    }
-
-    results.push({ href, label });
-  });
-
-  const deduped = new Map();
-  for (const item of results) {
-    const key = `${item.href}::${item.label}`;
-    if (!deduped.has(key)) {
-      deduped.set(key, item);
-    }
-  }
-
-  return Array.from(deduped.values());
-}
-
-async function fetchStudentListFromCandidates(candidates) {
-  let lastError;
-  for (const url of candidates) {
-    try {
-      const html = await fetchHtml(url);
-      const parsed = parseStudentLinks(html);
-      if (parsed.length > 0) {
-        return { url, students: parsed };
-      }
-    } catch (error) {
-      lastError = error;
-    }
-  }
-
-  throw lastError || new Error('학생 목록을 찾지 못했습니다.');
-}
-
-async function fetchBlueUtilsStudents() {
-  const enList = await fetchStudentListFromCandidates(BLUE_UTILS_STUDENT_URLS);
-
-  let koList;
-  try {
-    koList = await fetchStudentListFromCandidates(BLUE_UTILS_KO_STUDENT_URLS);
-  } catch (_error) {
-    koList = { students: [] };
-  }
-
-  const koByHref = new Map();
-  for (const entry of koList.students) {
-    const href = normalizeHref(entry.href);
-    if (hasHangul(entry.label)) {
-      koByHref.set(href, entry.label);
-    }
-  }
-
-  const merged = [];
-  for (const entry of enList.students) {
-    const href = normalizeHref(entry.href);
-    const koreanLabel = koByHref.get(href) || '';
-    const englishName = toEnglishSlugName(href) || null;
-    const koreanName = toKoreanNameFromBlueUtilsLabel(koreanLabel);
-
-    merged.push({
-      href,
-      englishName,
-      koreanName,
-      wikiSearchName: toWikiSearchNameFromSlug(href) || normalizeText(entry.label) || englishName,
-    });
-  }
-
-  return merged;
 }
 
 async function searchAudioPageByWeb(name, baseUrl) {
@@ -339,7 +177,11 @@ async function fetchFilePageAudioLinks(fileTitle, baseUrl) {
       return;
     }
     const lower = abs.toLowerCase();
-    if (/\.mp3(\?|$)/i.test(lower) || /\.ogg(\?|$)/i.test(lower) || lower.includes('/transcoded/')) {
+    const isDownloadableStatic =
+      lower.startsWith('https://static.') &&
+      lower.includes('?download') &&
+      (/\.mp3(\?|$)/i.test(lower) || /\.ogg(\?|$)/i.test(lower) || lower.includes('/transcoded/'));
+    if (isDownloadableStatic) {
       out.add(abs);
     }
   });
@@ -356,11 +198,9 @@ async function fetchFilePageAudioLinks(fileTitle, baseUrl) {
 
     const lower = abs.toLowerCase();
     const seemsAudio =
-      /\.mp3(\?|$)/i.test(lower) ||
-      /\.ogg(\?|$)/i.test(lower) ||
-      lower.includes('/transcoded/') ||
-      (lower.includes('/wiki/special:redirect/file/') &&
-        (lower.includes('.ogg') || lower.includes('.mp3')));
+      lower.startsWith('https://static.') &&
+      lower.includes('?download') &&
+      (/\.mp3(\?|$)/i.test(lower) || /\.ogg(\?|$)/i.test(lower) || lower.includes('/transcoded/'));
 
     if (seemsAudio) {
       out.add(abs);
@@ -445,7 +285,6 @@ function parseFileTitlesFromHtml(html) {
 }
 
 module.exports = {
-  fetchBlueUtilsStudents,
   resolveAudioFilesWithoutApi,
   resolveAudioFilesWithLinksWithoutApi,
   buildStaticAudioUrl,

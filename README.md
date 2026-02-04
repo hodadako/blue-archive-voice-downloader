@@ -19,8 +19,8 @@ npm run voices:sync
 npm run start
 ```
 
-`students:sync`는 `src/services/constants.js`에 정의된 `blue-utils.me` 주소에서
-학생 영문/한글 이름을 수집해 `src/data/students.json` 파일로 저장합니다.
+`students:sync`는 기존 `students.json`과 bluearchive.wiki 오디오 페이지를 참조해
+학생 영문/한글 이름을 정규화한 뒤 `src/data/students.json` 파일로 저장합니다.
 
 `voices:sync`는 학생별 음성 파일 목록과 static 다운로드 링크를 수집해
 `src/data/voice-links.json` 파일로 저장합니다.

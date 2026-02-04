@@ -178,33 +178,26 @@ function buildFileLinksByTitle(cachedEntry) {
 
 async function loadStudentMap(userDataDir, forceRefresh = false) {
   const cachePath = getCachePath(userDataDir);
-  if (!forceRefresh) {
-    const bundledStudents = readBundledStudents();
-    if (bundledStudents.length > 0) {
-      writeCache(cachePath, {
-        updatedAt: Date.now(),
-        source: 'bundled',
-        students: bundledStudents,
-      });
-      return bundledStudents;
-    }
-
-    const cache = readCache(cachePath);
-    const cachedStudents = normalizeStudents(cache?.students);
-    if (cachedStudents.length > 0) {
-      return cachedStudents;
-    }
+  const bundledStudents = readBundledStudents();
+  if (bundledStudents.length > 0) {
+    writeCache(cachePath, {
+      updatedAt: Date.now(),
+      source: 'bundled',
+      students: bundledStudents,
+    });
+    return bundledStudents;
   }
 
-  const { fetchBlueUtilsStudents } = getScraper();
-  const students = normalizeStudents(await fetchBlueUtilsStudents());
-  const payload = {
-    updatedAt: Date.now(),
-    source: 'remote',
-    students,
-  };
-  writeCache(cachePath, payload);
-  return students;
+  const cache = readCache(cachePath);
+  const cachedStudents = normalizeStudents(cache?.students);
+  if (cachedStudents.length > 0) {
+    return cachedStudents;
+  }
+
+  if (forceRefresh) {
+    return [];
+  }
+  return [];
 }
 
 function hasHangul(value) {
@@ -224,7 +217,7 @@ async function refreshStudentMap(userDataDir) {
   return {
     ok: true,
     count: students.length,
-    message: `학생 목록 ${students.length}명을 갱신했습니다.`,
+    message: `학생 목록 ${students.length}명을 로컬 데이터로 갱신했습니다.`,
   };
 }
 
