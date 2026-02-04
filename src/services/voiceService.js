@@ -1,14 +1,15 @@
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
-const crypto = require('crypto');
+const { execFileSync } = require('child_process');
 const axios = require('axios');
 const Fuse = require('fuse.js');
 
 const {
   MAP_CACHE_FILE,
+  VOICE_LINK_CACHE_FILE,
   BUNDLED_STUDENT_MAP_RELATIVE_PATH,
-  BLUEARCHIVE_API_URL,
-  BLUEARCHIVE_FANDOM_API_URL,
+  BUNDLED_VOICE_LINK_MAP_RELATIVE_PATH,
   USER_AGENT,
 } = require('./constants');
 
@@ -52,8 +53,16 @@ function getCachePath(userDataDir) {
   return path.join(userDataDir, MAP_CACHE_FILE);
 }
 
+function getVoiceCachePath(userDataDir) {
+  return path.join(userDataDir, VOICE_LINK_CACHE_FILE);
+}
+
 function getBundledStudentMapPath() {
   return path.join(__dirname, '..', BUNDLED_STUDENT_MAP_RELATIVE_PATH);
+}
+
+function getBundledVoiceMapPath() {
+  return path.join(__dirname, '..', BUNDLED_VOICE_LINK_MAP_RELATIVE_PATH);
 }
 
 function normalizeStudentEntry(student) {
@@ -104,6 +113,67 @@ function readBundledStudents() {
   } catch (_error) {
     return [];
   }
+}
+
+function readVoiceCache(userDataDir) {
+  const cachePath = getVoiceCachePath(userDataDir);
+  const cache = readCache(cachePath);
+  if (!cache || typeof cache !== 'object') {
+    return { updatedAt: 0, students: {} };
+  }
+  if (!cache.students || typeof cache.students !== 'object') {
+    return { updatedAt: cache.updatedAt || 0, students: {} };
+  }
+  return cache;
+}
+
+function writeVoiceCache(userDataDir, cache) {
+  const cachePath = getVoiceCachePath(userDataDir);
+  writeCache(cachePath, cache);
+}
+
+function readBundledVoiceMap() {
+  const bundledPath = getBundledVoiceMapPath();
+  const payload = readCache(bundledPath);
+  if (!payload || typeof payload !== 'object' || typeof payload.students !== 'object') {
+    return { updatedAt: 0, students: {} };
+  }
+  return payload;
+}
+
+function buildFileLinksByTitle(cachedEntry) {
+  const map = {};
+  if (!cachedEntry || typeof cachedEntry !== 'object') {
+    return map;
+  }
+
+  if (Array.isArray(cachedEntry.files)) {
+    for (const file of cachedEntry.files) {
+      if (!file?.fileTitle) {
+        continue;
+      }
+      const links = Array.isArray(file.links) ? file.links.filter(Boolean) : [];
+      if (links.length) {
+        map[file.fileTitle] = links;
+      }
+    }
+  }
+
+  if (Array.isArray(cachedEntry.links)) {
+    for (const entry of cachedEntry.links) {
+      if (!entry?.fileTitle || !entry?.url) {
+        continue;
+      }
+      if (!map[entry.fileTitle]) {
+        map[entry.fileTitle] = [];
+      }
+      if (!map[entry.fileTitle].includes(entry.url)) {
+        map[entry.fileTitle].push(entry.url);
+      }
+    }
+  }
+
+  return map;
 }
 
 async function loadStudentMap(userDataDir, forceRefresh = false) {
@@ -192,24 +262,29 @@ function sanitizeForDir(name) {
     .trim();
 }
 
-function buildDirectAudioUrl(fileTitle) {
-  const rawName = decodeURIComponent((fileTitle || '').replace(/^File:/, '').trim());
-  const fileName = rawName.replace(/\s+/g, '_');
-  if (!fileName) {
-    return null;
-  }
-
-  const hash = crypto.createHash('md5').update(fileName).digest('hex');
-  const encoded = encodeURIComponent(fileName);
-  return `https://static.wikitide.net/bluearchivewiki/transcoded/${hash[0]}/${hash.slice(0, 2)}/${encoded}/${encoded}.mp3?download`;
-}
-
 function toLocalDownloadName(fileTitle, url) {
   const rawName = decodeURIComponent((fileTitle || '').replace(/^File:/, '').trim()) || 'unknown';
   if (url && /\.ogg\.mp3(\?|$)/i.test(url)) {
     return rawName.replace(/\.ogg$/i, '.mp3');
   }
   return rawName;
+}
+
+function createZipFromDirectory(sourceDir, zipPath) {
+  if (process.platform === 'win32') {
+    execFileSync(
+      'powershell.exe',
+      [
+        '-NoProfile',
+        '-Command',
+        `Compress-Archive -Path "${sourceDir}\\*" -DestinationPath "${zipPath}" -Force`,
+      ],
+      { stdio: 'ignore' }
+    );
+    return;
+  }
+
+  execFileSync('zip', ['-rq', zipPath, '.'], { cwd: sourceDir, stdio: 'ignore' });
 }
 
 async function resolveStudentAndVoices(userDataDir, studentName) {
@@ -222,59 +297,31 @@ async function resolveStudentAndVoices(userDataDir, studentName) {
   }
 
   const picked = searchResult[0];
-  const { searchAudioPagesByName, fetchAudioFileTitles } = getScraper();
-  const audioQuery = picked.wikiSearchName || picked.englishName;
-  let audioTitle = await searchAudioPagesByName(audioQuery, BLUEARCHIVE_API_URL);
-  let audioApiUrl = BLUEARCHIVE_API_URL;
-
-  if (!audioTitle) {
-    audioTitle = await searchAudioPagesByName(audioQuery, BLUEARCHIVE_FANDOM_API_URL);
-    audioApiUrl = BLUEARCHIVE_FANDOM_API_URL;
-  }
-
-  if (!audioTitle) {
+  const cacheKey = picked.href || picked.englishName || picked.koreanName;
+  const bundledVoiceMap = readBundledVoiceMap();
+  const voiceCache = readVoiceCache(userDataDir);
+  const cachedEntry = cacheKey
+    ? voiceCache.students?.[cacheKey] || bundledVoiceMap.students?.[cacheKey]
+    : null;
+  if (cachedEntry?.audioTitle && Array.isArray(cachedEntry.fileTitles) && cachedEntry.fileTitles.length) {
     return {
-      ok: false,
-      message: `${audioQuery}의 오디오 페이지를 찾지 못했습니다.`,
+      ok: true,
       student: picked,
-    };
-  }
-
-  let fileTitles = await fetchAudioFileTitles(audioTitle, audioApiUrl);
-
-  if (!fileTitles.length && audioApiUrl !== BLUEARCHIVE_FANDOM_API_URL) {
-    const fandomAudioTitle = await searchAudioPagesByName(audioQuery, BLUEARCHIVE_FANDOM_API_URL);
-    if (fandomAudioTitle) {
-      const fandomFileTitles = await fetchAudioFileTitles(
-        fandomAudioTitle,
-        BLUEARCHIVE_FANDOM_API_URL
-      );
-      if (fandomFileTitles.length) {
-        audioTitle = fandomAudioTitle;
-        audioApiUrl = BLUEARCHIVE_FANDOM_API_URL;
-        fileTitles = fandomFileTitles;
-      }
-    }
-  }
-
-  if (!fileTitles.length) {
-    return {
-      ok: false,
-      message: `${audioTitle}에서 음성 파일을 찾지 못했습니다.`,
-      student: picked,
-      audioTitle,
+      audioTitle: cachedEntry.audioTitle,
+      fileTitles: cachedEntry.fileTitles,
+      fileLinksByTitle: buildFileLinksByTitle(cachedEntry),
+      fromCache: true,
     };
   }
 
   return {
-    ok: true,
+    ok: false,
+    message: '음성 링크 DB에 데이터가 없습니다. 먼저 voices:sync로 링크 DB를 생성해주세요.',
     student: picked,
-    audioTitle,
-    fileTitles,
   };
 }
 
-async function downloadVoiceFiles(studentName, fileTitles, targetBaseDir) {
+async function downloadVoiceFiles(studentName, fileTitles, targetBaseDir, fileLinksByTitle = {}) {
   if (!fileTitles?.length) {
     return {
       ok: false,
@@ -282,13 +329,24 @@ async function downloadVoiceFiles(studentName, fileTitles, targetBaseDir) {
     };
   }
 
-  const downloadRoot = path.join(targetBaseDir, sanitizeForDir(studentName));
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ba-voice-'));
+  const downloadRoot = path.join(tempRoot, sanitizeForDir(studentName));
   ensureDir(downloadRoot);
 
+  const { buildStaticAudioUrl } = getScraper();
   const results = [];
   for (const fileTitle of fileTitles) {
-    const url = buildDirectAudioUrl(fileTitle);
-    if (!url) {
+    const candidates = [];
+    const cachedLinks = Array.isArray(fileLinksByTitle?.[fileTitle])
+      ? fileLinksByTitle[fileTitle].filter(Boolean)
+      : [];
+    candidates.push(...cachedLinks);
+    const fallback = buildStaticAudioUrl(fileTitle);
+    if (fallback) {
+      candidates.push(fallback);
+    }
+
+    if (!candidates.length) {
       results.push({
         fileTitle,
         ok: false,
@@ -297,34 +355,70 @@ async function downloadVoiceFiles(studentName, fileTitles, targetBaseDir) {
       continue;
     }
 
-    const localName = toLocalDownloadName(fileTitle, url);
-    const localPath = path.join(downloadRoot, localName);
+    let downloaded = false;
+    let lastError = null;
+    for (const url of candidates) {
+      const localName = toLocalDownloadName(fileTitle, url);
+      const localPath = path.join(downloadRoot, localName);
+      try {
+        const response = await http.get(url);
+        fs.writeFileSync(localPath, Buffer.from(response.data));
+        results.push({
+          fileTitle,
+          ok: true,
+          path: localPath,
+          url,
+        });
+        downloaded = true;
+        break;
+      } catch (error) {
+        lastError = error;
+      }
+    }
 
-    try {
-      const response = await http.get(url);
-      fs.writeFileSync(localPath, Buffer.from(response.data));
-      results.push({
-        fileTitle,
-        ok: true,
-        path: localPath,
-      });
-    } catch (error) {
+    if (!downloaded) {
       results.push({
         fileTitle,
         ok: false,
-        reason: error.message,
+        reason: lastError?.message || '다운로드 실패',
       });
     }
   }
 
   const successCount = results.filter((entry) => entry.ok).length;
+  if (successCount > 0) {
+    const zipName = `${sanitizeForDir(studentName)}.zip`;
+    const zipPath = path.join(targetBaseDir, zipName);
+    try {
+      createZipFromDirectory(downloadRoot, zipPath);
+    } catch (error) {
+      fs.rmSync(tempRoot, { recursive: true, force: true });
+      return {
+        ok: false,
+        successCount,
+        totalCount: results.length,
+        results,
+        message: `ZIP 생성 실패: ${error.message}`,
+      };
+    }
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+    return {
+      ok: true,
+      successCount,
+      totalCount: results.length,
+      zipPath,
+      results,
+      message: `${successCount}/${results.length} 파일 다운로드 완료 (${zipName})`,
+    };
+  }
+
+  fs.rmSync(tempRoot, { recursive: true, force: true });
   return {
-    ok: successCount > 0,
+    ok: false,
     successCount,
     totalCount: results.length,
-    targetDir: downloadRoot,
     results,
-    message: `${successCount}/${results.length} 파일 다운로드 완료`,
+    message: `${successCount}/${results.length} 파일 다운로드 실패`,
   };
 }
 

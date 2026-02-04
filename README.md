@@ -6,19 +6,24 @@
 
 - 한국어/영어 학생 이름 검색
 - `src/data/students.json` 학생 목록을 사용해 한국어 -> 영어 이름 매핑
-- `bluearchive.wiki` 오디오 페이지 탐색 후 음성 파일 목록 조회
-- 선택한 파일만 다운로드
+- 위키 페이지 HTML 스크래핑으로 오디오 파일 목록 조회(`api.php` 미사용)
+- `src/data/voice-links.json` 링크 DB를 기반으로 음성 목록 조회
+- 다운로드 결과를 학생별 `.zip` 파일로 저장
 
 ## 빠른 시작
 
 ```bash
 npm install
 npm run students:sync
+npm run voices:sync
 npm run start
 ```
 
 `students:sync`는 `src/services/constants.js`에 정의된 `blue-utils.me` 주소에서
 학생 영문/한글 이름을 수집해 `src/data/students.json` 파일로 저장합니다.
+
+`voices:sync`는 학생별 음성 파일 목록과 static 다운로드 링크를 수집해
+`src/data/voice-links.json` 파일로 저장합니다.
 
 ## 빌드
 

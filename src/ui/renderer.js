@@ -11,6 +11,7 @@ const voiceList = document.getElementById('voiceList');
 
 let selectedStudent = null;
 let resolvedFiles = [];
+let resolvedFileLinksByTitle = {};
 
 function formatStudentLabel(item) {
   const base = item.koreanName || '이름없음';
@@ -131,11 +132,13 @@ resolveBtn.addEventListener('click', async () => {
       setVoiceStatus(result.message);
       downloadBtn.disabled = true;
       voiceList.innerHTML = '';
+      resolvedFileLinksByTitle = {};
       return;
     }
 
     selectedStudent = result.student;
     resolvedFiles = result.fileTitles;
+    resolvedFileLinksByTitle = result.fileLinksByTitle || {};
     renderVoiceList(resolvedFiles);
     downloadBtn.disabled = resolvedFiles.length === 0;
 
@@ -167,6 +170,7 @@ downloadBtn.addEventListener('click', async () => {
     const result = await window.voiceApi.downloadVoices({
       studentName: selectedStudent.koreanName || selectedStudent.englishName || 'unknown',
       fileTitles: selectedFiles,
+      fileLinksByTitle: resolvedFileLinksByTitle,
     });
 
     setVoiceStatus(result.message || '다운로드 완료');

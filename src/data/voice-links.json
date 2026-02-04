@@ -1,0 +1,29 @@
+{
+  "updatedAt": 1770199239698,
+  "students": {
+    "/student-detail/saki": {
+      "audioTitle": "Saki/audio",
+      "fileTitles": [
+        "File:Special:Upload"
+      ],
+      "links": [
+        {
+          "fileTitle": "File:Special:Upload",
+          "url": "https://static.wikitide.net/bluearchivewiki/transcoded/3/36/Special%3AUpload/Special%3AUpload.mp3?download"
+        }
+      ]
+    },
+    "/student-detail/moe": {
+      "audioTitle": "Moe/audio",
+      "fileTitles": [
+        "File:Special:Upload"
+      ],
+      "links": [
+        {
+          "fileTitle": "File:Special:Upload",
+          "url": "https://static.wikitide.net/bluearchivewiki/transcoded/3/36/Special%3AUpload/Special%3AUpload.mp3?download"
+        }
+      ]
+    }
+  }
+}

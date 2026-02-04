@@ -50,6 +50,12 @@ p {
   display: flex;
   gap: 12px;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+#refreshStatus {
+  flex: 1;
+  min-width: 260px;
 }
 
 button {

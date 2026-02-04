@@ -51,7 +51,7 @@ ipcMain.handle('voices:resolve', async (_event, studentName) => {
 });
 
 ipcMain.handle('voices:download', async (_event, payload) => {
-  const { studentName, fileTitles } = payload;
+  const { studentName, fileTitles, fileLinksByTitle } = payload;
   const chosen = await dialog.showOpenDialog({
     properties: ['openDirectory', 'createDirectory'],
     title: '저장 폴더를 선택하세요',
@@ -62,5 +62,5 @@ ipcMain.handle('voices:download', async (_event, payload) => {
   }
 
   const targetDir = chosen.filePaths[0];
-  return downloadVoiceFiles(studentName, fileTitles, targetDir);
+  return downloadVoiceFiles(studentName, fileTitles, targetDir, fileLinksByTitle);
 });

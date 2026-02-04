@@ -6,13 +6,12 @@ if (typeof globalThis.File === 'undefined') {
 }
 
 const axios = require('axios');
+const crypto = require('crypto');
 const cheerio = require('cheerio');
 
 const {
   BLUE_UTILS_STUDENT_URLS,
   BLUE_UTILS_KO_STUDENT_URLS,
-  BLUEARCHIVE_API_URL,
-  BLUEARCHIVE_FANDOM_API_URL,
   USER_AGENT,
 } = require('./constants');
 
@@ -73,6 +72,27 @@ function toKoreanNameFromBlueUtilsLabel(label) {
 async function fetchHtml(url) {
   const response = await http.get(url);
   return response.data;
+}
+
+function decodeWikiTitleFromHref(href) {
+  const normalized = normalizeHref(href);
+  const idx = normalized.toLowerCase().indexOf('/wiki/');
+  if (idx < 0) {
+    return null;
+  }
+
+  const titlePart = normalized.slice(idx + '/wiki/'.length);
+  if (!titlePart || /^special:/i.test(titlePart) || /^file:/i.test(titlePart)) {
+    return null;
+  }
+
+  return decodeURIComponent(titlePart.replace(/_/g, ' '));
+}
+
+function toWikiPageUrl(baseUrl, title) {
+  const normalizedTitle = normalizeText(title).replace(/\s+/g, '_');
+  const encodedTitle = encodeURIComponent(normalizedTitle).replace(/%2F/g, '/');
+  return `${baseUrl}/wiki/${encodedTitle}`;
 }
 
 function parseStudentLinks(html) {
@@ -164,32 +184,174 @@ async function fetchBlueUtilsStudents() {
   return merged;
 }
 
-async function searchAudioPagesByName(name, apiUrl = BLUEARCHIVE_API_URL) {
-  const response = await http.get(apiUrl, {
-    params: {
-      action: 'query',
-      list: 'search',
-      srsearch: `${name}/audio`,
-      srlimit: 5,
-      format: 'json',
-      origin: '*',
-    },
-    headers: {
-      Accept: 'application/json',
-    },
+async function searchAudioPageByWeb(name, baseUrl) {
+  const query = `${normalizeText(name)}/audio`;
+  const url = `${baseUrl}/wiki/Special:Search?query=${encodeURIComponent(query)}`;
+  const html = await fetchHtml(url);
+  const $ = cheerio.load(html);
+
+  let bestTitle = null;
+  $('a[href*="/wiki/"]').each((_idx, el) => {
+    if (bestTitle) {
+      return;
+    }
+    const href = $(el).attr('href') || '';
+    const title = decodeWikiTitleFromHref(href);
+    if (!title) {
+      return;
+    }
+    if (/\/audio$/i.test(title)) {
+      bestTitle = title;
+    }
   });
 
-  const hits = response.data?.query?.search || [];
-  const exactAudio = hits.find((item) => /\/audio$/i.test(item.title));
-  if (exactAudio) {
-    return exactAudio.title;
+  if (bestTitle) {
+    return bestTitle;
   }
 
-  if (hits[0]?.title) {
-    return hits[0].title;
+  const fallbackTitle = `${normalizeText(name).replace(/\b\w/g, (m) => m.toUpperCase())}/audio`;
+  return fallbackTitle;
+}
+
+async function fetchAudioFileTitlesFromWikiPage(audioPageTitle, baseUrl) {
+  const url = toWikiPageUrl(baseUrl, audioPageTitle);
+  const html = await fetchHtml(url);
+  return parseFileTitlesFromHtml(html);
+}
+
+async function resolveAudioFilesWithoutApi(name) {
+  const bases = ['https://bluearchive.wiki', 'https://bluearchive.fandom.com'];
+  let lastError;
+
+  for (const baseUrl of bases) {
+    try {
+      const audioTitle = await searchAudioPageByWeb(name, baseUrl);
+      const fileTitles = await fetchAudioFileTitlesFromWikiPage(audioTitle, baseUrl);
+      if (fileTitles.length) {
+        return { audioTitle, fileTitles, baseUrl };
+      }
+    } catch (error) {
+      lastError = error;
+    }
   }
 
-  return null;
+  if (lastError) {
+    throw lastError;
+  }
+  return { audioTitle: null, fileTitles: [], baseUrl: null };
+}
+
+function toAbsoluteUrl(baseUrl, href) {
+  if (!href) {
+    return null;
+  }
+
+  try {
+    if (/^https?:\/\//i.test(href)) {
+      return href;
+    }
+    if (href.startsWith('//')) {
+      return `https:${href}`;
+    }
+    return new URL(href, baseUrl).toString();
+  } catch (_error) {
+    return null;
+  }
+}
+
+function sortAudioLinkCandidates(urls) {
+  return [...urls].sort((a, b) => {
+    const score = (url) => {
+      const lower = url.toLowerCase();
+      let n = 0;
+      if (lower.includes('static.wikitide.net')) n += 100;
+      if (lower.includes('/transcoded/')) n += 80;
+      if (/\.mp3(\?|$)/i.test(lower)) n += 60;
+      if (/download/i.test(lower)) n += 30;
+      if (/\.ogg(\?|$)/i.test(lower)) n += 20;
+      return n;
+    };
+    return score(b) - score(a);
+  });
+}
+
+async function fetchFilePageAudioLinks(fileTitle, baseUrl) {
+  const title = normalizeText((fileTitle || '').replace(/^File:/i, ''));
+  if (!title) {
+    return [];
+  }
+
+  const url = toWikiPageUrl(baseUrl, `File:${title}`);
+  const html = await fetchHtml(url);
+  const $ = cheerio.load(html || '');
+  const out = new Set();
+
+  $('a[href]').each((_idx, el) => {
+    const href = ($(el).attr('href') || '').trim();
+    if (!href) {
+      return;
+    }
+    const abs = toAbsoluteUrl(baseUrl, href);
+    if (!abs) {
+      return;
+    }
+
+    const lower = abs.toLowerCase();
+    const seemsAudio =
+      /\.mp3(\?|$)/i.test(lower) ||
+      /\.ogg(\?|$)/i.test(lower) ||
+      lower.includes('/transcoded/') ||
+      (lower.includes('/wiki/special:redirect/file/') &&
+        (lower.includes('.ogg') || lower.includes('.mp3')));
+
+    if (seemsAudio) {
+      out.add(abs);
+    }
+  });
+
+  const fallback = buildStaticAudioUrl(fileTitle);
+  if (fallback) {
+    out.add(fallback);
+  }
+
+  return sortAudioLinkCandidates(Array.from(out));
+}
+
+async function resolveAudioFilesWithLinksWithoutApi(name) {
+  const resolved = await resolveAudioFilesWithoutApi(name);
+  if (!resolved.audioTitle || !resolved.fileTitles?.length || !resolved.baseUrl) {
+    return {
+      audioTitle: resolved.audioTitle,
+      fileTitles: resolved.fileTitles || [],
+      baseUrl: resolved.baseUrl || null,
+      files: [],
+    };
+  }
+
+  const files = [];
+  for (const fileTitle of resolved.fileTitles) {
+    const links = await fetchFilePageAudioLinks(fileTitle, resolved.baseUrl);
+    files.push({ fileTitle, links });
+  }
+
+  return {
+    audioTitle: resolved.audioTitle,
+    fileTitles: resolved.fileTitles,
+    baseUrl: resolved.baseUrl,
+    files,
+  };
+}
+
+function buildStaticAudioUrl(fileTitle) {
+  const rawName = decodeURIComponent((fileTitle || '').replace(/^File:/, '').trim());
+  const fileName = rawName.replace(/\s+/g, '_');
+  if (!fileName) {
+    return null;
+  }
+
+  const hash = crypto.createHash('md5').update(fileName).digest('hex');
+  const encoded = encodeURIComponent(fileName);
+  return `https://static.wikitide.net/bluearchivewiki/transcoded/${hash[0]}/${hash.slice(0, 2)}/${encoded}/${encoded}.mp3?download`;
 }
 
 function parseFileTitlesFromHtml(html) {
@@ -216,64 +378,9 @@ function parseFileTitlesFromHtml(html) {
   return Array.from(set);
 }
 
-async function fetchAudioFileTitles(audioPageTitle, apiUrl = BLUEARCHIVE_API_URL) {
-  const response = await http.get(apiUrl, {
-    params: {
-      action: 'parse',
-      page: audioPageTitle,
-      prop: 'text',
-      format: 'json',
-      formatversion: 2,
-      origin: '*',
-    },
-    headers: {
-      Accept: 'application/json',
-    },
-  });
-
-  const html = response.data?.parse?.text || '';
-  return parseFileTitlesFromHtml(html);
-}
-
-async function fetchImageUrlsByFileTitles(fileTitles, apiUrl = BLUEARCHIVE_API_URL) {
-  if (!fileTitles.length) {
-    return {};
-  }
-
-  const joinedTitles = fileTitles.join('|');
-
-  const response = await http.get(apiUrl, {
-    params: {
-      action: 'query',
-      prop: 'imageinfo',
-      iiprop: 'url',
-      titles: joinedTitles,
-      format: 'json',
-      origin: '*',
-    },
-    headers: {
-      Accept: 'application/json',
-    },
-  });
-
-  const pages = response.data?.query?.pages || {};
-  const out = {};
-
-  Object.values(pages).forEach((page) => {
-    if (!page?.title || !page?.imageinfo?.[0]?.url) {
-      return;
-    }
-    out[page.title] = page.imageinfo[0].url;
-  });
-
-  return out;
-}
-
 module.exports = {
-  BLUEARCHIVE_API_URL,
-  BLUEARCHIVE_FANDOM_API_URL,
   fetchBlueUtilsStudents,
-  searchAudioPagesByName,
-  fetchAudioFileTitles,
-  fetchImageUrlsByFileTitles,
+  resolveAudioFilesWithoutApi,
+  resolveAudioFilesWithLinksWithoutApi,
+  buildStaticAudioUrl,
 };
