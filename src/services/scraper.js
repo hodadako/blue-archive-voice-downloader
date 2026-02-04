@@ -44,15 +44,51 @@ function getHrefSlug(href) {
 }
 
 function toEnglishSlugName(href) {
-  return normalizeText(getHrefSlug(href).toLowerCase());
+  const raw = normalizeText(getHrefSlug(href).toLowerCase());
+  if (!raw) {
+    return '';
+  }
+
+  const tokenAliases = {
+    arbeit: 'part_timer',
+  };
+
+  return raw
+    .split('_')
+    .filter(Boolean)
+    .flatMap((token) => (tokenAliases[token] || token).split('_'))
+    .join('_');
 }
 
 function toWikiSearchNameFromSlug(href) {
-  const slug = getHrefSlug(href);
+  const slug = toEnglishSlugName(href);
   if (!slug) {
     return '';
   }
-  return normalizeText(slug.replace(/[_-]+/g, ' '));
+
+  const toTitleCase = (value) =>
+    value
+      .split(' ')
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ')
+      .trim();
+
+  const parts = slug.split('_').filter(Boolean);
+  if (!parts.length) {
+    return '';
+  }
+
+  const base = toTitleCase(parts[0].replace(/-/g, ' ')).replace(/ /g, '-');
+  const variant = parts
+    .slice(1)
+    .join(' ')
+    .replace(/_/g, ' ');
+
+  if (!variant) {
+    return base;
+  }
+
+  return `${base}_(${toTitleCase(variant).replace(/ /g, '-')})`;
 }
 
 function toKoreanNameFromBlueUtilsLabel(label) {
@@ -222,11 +258,18 @@ async function fetchAudioFileTitlesFromWikiPage(audioPageTitle, baseUrl) {
 async function resolveAudioFilesWithoutApi(name) {
   const bases = ['https://bluearchive.wiki', 'https://bluearchive.fandom.com'];
   let lastError;
+  const normalized = normalizeText(name).replace(/\/audio$/i, '');
 
   for (const baseUrl of bases) {
     try {
-      const audioTitle = await searchAudioPageByWeb(name, baseUrl);
-      const fileTitles = await fetchAudioFileTitlesFromWikiPage(audioTitle, baseUrl);
+      let audioTitle = `${normalized}/audio`;
+      let fileTitles = await fetchAudioFileTitlesFromWikiPage(audioTitle, baseUrl);
+
+      if (!fileTitles.length) {
+        audioTitle = await searchAudioPageByWeb(name, baseUrl);
+        fileTitles = await fetchAudioFileTitlesFromWikiPage(audioTitle, baseUrl);
+      }
+
       if (fileTitles.length) {
         return { audioTitle, fileTitles, baseUrl };
       }
