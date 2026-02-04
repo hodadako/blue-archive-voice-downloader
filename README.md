@@ -5,7 +5,7 @@
 ## 기능
 
 - 한국어/영어 학생 이름 검색
-- `blue-utils.me` 학생 목록을 사용해 한국어 -> 영어 이름 매핑
+- `src/data/students.json` 학생 목록을 사용해 한국어 -> 영어 이름 매핑
 - `bluearchive.wiki` 오디오 페이지 탐색 후 음성 파일 목록 조회
 - 선택한 파일만 다운로드
 
@@ -13,8 +13,12 @@
 
 ```bash
 npm install
+npm run students:sync
 npm run start
 ```
+
+`students:sync`는 `src/services/constants.js`에 정의된 `blue-utils.me` 주소에서
+학생 영문/한글 이름을 수집해 `src/data/students.json` 파일로 저장합니다.
 
 ## 빌드
 
@@ -35,5 +39,5 @@ GitHub Actions 워크플로우(`.github/workflows/release.yml`)를 포함했습�
 ## 주의사항
 
 - 사이트 구조가 바뀌면 파서가 동작하지 않을 수 있습니다.
-- 첫 실행 시 학생 목록 갱신에 시간이 걸릴 수 있습니다.
+- `src/data/students.json`이 비어있으면 앱에서 학생 목록 갱신 시 네트워크 요청이 발생합니다.
 - 원본 음성 파일의 저작권/사용 정책을 확인 후 배포하세요.

@@ -6,6 +6,7 @@
   "author": "Daniel",
   "license": "MIT",
   "scripts": {
+    "students:sync": "node scripts/sync-students.js",
     "start": "electron .",
     "build": "electron-builder",
     "build:mac": "electron-builder --mac dmg",
