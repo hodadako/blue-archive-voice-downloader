@@ -286,6 +286,21 @@ async function fetchFilePageAudioLinks(fileTitle, baseUrl) {
   const $ = cheerio.load(html || '');
   const out = new Set();
 
+  $('source[src], audio[src]').each((_idx, el) => {
+    const src = ($(el).attr('src') || '').trim();
+    if (!src) {
+      return;
+    }
+    const abs = toAbsoluteUrl(baseUrl, src);
+    if (!abs) {
+      return;
+    }
+    const lower = abs.toLowerCase();
+    if (/\.mp3(\?|$)/i.test(lower) || /\.ogg(\?|$)/i.test(lower) || lower.includes('/transcoded/')) {
+      out.add(abs);
+    }
+  });
+
   $('a[href]').each((_idx, el) => {
     const href = ($(el).attr('href') || '').trim();
     if (!href) {
@@ -357,6 +372,14 @@ function buildStaticAudioUrl(fileTitle) {
 function parseFileTitlesFromHtml(html) {
   const $ = cheerio.load(html || '');
   const set = new Set();
+
+  $('[data-mwtitle]').each((_idx, el) => {
+    const title = normalizeText($(el).attr('data-mwtitle') || '');
+    if (!title) {
+      return;
+    }
+    set.add(/^File:/i.test(title) ? title : `File:${title}`);
+  });
 
   $('a[href]').each((_idx, el) => {
     const href = $(el).attr('href') || '';
