@@ -1,0 +1,40 @@
+{
+  "englishTypeDisplay": {
+    "swimsuit": "Swimsuit",
+    "dress": "Dress",
+    "idol": "Idol",
+    "newyear": "NewYear",
+    "xmas": "Xmas",
+    "halloween": "Halloween",
+    "bunnygirl": "BunnyGirl",
+    "tracksuit": "TrackSuit",
+    "cheerleader": "Cheerleader",
+    "camp": "Camp",
+    "hotspring": "HotSpring",
+    "kimono": "Kimono",
+    "guide": "Guide",
+    "maid": "Maid",
+    "cycling": "Cycling",
+    "terror": "Terror",
+    "part_timer": "Part-Timer"
+  },
+  "koreanTypeDisplay": {
+    "swimsuit": "수영복",
+    "dress": "드레스",
+    "idol": "아이돌",
+    "newyear": "새해",
+    "xmas": "크리스마스",
+    "halloween": "할로윈",
+    "bunnygirl": "바니걸",
+    "tracksuit": "체육복",
+    "cheerleader": "치어리더",
+    "camp": "캠핑",
+    "hotspring": "온천",
+    "kimono": "기모노",
+    "guide": "가이드",
+    "maid": "메이드",
+    "cycling": "라이딩",
+    "terror": "테러",
+    "part_timer": "아르바이트"
+  }
+}

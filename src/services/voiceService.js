@@ -68,6 +68,11 @@ function getBundledVoiceMapPath() {
 function normalizeStudentEntry(student) {
   const koreanName = (student?.koreanName || '').trim() || null;
   const englishName = (student?.englishName || '').trim() || null;
+  const baseKoreanName = (student?.baseKoreanName || '').trim() || null;
+  const baseEnglishName = (student?.baseEnglishName || '').trim() || null;
+  const typeKey = (student?.typeKey || '').trim() || null;
+  const koreanType = (student?.koreanType || '').trim() || null;
+  const englishType = (student?.englishType || '').trim() || null;
   const wikiSearchName =
     (student?.wikiSearchName || '').trim() ||
     (englishName ? englishName.replace(/[_-]+/g, ' ') : '');
@@ -75,6 +80,11 @@ function normalizeStudentEntry(student) {
   const searchText = [
     koreanName,
     englishName,
+    baseKoreanName,
+    baseEnglishName,
+    typeKey,
+    koreanType,
+    englishType,
     wikiSearchName,
   ]
     .filter(Boolean)
@@ -84,6 +94,11 @@ function normalizeStudentEntry(student) {
     href: student?.href || '',
     englishName,
     koreanName,
+    baseEnglishName,
+    baseKoreanName,
+    typeKey,
+    englishType,
+    koreanType,
     wikiSearchName: wikiSearchName || englishName || koreanName || '',
     searchText,
   };

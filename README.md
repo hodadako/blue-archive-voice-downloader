@@ -21,6 +21,9 @@ npm run start
 
 `students:sync`는 기존 `students.json`과 bluearchive.wiki 오디오 페이지를 참조해
 학생 영문/한글 이름을 정규화한 뒤 `src/data/students.json` 파일로 저장합니다.
+이때 이름/타입 변환 규칙은 `src/data/student-name-formulas.json`,
+`src/data/student-type-formulas.json`을 사용합니다.
+학생 목록 소스는 `https://bluearchive.wiki/wiki/Characters`입니다.
 
 `voices:sync`는 학생별 음성 파일 목록과 static 다운로드 링크를 수집해
 `src/data/voice-links.json` 파일로 저장합니다.

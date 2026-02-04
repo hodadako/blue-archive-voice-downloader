@@ -58,6 +58,36 @@ function toWikiPageUrl(baseUrl, title) {
   return `${baseUrl}/wiki/${encodedTitle}`;
 }
 
+async function fetchCharacterTitlesFromWiki(baseUrl = 'https://bluearchive.wiki') {
+  const url = `${baseUrl}/wiki/Characters`;
+  const html = await fetchHtml(url);
+  const $ = cheerio.load(html || '');
+  const out = new Set();
+
+  $('#mw-content-text a[href^="/wiki/"]').each((_idx, el) => {
+    const href = ($(el).attr('href') || '').trim();
+    const title = decodeWikiTitleFromHref(href);
+    if (!title) {
+      return;
+    }
+
+    const normalized = normalizeText(title);
+    if (!normalized) {
+      return;
+    }
+    if (/\/audio$/i.test(normalized)) {
+      return;
+    }
+    if (/^characters$/i.test(normalized)) {
+      return;
+    }
+
+    out.add(normalized);
+  });
+
+  return Array.from(out);
+}
+
 async function searchAudioPageByWeb(name, baseUrl) {
   const query = `${normalizeText(name)}/audio`;
   const url = `${baseUrl}/wiki/Special:Search?query=${encodeURIComponent(query)}`;
@@ -285,6 +315,7 @@ function parseFileTitlesFromHtml(html) {
 }
 
 module.exports = {
+  fetchCharacterTitlesFromWiki,
   resolveAudioFilesWithoutApi,
   resolveAudioFilesWithLinksWithoutApi,
   buildStaticAudioUrl,
