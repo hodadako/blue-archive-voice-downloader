@@ -11,8 +11,9 @@ module.exports = {
     'https://blue-utils.me/ko/students',
   ],
   BLUEARCHIVE_API_URL: 'https://bluearchive.wiki/api.php',
+  BLUEARCHIVE_FANDOM_API_URL: 'https://bluearchive.fandom.com/api.php',
   USER_AGENT:
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
   MAP_CACHE_FILE: 'student-map-cache.json',
-  MAP_CACHE_TTL_MS: 1000 * 60 * 60 * 24,
+  BUNDLED_STUDENT_MAP_RELATIVE_PATH: 'data/students.json',
 };

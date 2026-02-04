@@ -12,6 +12,12 @@ const voiceList = document.getElementById('voiceList');
 let selectedStudent = null;
 let resolvedFiles = [];
 
+function formatStudentLabel(item) {
+  const base = item.koreanName || '이름없음';
+  const english = item.englishName ? ` (${item.englishName})` : '';
+  return `${base}${english}`;
+}
+
 function setRefreshStatus(text) {
   refreshStatus.textContent = text;
 }
@@ -32,9 +38,7 @@ function renderSearchItems(items) {
 
   items.forEach((item, idx) => {
     const li = document.createElement('li');
-    li.textContent = item.koreanName
-      ? `${item.koreanName} (${item.englishName})`
-      : item.englishName;
+    li.textContent = formatStudentLabel(item);
 
     li.addEventListener('click', () => {
       selectedStudent = item;
@@ -45,7 +49,7 @@ function renderSearchItems(items) {
       });
       li.classList.add('active');
 
-      setVoiceStatus(`${item.englishName} 선택됨. 음성 파일 조회를 눌러주세요.`);
+      setVoiceStatus(`${formatStudentLabel(item)} 선택됨. 음성 파일 조회를 눌러주세요.`);
     });
 
     if (idx === 0 && !selectedStudent) {
@@ -136,7 +140,7 @@ resolveBtn.addEventListener('click', async () => {
     downloadBtn.disabled = resolvedFiles.length === 0;
 
     setVoiceStatus(
-      `${result.student.koreanName || result.student.englishName} - ${resolvedFiles.length}개 파일 발견`
+      `${formatStudentLabel(result.student)} - ${resolvedFiles.length}개 파일 발견`
     );
   } catch (error) {
     setVoiceStatus(`조회 실패: ${error.message}`);
@@ -161,7 +165,7 @@ downloadBtn.addEventListener('click', async () => {
   setVoiceStatus('다운로드 중...');
   try {
     const result = await window.voiceApi.downloadVoices({
-      studentName: selectedStudent.koreanName || selectedStudent.englishName,
+      studentName: selectedStudent.koreanName || selectedStudent.englishName || 'unknown',
       fileTitles: selectedFiles,
     });
 

@@ -1,3 +1,10 @@
+if (typeof global.File === 'undefined') {
+  global.File = class File {};
+}
+if (typeof globalThis.File === 'undefined') {
+  globalThis.File = global.File;
+}
+
 const axios = require('axios');
 const cheerio = require('cheerio');
 
@@ -5,6 +12,7 @@ const {
   BLUE_UTILS_STUDENT_URLS,
   BLUE_UTILS_KO_STUDENT_URLS,
   BLUEARCHIVE_API_URL,
+  BLUEARCHIVE_FANDOM_API_URL,
   USER_AGENT,
 } = require('./constants');
 
@@ -29,6 +37,37 @@ function normalizeHref(href) {
     return '';
   }
   return href.replace(/^https?:\/\/[^/]+/i, '').replace(/\/$/, '');
+}
+
+function getHrefSlug(href) {
+  const normalized = normalizeHref(href);
+  return decodeURIComponent(normalized.split('/').filter(Boolean).pop() || '');
+}
+
+function toEnglishSlugName(href) {
+  return normalizeText(getHrefSlug(href).toLowerCase());
+}
+
+function toWikiSearchNameFromSlug(href) {
+  const slug = getHrefSlug(href);
+  if (!slug) {
+    return '';
+  }
+  return normalizeText(slug.replace(/[_-]+/g, ' '));
+}
+
+function toKoreanNameFromBlueUtilsLabel(label) {
+  const words = normalizeText(label).split(' ').filter(Boolean);
+  if (!words.length) {
+    return null;
+  }
+
+  const base = words[1] || words[0];
+  const variant = words[words.length - 1];
+  if (variant && variant !== '없음') {
+    return `${base}_${variant}`;
+  }
+  return base;
 }
 
 async function fetchHtml(url) {
@@ -101,27 +140,32 @@ async function fetchBlueUtilsStudents() {
 
   const koByHref = new Map();
   for (const entry of koList.students) {
+    const href = normalizeHref(entry.href);
     if (hasHangul(entry.label)) {
-      koByHref.set(normalizeHref(entry.href), entry.label);
+      koByHref.set(href, entry.label);
     }
   }
 
   const merged = [];
   for (const entry of enList.students) {
     const href = normalizeHref(entry.href);
-    const koreanName = koByHref.get(href) || null;
+    const koreanLabel = koByHref.get(href) || '';
+    const englishName = toEnglishSlugName(href) || null;
+    const koreanName = toKoreanNameFromBlueUtilsLabel(koreanLabel);
+
     merged.push({
       href,
-      englishName: entry.label,
+      englishName,
       koreanName,
+      wikiSearchName: toWikiSearchNameFromSlug(href) || normalizeText(entry.label) || englishName,
     });
   }
 
   return merged;
 }
 
-async function searchAudioPagesByName(name) {
-  const response = await http.get(BLUEARCHIVE_API_URL, {
+async function searchAudioPagesByName(name, apiUrl = BLUEARCHIVE_API_URL) {
+  const response = await http.get(apiUrl, {
     params: {
       action: 'query',
       list: 'search',
@@ -172,8 +216,8 @@ function parseFileTitlesFromHtml(html) {
   return Array.from(set);
 }
 
-async function fetchAudioFileTitles(audioPageTitle) {
-  const response = await http.get(BLUEARCHIVE_API_URL, {
+async function fetchAudioFileTitles(audioPageTitle, apiUrl = BLUEARCHIVE_API_URL) {
+  const response = await http.get(apiUrl, {
     params: {
       action: 'parse',
       page: audioPageTitle,
@@ -191,14 +235,14 @@ async function fetchAudioFileTitles(audioPageTitle) {
   return parseFileTitlesFromHtml(html);
 }
 
-async function fetchImageUrlsByFileTitles(fileTitles) {
+async function fetchImageUrlsByFileTitles(fileTitles, apiUrl = BLUEARCHIVE_API_URL) {
   if (!fileTitles.length) {
     return {};
   }
 
   const joinedTitles = fileTitles.join('|');
 
-  const response = await http.get(BLUEARCHIVE_API_URL, {
+  const response = await http.get(apiUrl, {
     params: {
       action: 'query',
       prop: 'imageinfo',
@@ -226,6 +270,8 @@ async function fetchImageUrlsByFileTitles(fileTitles) {
 }
 
 module.exports = {
+  BLUEARCHIVE_API_URL,
+  BLUEARCHIVE_FANDOM_API_URL,
   fetchBlueUtilsStudents,
   searchAudioPagesByName,
   fetchAudioFileTitles,
