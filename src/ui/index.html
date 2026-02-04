@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blue Archive Voice Downloader</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Blue Archive Voice Downloader</h1>
+        <p>
+          한국어/영어 이름으로 학생을 검색하고, <code>bluearchive.wiki</code> 음성 파일을 내려받습니다.
+        </p>
+      </header>
+
+      <section class="toolbar">
+        <button id="refreshBtn">학생 목록 갱신</button>
+        <span id="refreshStatus">최초 실행 시 학생 목록을 가져옵니다.</span>
+      </section>
+
+      <section class="searchArea">
+        <label for="studentInput">학생 이름 검색</label>
+        <div class="searchRow">
+          <input id="studentInput" type="text" placeholder="예: 호시노, Hoshino" />
+          <button id="searchBtn">검색</button>
+          <button id="resolveBtn">음성 파일 조회</button>
+        </div>
+        <ul id="searchResult"></ul>
+      </section>
+
+      <section class="voiceArea">
+        <div class="voiceHead">
+          <h2>음성 파일 목록</h2>
+          <button id="downloadBtn" disabled>선택 파일 다운로드</button>
+        </div>
+        <p id="voiceStatus">학생을 검색하고 음성 파일 조회를 눌러주세요.</p>
+        <ul id="voiceList"></ul>
+      </section>
+    </main>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>
