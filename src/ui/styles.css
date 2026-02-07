@@ -46,18 +46,6 @@ p {
   color: var(--muted);
 }
 
-.toolbar {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-#refreshStatus {
-  flex: 1;
-  min-width: 260px;
-}
-
 button {
   border: 1px solid var(--accent);
   background: var(--accent);

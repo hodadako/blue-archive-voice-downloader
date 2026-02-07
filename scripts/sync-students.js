@@ -5,10 +5,7 @@ if (typeof global.File === 'undefined') {
   global.File = class File {};
 }
 
-const {
-  fetchCharacterTitlesFromWiki,
-  resolveAudioFilesWithoutApi,
-} = require('../src/services/scraper');
+const { fetchCharacterTitlesFromWiki } = require('../src/services/scraper');
 const nameFormula = require('../src/data/student-name-formulas.json');
 const typeFormula = require('../src/data/student-type-formulas.json');
 
@@ -16,19 +13,21 @@ function normalizeText(value) {
   return (value || '').replace(/\s+/g, ' ').trim();
 }
 
-function toSlugParts(title) {
+function normalizeTypeKey(value) {
+  return normalizeText(value)
+    .toLowerCase()
+    .replace(/[\s-]+/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+
+function titleToEnglishSlug(title) {
   return normalizeText(title)
     .replace(/[()]/g, ' ')
     .replace(/[\s-]+/g, '_')
     .replace(/_+/g, '_')
     .replace(/^_+|_+$/g, '')
-    .toLowerCase()
-    .split('_')
-    .filter(Boolean);
-}
-
-function toEnglishSlug(title) {
-  return toSlugParts(title).join('_');
+    .toLowerCase();
 }
 
 function splitEnglishNameAndType(englishName) {
@@ -36,147 +35,161 @@ function splitEnglishNameAndType(englishName) {
   if (!tokens.length) {
     return { baseEnglishName: null, typeKey: null };
   }
+  if (tokens.length === 1) {
+    return { baseEnglishName: tokens[0], typeKey: null };
+  }
   return {
     baseEnglishName: tokens[0],
-    typeKey: tokens.length > 1 ? tokens.slice(1).join('_') : null,
+    typeKey: tokens.slice(1).join('_'),
   };
 }
 
-function validateNameFormula() {
-  const baseNameMap = nameFormula?.baseNameMap || {};
-  const baseSeen = new Set();
-  const koreanSeen = new Set();
-
-  for (const [rawKey, korean] of Object.entries(baseNameMap)) {
-    const baseKey = normalizeText(rawKey).toLowerCase().split('_')[0];
-    if (!baseKey) {
-      throw new Error('student-name-formulas.json: empty base key');
+function assertNoDuplicateKeys(label, obj) {
+  const seenKeys = new Set();
+  for (const [rawKey, rawValue] of Object.entries(obj || {})) {
+    const key = normalizeTypeKey(rawKey);
+    const value = normalizeText(rawValue);
+    if (!key || !value) {
+      throw new Error(`${label}: empty key/value found`);
     }
-    if (baseSeen.has(baseKey)) {
-      throw new Error(`student-name-formulas.json: duplicated base key "${baseKey}"`);
+    if (seenKeys.has(key)) {
+      throw new Error(`${label}: duplicated key "${key}"`);
     }
-    baseSeen.add(baseKey);
-
-    const normalizedKorean = normalizeText(korean);
-    if (!normalizedKorean) {
-      throw new Error(`student-name-formulas.json: empty korean value for "${rawKey}"`);
-    }
-    if (koreanSeen.has(normalizedKorean)) {
-      throw new Error(`student-name-formulas.json: duplicated korean value "${normalizedKorean}"`);
-    }
-    koreanSeen.add(normalizedKorean);
+    seenKeys.add(key);
   }
 }
 
-function validateTypeFormula() {
-  const en = typeFormula?.englishTypeDisplay || {};
-  const ko = typeFormula?.koreanTypeDisplay || {};
-
-  const allTypeKeys = new Set([...Object.keys(en), ...Object.keys(ko)]);
-  const enSeen = new Set();
-  const koSeen = new Set();
-
-  for (const key of allTypeKeys) {
-    if (!en[key]) {
-      throw new Error(`student-type-formulas.json: missing englishTypeDisplay for "${key}"`);
+function findDuplicateValues(obj) {
+  const seen = new Set();
+  const dup = new Set();
+  for (const [rawKey, rawValue] of Object.entries(obj || {})) {
+    const value = normalizeText(rawValue);
+    if (!value) {
+      continue;
     }
-    if (!ko[key]) {
-      throw new Error(`student-type-formulas.json: missing koreanTypeDisplay for "${key}"`);
+    if (seen.has(value)) {
+      dup.add(value);
+    }
+    seen.add(value);
+  }
+  return Array.from(dup).sort();
+}
+
+function buildFormulaMaps() {
+  const baseMapRaw = nameFormula?.baseNameMap || {};
+  const baseNameMap = {};
+  for (const [key, value] of Object.entries(baseMapRaw)) {
+    const baseKey = normalizeTypeKey(key).split('_')[0];
+    if (!baseKey) {
+      continue;
+    }
+    if (!baseNameMap[baseKey]) {
+      baseNameMap[baseKey] = normalizeText(value);
     }
   }
 
-  for (const value of Object.values(en)) {
-    const text = normalizeText(value);
-    if (enSeen.has(text)) {
-      throw new Error(`student-type-formulas.json: duplicated englishTypeDisplay "${text}"`);
-    }
-    enSeen.add(text);
+  assertNoDuplicateKeys('student-name-formulas.baseNameMap', baseNameMap);
+
+  const englishTypeMap = {};
+  const koreanTypeMap = {};
+
+  for (const [key, value] of Object.entries(typeFormula?.englishTypeDisplay || {})) {
+    englishTypeMap[normalizeTypeKey(key)] = normalizeText(value);
+  }
+  for (const [key, value] of Object.entries(typeFormula?.koreanTypeDisplay || {})) {
+    koreanTypeMap[normalizeTypeKey(key)] = normalizeText(value);
   }
 
-  for (const value of Object.values(ko)) {
-    const text = normalizeText(value);
-    if (koSeen.has(text)) {
-      throw new Error(`student-type-formulas.json: duplicated koreanTypeDisplay "${text}"`);
+  assertNoDuplicateKeys('student-type-formulas.englishTypeDisplay', englishTypeMap);
+  assertNoDuplicateKeys('student-type-formulas.koreanTypeDisplay', koreanTypeMap);
+
+  for (const key of Object.keys(englishTypeMap)) {
+    if (!koreanTypeMap[key]) {
+      throw new Error(`student-type-formulas: missing koreanTypeDisplay for "${key}"`);
     }
-    koSeen.add(text);
   }
+
+  const duplicateNameValues = findDuplicateValues(baseNameMap);
+  const duplicateEnglishTypeValues = findDuplicateValues(englishTypeMap);
+  const duplicateKoreanTypeValues = findDuplicateValues(koreanTypeMap);
+
+  return {
+    baseNameMap,
+    englishTypeMap,
+    koreanTypeMap,
+    duplicateNameValues,
+    duplicateEnglishTypeValues,
+    duplicateKoreanTypeValues,
+  };
 }
 
 async function main() {
-  validateNameFormula();
-  validateTypeFormula();
-
   const studentsPath = path.join(__dirname, '..', 'src', 'data', 'students.json');
-  const existingPayload = JSON.parse(fs.readFileSync(studentsPath, 'utf8'));
-  const existingStudents = Array.isArray(existingPayload?.students) ? existingPayload.students : [];
-
-  const fallbackBaseKoreanByEnglish = new Map();
-  for (const student of existingStudents) {
-    const englishBase = normalizeText(student?.englishName || '').toLowerCase().split('_')[0];
-    const koreanBase = normalizeText(student?.koreanName || '').split('_')[0];
-    if (englishBase && koreanBase && !fallbackBaseKoreanByEnglish.has(englishBase)) {
-      fallbackBaseKoreanByEnglish.set(englishBase, koreanBase);
-    }
-  }
-
-  const formulaBaseKoreanByEnglish = new Map(
-    Object.entries(nameFormula?.baseNameMap || {}).map(([k, v]) => [
-      normalizeText(k).toLowerCase().split('_')[0],
-      normalizeText(v),
-    ])
+  const existing = JSON.parse(fs.readFileSync(studentsPath, 'utf8'));
+  const existingStudents = Array.isArray(existing?.students) ? existing.students : [];
+  const existingByEnglish = new Map(
+    existingStudents
+      .filter((s) => s?.englishName)
+      .map((s) => [s.englishName, s])
   );
 
-  const characterTitles = await fetchCharacterTitlesFromWiki('https://bluearchive.wiki');
-  const outByHref = new Map();
-  const typeKeys = new Set(Object.keys(typeFormula?.englishTypeDisplay || {}));
+  const {
+    baseNameMap,
+    englishTypeMap,
+    koreanTypeMap,
+    duplicateNameValues,
+    duplicateEnglishTypeValues,
+    duplicateKoreanTypeValues,
+  } = buildFormulaMaps();
 
-  for (const characterTitle of characterTitles) {
-    try {
-      const resolved = await resolveAudioFilesWithoutApi(characterTitle);
-      const audioTitle = normalizeText((resolved.audioTitle || '').replace(/\/audio$/i, ''));
-      if (!audioTitle) {
-        continue;
-      }
+  const titles = await fetchCharacterTitlesFromWiki('https://bluearchive.wiki');
+  const outByEnglish = new Map();
+  const missingBase = new Set();
+  const missingType = new Set();
 
-      const englishName = toEnglishSlug(audioTitle);
-      if (!englishName) {
-        continue;
-      }
-
-      const { baseEnglishName, typeKey } = splitEnglishNameAndType(englishName);
-      if (typeKey && !typeKeys.has(typeKey)) {
-        continue;
-      }
-
-      const baseKoreanName =
-        formulaBaseKoreanByEnglish.get(baseEnglishName) ||
-        fallbackBaseKoreanByEnglish.get(baseEnglishName) ||
-        null;
-      const englishType = typeKey ? typeFormula.englishTypeDisplay[typeKey] : null;
-      const koreanType = typeKey ? typeFormula.koreanTypeDisplay[typeKey] : null;
-      const koreanName = baseKoreanName
-        ? (koreanType ? `${baseKoreanName}_${koreanType}` : baseKoreanName)
-        : null;
-
-      const href = `/student-detail/${englishName}`;
-      outByHref.set(href, {
-        href,
-        englishName,
-        koreanName,
-        baseEnglishName,
-        baseKoreanName,
-        typeKey: typeKey || null,
-        englishType,
-        koreanType,
-        wikiSearchName: audioTitle,
-      });
-    } catch (_error) {
-      // Skip titles that are not playable character audio pages.
+  for (const title of titles) {
+    const wikiSearchName = normalizeText(title);
+    if (!wikiSearchName) {
+      continue;
     }
+
+    const englishName = titleToEnglishSlug(wikiSearchName);
+    if (!englishName) {
+      continue;
+    }
+
+    const { baseEnglishName, typeKey } = splitEnglishNameAndType(englishName);
+    const englishType = typeKey ? englishTypeMap[typeKey] || null : null;
+    const koreanType = typeKey ? koreanTypeMap[typeKey] || null : null;
+    const baseKoreanName = baseEnglishName ? baseNameMap[baseEnglishName] || null : null;
+
+    if (baseEnglishName && !baseKoreanName) {
+      missingBase.add(baseEnglishName);
+    }
+    if (typeKey && !englishType) {
+      missingType.add(typeKey);
+    }
+
+    const existingRow = existingByEnglish.get(englishName);
+    const koreanName = baseKoreanName
+      ? (koreanType ? `${baseKoreanName}_${koreanType}` : baseKoreanName)
+      : (existingRow?.koreanName || null);
+
+    outByEnglish.set(englishName, {
+      href: `/student-detail/${englishName}`,
+      englishName,
+      koreanName,
+      baseEnglishName,
+      baseKoreanName,
+      typeKey: typeKey || null,
+      englishType,
+      koreanType,
+      wikiSearchName,
+    });
   }
 
-  const students = Array.from(outByHref.values()).sort((a, b) =>
-    (a.englishName || '').localeCompare(b.englishName || '')
+  const students = Array.from(outByEnglish.values()).sort((a, b) =>
+    a.englishName.localeCompare(b.englishName)
   );
 
   const payload = {
@@ -186,6 +199,21 @@ async function main() {
 
   fs.writeFileSync(studentsPath, JSON.stringify(payload, null, 2), 'utf8');
   console.log(`Saved ${students.length} students to ${studentsPath}`);
+  if (duplicateNameValues.length) {
+    console.log(`Duplicate korean names in name formula: ${duplicateNameValues.join(', ')}`);
+  }
+  if (duplicateEnglishTypeValues.length) {
+    console.log(`Duplicate english type labels: ${duplicateEnglishTypeValues.join(', ')}`);
+  }
+  if (duplicateKoreanTypeValues.length) {
+    console.log(`Duplicate korean type labels: ${duplicateKoreanTypeValues.join(', ')}`);
+  }
+  if (missingBase.size) {
+    console.log(`Missing baseNameMap keys (${missingBase.size}): ${Array.from(missingBase).sort().join(', ')}`);
+  }
+  if (missingType.size) {
+    console.log(`Missing type formulas (${missingType.size}): ${Array.from(missingType).sort().join(', ')}`);
+  }
 }
 
 main().catch((error) => {

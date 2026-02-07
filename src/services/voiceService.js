@@ -227,15 +227,6 @@ function buildFuse(students) {
   });
 }
 
-async function refreshStudentMap(userDataDir) {
-  const students = await loadStudentMap(userDataDir, true);
-  return {
-    ok: true,
-    count: students.length,
-    message: `학생 목록 ${students.length}명을 로컬 데이터로 갱신했습니다.`,
-  };
-}
-
 async function searchStudents(userDataDir, query) {
   const q = (query || '').trim();
   if (!q) {
@@ -431,7 +422,6 @@ async function downloadVoiceFiles(studentName, fileTitles, targetBaseDir, fileLi
 }
 
 module.exports = {
-  refreshStudentMap,
   searchStudents,
   resolveStudentAndVoices,
   downloadVoiceFiles,

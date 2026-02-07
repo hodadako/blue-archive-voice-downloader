@@ -5,7 +5,6 @@ const {
   searchStudents,
   resolveStudentAndVoices,
   downloadVoiceFiles,
-  refreshStudentMap,
 } = require('./services/voiceService');
 
 function createWindow() {
@@ -36,10 +35,6 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
-});
-
-ipcMain.handle('students:refresh', async () => {
-  return refreshStudentMap(app.getPath('userData'));
 });
 
 ipcMain.handle('students:search', async (_event, query) => {

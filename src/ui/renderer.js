@@ -1,10 +1,8 @@
 const studentInput = document.getElementById('studentInput');
-const refreshBtn = document.getElementById('refreshBtn');
 const searchBtn = document.getElementById('searchBtn');
 const resolveBtn = document.getElementById('resolveBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 
-const refreshStatus = document.getElementById('refreshStatus');
 const voiceStatus = document.getElementById('voiceStatus');
 const searchResult = document.getElementById('searchResult');
 const voiceList = document.getElementById('voiceList');
@@ -17,10 +15,6 @@ function formatStudentLabel(item) {
   const base = item.koreanName || '이름없음';
   const english = item.englishName ? ` (${item.englishName})` : '';
   return `${base}${english}`;
-}
-
-function setRefreshStatus(text) {
-  refreshStatus.textContent = text;
 }
 
 function setVoiceStatus(text) {
@@ -100,16 +94,6 @@ async function doSearch() {
     setVoiceStatus(`검색 실패: ${error.message}`);
   }
 }
-
-refreshBtn.addEventListener('click', async () => {
-  setRefreshStatus('학생 목록 갱신 중...');
-  try {
-    const result = await window.voiceApi.refreshStudents();
-    setRefreshStatus(result.message);
-  } catch (error) {
-    setRefreshStatus(`갱신 실패: ${error.message}`);
-  }
-});
 
 searchBtn.addEventListener('click', doSearch);
 studentInput.addEventListener('keydown', (event) => {
