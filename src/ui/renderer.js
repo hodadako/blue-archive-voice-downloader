@@ -26,7 +26,7 @@ const translations = {
     langLabel: '언어',
     themeLabel: '다크모드',
     searchLabel: '학생 이름 검색',
-    searchPlaceholder: '예: 호시노, Hoshino',
+    searchPlaceholder: 'Aru',
     searchBtn: '검색',
     resolveBtn: '음성 파일 조회',
     voiceListTitle: '음성 파일 목록',
@@ -55,7 +55,7 @@ const translations = {
     langLabel: 'Language',
     themeLabel: 'Dark mode',
     searchLabel: 'Search student name',
-    searchPlaceholder: 'e.g., Hoshino',
+    searchPlaceholder: 'Aru',
     searchBtn: 'Search',
     resolveBtn: 'Resolve voices',
     voiceListTitle: 'Voice file list',
@@ -141,7 +141,23 @@ function renderSearchItems(items) {
 
   items.forEach((item, idx) => {
     const li = document.createElement('li');
-    li.textContent = formatStudentLabel(item);
+    const row = document.createElement('div');
+    row.className = 'student-row';
+
+    if (item.imageUrl) {
+      const img = document.createElement('img');
+      img.className = 'student-avatar';
+      img.src = item.imageUrl;
+      img.alt = formatStudentLabel(item);
+      img.loading = 'lazy';
+      row.appendChild(img);
+    }
+
+    const label = document.createElement('span');
+    label.textContent = formatStudentLabel(item);
+    row.appendChild(label);
+
+    li.appendChild(row);
 
     li.addEventListener('click', () => {
       selectedStudent = item;

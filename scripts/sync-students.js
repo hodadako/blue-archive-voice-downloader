@@ -5,7 +5,7 @@ if (typeof global.File === 'undefined') {
   global.File = class File {};
 }
 
-const { fetchCharacterTitlesFromWiki } = require('../src/services/scraper');
+const { fetchCharacterEntriesFromWiki } = require('../src/services/scraper');
 const nameFormula = require('../src/data/student-name-formulas.json');
 const typeFormula = require('../src/data/student-type-formulas.json');
 
@@ -148,12 +148,14 @@ async function main() {
     duplicateKoreanTypeValues,
   } = buildFormulaMaps();
 
-  const titles = await fetchCharacterTitlesFromWiki('https://bluearchive.wiki');
+  const entries = await fetchCharacterEntriesFromWiki('https://bluearchive.wiki');
   const outByEnglish = new Map();
   const missingBase = new Set();
   const missingType = new Set();
 
-  for (const title of titles) {
+  for (const entry of entries) {
+    const title = entry?.title;
+    const imageUrl = entry?.imageUrl || null;
     const wikiSearchName = normalizeText(title);
     if (!wikiSearchName) {
       continue;
@@ -197,6 +199,7 @@ async function main() {
       englishType,
       koreanType,
       wikiSearchName,
+      imageUrl: imageUrl || existingRow?.imageUrl || null,
     });
   }
 

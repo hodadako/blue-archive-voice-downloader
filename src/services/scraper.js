@@ -58,12 +58,24 @@ function toWikiPageUrl(baseUrl, title) {
   return `${baseUrl}/wiki/${encodedTitle}`;
 }
 
-async function fetchCharacterTitlesFromWiki(baseUrl = 'https://bluearchive.wiki') {
-  const url = `${baseUrl}/wiki/Characters`;
-  const html = await fetchHtml(url);
-  const $ = cheerio.load(html || '');
-  const out = new Set();
-  const blockedTitles = new Set([
+function extractImageUrl($, el, baseUrl) {
+  const img = $(el).find('img').first();
+  if (!img.length) {
+    return null;
+  }
+  const srcset = (img.attr('srcset') || '').trim();
+  const dataSrc = (img.attr('data-src') || '').trim();
+  const src = (img.attr('src') || '').trim();
+  let candidate = dataSrc || src;
+  if (!candidate && srcset) {
+    candidate = srcset.split(',')[0].trim().split(' ')[0];
+  }
+  const abs = toAbsoluteUrl(baseUrl, candidate);
+  return abs || null;
+}
+
+function getCharacterBlockedTitles() {
+  return new Set([
     'Affinity',
     'Characters StatChart',
     'Characters image list',
@@ -71,6 +83,14 @@ async function fetchCharacterTitlesFromWiki(baseUrl = 'https://bluearchive.wiki'
     'Unique gear list',
     'Unique weapons list',
   ]);
+}
+
+async function fetchCharacterEntriesFromWiki(baseUrl = 'https://bluearchive.wiki') {
+  const url = `${baseUrl}/wiki/Characters`;
+  const html = await fetchHtml(url);
+  const $ = cheerio.load(html || '');
+  const out = new Map();
+  const blockedTitles = getCharacterBlockedTitles();
 
   $('#mw-content-text a[href^="/wiki/"]').each((_idx, el) => {
     const href = ($(el).attr('href') || '').trim();
@@ -93,10 +113,21 @@ async function fetchCharacterTitlesFromWiki(baseUrl = 'https://bluearchive.wiki'
       return;
     }
 
-    out.add(normalized);
+    const existing = out.get(normalized);
+    if (existing) {
+      return;
+    }
+
+    const imageUrl = extractImageUrl($, el, baseUrl);
+    out.set(normalized, { title: normalized, imageUrl: imageUrl || null });
   });
 
-  return Array.from(out);
+  return Array.from(out.values());
+}
+
+async function fetchCharacterTitlesFromWiki(baseUrl = 'https://bluearchive.wiki') {
+  const entries = await fetchCharacterEntriesFromWiki(baseUrl);
+  return entries.map((entry) => entry.title);
 }
 
 async function searchAudioPageByWeb(name, baseUrl) {
@@ -327,6 +358,7 @@ function parseFileTitlesFromHtml(html) {
 
 module.exports = {
   fetchCharacterTitlesFromWiki,
+  fetchCharacterEntriesFromWiki,
   resolveAudioFilesWithoutApi,
   resolveAudioFilesWithLinksWithoutApi,
   buildStaticAudioUrl,

@@ -100,6 +100,7 @@ function normalizeStudentEntry(student) {
     englishType,
     koreanType,
     wikiSearchName: wikiSearchName || englishName || koreanName || '',
+    imageUrl: (student?.imageUrl || '').trim() || null,
     searchText,
   };
 }
