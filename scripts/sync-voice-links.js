@@ -26,42 +26,59 @@ async function main() {
 
   let successCount = 0;
   let failCount = 0;
+  const concurrency = Number(process.env.VOICE_SYNC_CONCURRENCY || '6');
+  let cursor = 0;
 
-  for (const student of students) {
-    const key = student.href || student.englishName || student.koreanName;
-    if (!key) {
-      failCount += 1;
-      continue;
-    }
+  async function worker() {
+    while (true) {
+      const idx = cursor;
+      cursor += 1;
+      if (idx >= students.length) {
+        return;
+      }
 
-    const query = student.wikiSearchName || student.englishName || student.koreanName;
-    if (!query) {
-      failCount += 1;
-      continue;
-    }
-
-    try {
-      const resolved = await resolveAudioFilesWithLinksWithoutApi(query);
-      const fileTitles = resolved.fileTitles || [];
-      if (!resolved.audioTitle || !fileTitles.length) {
+      const student = students[idx];
+      const key = student.href || student.englishName || student.koreanName;
+      if (!key) {
         failCount += 1;
+        console.log('[FAIL] missing key');
         continue;
       }
 
-      const files = resolved.files || [];
+      const query = student.wikiSearchName || student.englishName || student.koreanName;
+      if (!query) {
+        failCount += 1;
+        console.log(`[FAIL] ${key}: missing query`);
+        continue;
+      }
 
-      out.students[key] = {
-        audioTitle: resolved.audioTitle,
-        fileTitles,
-        files,
-      };
-      successCount += 1;
-      console.log(`[OK] ${query} -> ${fileTitles.length} files`);
-    } catch (_error) {
-      failCount += 1;
-      console.log(`[FAIL] ${query}`);
+      try {
+        const resolved = await resolveAudioFilesWithLinksWithoutApi(query);
+        const fileTitles = resolved.fileTitles || [];
+        if (!resolved.audioTitle || !fileTitles.length) {
+          failCount += 1;
+          console.log(`[FAIL] ${query}: no audio titles found`);
+          continue;
+        }
+
+        const files = resolved.files || [];
+
+        out.students[key] = {
+          audioTitle: resolved.audioTitle,
+          fileTitles,
+          files,
+        };
+        successCount += 1;
+        console.log(`[OK] ${query} -> ${fileTitles.length} files`);
+      } catch (error) {
+        failCount += 1;
+        console.log(`[FAIL] ${query}: ${error.message}`);
+      }
     }
   }
+
+  const workers = Array.from({ length: Math.max(1, concurrency) }, () => worker());
+  await Promise.all(workers);
 
   fs.writeFileSync(outputPath, JSON.stringify(out, null, 2), 'utf8');
   console.log(
