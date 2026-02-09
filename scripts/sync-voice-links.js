@@ -23,25 +23,56 @@ async function main() {
     updatedAt: Date.now(),
     students: {},
   };
+  const existing = fs.existsSync(outputPath) ? readJson(outputPath) : null;
+  const existingStudents = existing?.students && typeof existing.students === 'object' ? existing.students : {};
 
   let successCount = 0;
   let failCount = 0;
   const concurrency = Number(process.env.VOICE_SYNC_CONCURRENCY || '6');
+  const queryFilter = (process.env.VOICE_SYNC_QUERY || '').trim();
+  const linkFilter = (process.env.VOICE_SYNC_LINK || '').trim();
+  const forceSync = String(process.env.VOICE_SYNC_FORCE || '').toLowerCase() === 'true';
   let cursor = 0;
+
+  const filteredStudents = students.filter((student) => {
+    if (linkFilter) {
+      const normalized = linkFilter.startsWith('/wiki/') ? linkFilter : `/wiki/${linkFilter}`;
+      return student.href === normalized;
+    }
+    if (!queryFilter) {
+      return true;
+    }
+    const query = queryFilter.toLowerCase();
+    const haystack = [
+      student.wikiSearchName,
+      student.englishName,
+      student.koreanName,
+      student.href,
+    ]
+      .filter(Boolean)
+      .map((value) => String(value).toLowerCase());
+    return haystack.some((value) => value.includes(query));
+  });
 
   async function worker() {
     while (true) {
       const idx = cursor;
       cursor += 1;
-      if (idx >= students.length) {
+      if (idx >= filteredStudents.length) {
         return;
       }
 
-      const student = students[idx];
+      const student = filteredStudents[idx];
       const key = student.href || student.englishName || student.koreanName;
       if (!key) {
         failCount += 1;
         console.log('[FAIL] missing key');
+        continue;
+      }
+
+      if (!forceSync && existingStudents[key]) {
+        out.students[key] = existingStudents[key];
+        console.log(`[SKIP] ${key}: cached`);
         continue;
       }
 
@@ -82,7 +113,7 @@ async function main() {
 
   fs.writeFileSync(outputPath, JSON.stringify(out, null, 2), 'utf8');
   console.log(
-    `Saved voice links to ${outputPath} (success=${successCount}, fail=${failCount}, total=${students.length})`
+    `Saved voice links to ${outputPath} (success=${successCount}, fail=${failCount}, total=${filteredStudents.length})`
   );
 }
 
