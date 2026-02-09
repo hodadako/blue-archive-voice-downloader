@@ -1,0 +1,76 @@
+name: Bug Report
+description: Report a reproducible problem in the app
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting.
+        Please fill in the details below so we can reproduce the issue quickly.
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: A short description of the bug
+      placeholder: Search result jumps to wrong item on ArrowDown
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Write exact steps
+      placeholder: |
+        1. Open app
+        2. Type "aru"
+        3. Press ArrowDown
+        4. Observe unexpected selection
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      placeholder: The next suggestion should be selected.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      placeholder: It jumps to the last suggestion.
+    validations:
+      required: true
+  - type: input
+    id: app_version
+    attributes:
+      label: App Version
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: OS
+      options:
+        - macOS
+        - Windows
+        - Linux
+    validations:
+      required: true
+  - type: dropdown
+    id: arch
+    attributes:
+      label: Architecture
+      options:
+        - x64
+        - arm64
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or Screenshots
+      description: Paste logs or attach screenshots if available

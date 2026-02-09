@@ -2,7 +2,7 @@
 
 한국어/영어 학생 이름으로 검색해서 `bluearchive.wiki` 음성 파일을 다운로드하는 데스크톱 앱입니다.
 
-English README: `README.en.md`
+[English README](README.en.md)
 
 ## 사용자용 안내
 
@@ -49,3 +49,7 @@ npm run build:mac
 - Blue Archive 관련 원저작권 및 IP는 Nexon Games와 Yostar에 있습니다.
 - 이 프로젝트는 비영리/비수익 목적의 팬 유틸리티입니다.
 - 음성 및 관련 에셋의 사용은 각 권리자의 정책을 따르세요.
+
+## 이슈 제보
+
+- 버그/개선 제안은 GitHub Issues 템플릿을 사용해 제보해주세요.
