@@ -254,12 +254,16 @@ function moveActiveSearchSuggestion(step) {
     return false;
   }
   if (activeSuggestionIndex < 0) {
-    setActiveSearchSuggestion(0, { applyInputValue: true, announceSelection: true });
+    const startIndex = step < 0 ? searchSuggestions.length - 1 : 0;
+    setActiveSearchSuggestion(startIndex, { applyInputValue: true, announceSelection: true });
     return true;
   }
 
-  const total = searchSuggestions.length;
-  const next = (activeSuggestionIndex + step + total) % total;
+  const lastIndex = searchSuggestions.length - 1;
+  const next = Math.max(0, Math.min(lastIndex, activeSuggestionIndex + step));
+  if (next === activeSuggestionIndex) {
+    return true;
+  }
   setActiveSearchSuggestion(next, { applyInputValue: true, announceSelection: true });
   return true;
 }
