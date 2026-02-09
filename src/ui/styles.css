@@ -6,6 +6,18 @@
   --line: #dbe2ef;
   --accent: #0f766e;
   --accent-strong: #115e59;
+  --shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+body[data-theme='dark'] {
+  --bg: #0f172a;
+  --card: #111827;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --line: #1f2937;
+  --accent: #22c55e;
+  --accent-strong: #16a34a;
+  --shadow: 0 8px 20px rgba(15, 23, 42, 0.45);
 }
 
 * {
@@ -17,8 +29,8 @@ body {
   min-height: 100vh;
   font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
   color: var(--text);
-  background: radial-gradient(circle at top right, #d6fbf6, transparent 40%),
-    linear-gradient(180deg, #eef4ff 0%, #f8fafc 100%);
+  background: radial-gradient(circle at top right, rgba(34, 197, 94, 0.18), transparent 40%),
+    linear-gradient(180deg, var(--bg) 0%, #0b1221 100%);
 }
 
 .container {
@@ -34,6 +46,7 @@ section {
   border-radius: 14px;
   padding: 16px 18px;
   margin-bottom: 14px;
+  box-shadow: var(--shadow);
 }
 
 h1,
@@ -44,6 +57,10 @@ h2 {
 p {
   margin: 0;
   color: var(--muted);
+}
+
+code {
+  color: var(--accent);
 }
 
 button {
@@ -75,6 +92,8 @@ input {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 10px;
+  background: transparent;
+  color: var(--text);
 }
 
 #searchResult,
@@ -100,7 +119,7 @@ input {
 }
 
 #searchResult li.active {
-  background: #dff8f5;
+  background: rgba(34, 197, 94, 0.16);
 }
 
 .voiceHead {
@@ -113,4 +132,119 @@ input {
   display: flex;
   gap: 8px;
   align-items: center;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.headerControls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.control {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.control select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+}
+
+.toggle {
+  position: relative;
+  gap: 10px;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggleTrack {
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--line);
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.toggleTrack::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--card);
+  transition: transform 0.2s ease;
+}
+
+.toggle input:checked + .toggleTrack {
+  background: var(--accent);
+}
+
+.toggle input:checked + .toggleTrack::after {
+  transform: translateX(18px);
+}
+
+.progressArea {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.1);
+  overflow: hidden;
+}
+
+#progressFill {
+  width: 0%;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .searchRow {
+    grid-template-columns: 1fr;
+  }
+
+  .voiceHead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }

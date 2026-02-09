@@ -46,16 +46,29 @@ ipcMain.handle('voices:resolve', async (_event, studentName) => {
 });
 
 ipcMain.handle('voices:download', async (_event, payload) => {
-  const { studentName, fileTitles, fileLinksByTitle } = payload;
+  const { studentName, fileTitles, fileLinksByTitle, language } = payload || {};
   const chosen = await dialog.showOpenDialog({
     properties: ['openDirectory', 'createDirectory'],
-    title: '저장 폴더를 선택하세요',
+    title: language === 'en' ? 'Choose a save folder' : '저장 폴더를 선택하세요',
   });
 
   if (chosen.canceled || chosen.filePaths.length === 0) {
-    return { ok: false, message: '저장 폴더 선택이 취소되었습니다.' };
+    return {
+      ok: false,
+      message:
+        language === 'en' ? 'Save folder selection was canceled.' : '저장 폴더 선택이 취소되었습니다.',
+    };
   }
 
   const targetDir = chosen.filePaths[0];
-  return downloadVoiceFiles(studentName, fileTitles, targetDir, fileLinksByTitle);
+  const sender = _event.sender;
+  return downloadVoiceFiles(
+    studentName,
+    fileTitles,
+    targetDir,
+    fileLinksByTitle,
+    (progress) => {
+      sender.send('voices:download:progress', progress);
+    }
+  );
 });

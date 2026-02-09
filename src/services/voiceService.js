@@ -320,7 +320,13 @@ async function resolveStudentAndVoices(userDataDir, studentName) {
   };
 }
 
-async function downloadVoiceFiles(studentName, fileTitles, targetBaseDir, fileLinksByTitle = {}) {
+async function downloadVoiceFiles(
+  studentName,
+  fileTitles,
+  targetBaseDir,
+  fileLinksByTitle = {},
+  onProgress
+) {
   if (!fileTitles?.length) {
     return {
       ok: false,
@@ -334,6 +340,15 @@ async function downloadVoiceFiles(studentName, fileTitles, targetBaseDir, fileLi
 
   const { buildStaticAudioUrl } = getScraper();
   const results = [];
+  const totalCount = fileTitles.length;
+  let completedCount = 0;
+  if (typeof onProgress === 'function') {
+    onProgress({
+      completed: completedCount,
+      total: totalCount,
+      currentFile: null,
+    });
+  }
   for (const fileTitle of fileTitles) {
     const candidates = [];
     const cachedLinks = Array.isArray(fileLinksByTitle?.[fileTitle])
@@ -351,6 +366,16 @@ async function downloadVoiceFiles(studentName, fileTitles, targetBaseDir, fileLi
         ok: false,
         reason: 'URL 생성 실패',
       });
+      completedCount += 1;
+      if (typeof onProgress === 'function') {
+        onProgress({
+          completed: completedCount,
+          total: totalCount,
+          currentFile: fileTitle,
+          ok: false,
+          reason: 'URL 생성 실패',
+        });
+      }
       continue;
     }
 
@@ -380,6 +405,17 @@ async function downloadVoiceFiles(studentName, fileTitles, targetBaseDir, fileLi
         fileTitle,
         ok: false,
         reason: lastError?.message || '다운로드 실패',
+      });
+    }
+    completedCount += 1;
+    if (typeof onProgress === 'function') {
+      const lastResult = results[results.length - 1];
+      onProgress({
+        completed: completedCount,
+        total: totalCount,
+        currentFile: fileTitle,
+        ok: lastResult?.ok ?? false,
+        reason: lastResult?.reason ?? null,
       });
     }
   }
