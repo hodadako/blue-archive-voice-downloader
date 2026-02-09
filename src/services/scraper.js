@@ -135,7 +135,7 @@ async function fetchAudioFileTitlesFromWikiPage(audioPageTitle, baseUrl) {
 }
 
 async function resolveAudioFilesWithoutApi(name) {
-  const bases = ['https://bluearchive.wiki', 'https://bluearchive.fandom.com'];
+  const bases = ['https://bluearchive.wiki'];
   let lastError;
   const normalized = normalizeText(name).replace(/\/audio$/i, '');
 
