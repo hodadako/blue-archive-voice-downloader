@@ -1,56 +1,51 @@
 # Blue Archive Voice Downloader
 
-한국어/영어 학생 이름으로 검색해서 `bluearchive.wiki`의 음성(`.ogg`) 파일을 내려받는 Electron 앱입니다.
+한국어/영어 학생 이름으로 검색해서 `bluearchive.wiki` 음성 파일을 다운로드하는 데스크톱 앱입니다.
 
-## 기능
+English README: `README.en.md`
 
-- 한국어/영어 학생 이름 검색
-- `src/data/students.json` 학생 목록을 사용해 한국어 -> 영어 이름 매핑
-- 위키 페이지 HTML 스크래핑으로 오디오 파일 목록 조회(`api.php` 미사용)
-- `src/data/voice-links.json` 링크 DB를 기반으로 음성 목록 조회
-- 다운로드 결과를 학생별 `.zip` 파일로 저장
+## 사용자용 안내
 
-## 빠른 시작
+릴리스 페이지에서 운영체제에 맞는 설치 파일을 받아 실행하세요.
+
+- macOS: `.dmg`
+- Windows: `.exe`
+
+앱 실행 후 사용 순서:
+
+1. 학생 이름(한국어/영어) 검색
+2. 검색 결과에서 학생 선택
+3. `음성 파일 조회` 클릭
+4. 원하는 파일 선택 후 다운로드
+
+## 검색 기능 상세
+
+- 한국어/영어 자동완성: 입력 중 자동으로 검색 결과가 갱신됩니다.
+- 한국어 검색: 완전 일치/접두어 일치를 우선해 결과를 보여줍니다.
+- 영어 검색: 완전 일치/접두어/단어 경계 기준으로 우선 정렬해 의도와 무관한 결과를 줄였습니다.
+- 오타 보정: 위 규칙으로 결과가 없을 때만 퍼지(fuzzy) 검색이 동작합니다.
+- 추천 결과: 검색 결과 맨 위 항목이 기본 선택되어 바로 다음 단계(음성 파일 조회)로 진행할 수 있습니다.
+
+## DMG 빌드(앱 버전 테스트용)
+
+macOS에서 직접 테스트 빌드를 만들려면:
 
 ```bash
 npm install
-npm run students:sync
-npm run students:images:sync
-npm run voices:sync
-npm run start
+npm run build:mac
 ```
 
-`students:sync`는 기존 `students.json`과 bluearchive.wiki 오디오 페이지를 참조해
-학생 영문/한글 이름을 정규화한 뒤 `src/data/students.json` 파일로 저장합니다.
-이때 이름/타입 변환 규칙은 `src/data/student-name-formulas.json`,
-`src/data/student-type-formulas.json`을 사용합니다.
-학생 목록 소스는 `https://bluearchive.wiki/wiki/Characters`입니다.
+빌드 결과물은 `dist/` 폴더에 생성됩니다.
 
-`students:images:sync`는 `https://bluearchive.wiki/wiki/Characters`의 `tbody`에서
-학생별 이미지 링크를 수집해 `src/data/images/students`에 저장하고,
-`src/data/students.json`의 `imageUrl`을 로컬 경로로 갱신합니다.
+## 라이선스
 
-`voices:sync`는 학생별 음성 파일 목록과 static 다운로드 링크를 수집해
-`src/data/voice-links.json` 파일로 저장합니다.
+이 프로젝트 소스코드는 MIT 라이선스를 따릅니다.
 
-## 빌드
+- `LICENSE`
+- `OPEN_SOURCE.md`
 
-```bash
-npm run build:mac   # .dmg
-npm run build:win   # .exe (nsis)
-```
+## 저작권 및 비영리 고지
 
-## 배포(운영체제 무관)
-
-GitHub Actions 워크플로우(`.github/workflows/release.yml`)를 포함했습니다.
-
-1. GitHub 저장소에 푸시
-2. 태그 생성: `git tag v0.1.0 && git push origin v0.1.0`
-3. Actions에서 macOS/Windows 빌드 동시 실행
-4. 산출물로 `.dmg`, `.exe` 획득
-
-## 주의사항
-
-- 사이트 구조가 바뀌면 파서가 동작하지 않을 수 있습니다.
-- `src/data/students.json`이 비어있으면 앱에서 학생 목록 갱신 시 네트워크 요청이 발생합니다.
-- 원본 음성 파일의 저작권/사용 정책을 확인 후 배포하세요.
+- Blue Archive 관련 원저작권 및 IP는 Nexon Games와 Yostar에 있습니다.
+- 이 프로젝트는 비영리/비수익 목적의 팬 유틸리티입니다.
+- 음성 및 관련 에셋의 사용은 각 권리자의 정책을 따르세요.
