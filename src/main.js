@@ -8,9 +8,11 @@ const {
 } = require('./services/voiceService');
 
 function createWindow() {
+  const windowIcon = path.join(__dirname, '..', 'icons', 'icon.png');
   const win = new BrowserWindow({
     width: 1080,
     height: 760,
+    icon: windowIcon,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
