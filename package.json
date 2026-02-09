@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "students:sync": "node scripts/sync-students.js",
+    "students:images:sync": "node scripts/sync-student-images.js",
     "voices:sync": "node scripts/sync-voice-links.js",
     "start": "electron .",
     "build": "electron-builder",

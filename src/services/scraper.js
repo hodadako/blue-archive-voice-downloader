@@ -85,42 +85,73 @@ function getCharacterBlockedTitles() {
   ]);
 }
 
+function shouldIncludeCharacterTitle(title, blockedTitles) {
+  const normalized = normalizeText(title);
+  if (!normalized) {
+    return false;
+  }
+  if (blockedTitles.has(normalized)) {
+    return false;
+  }
+  if (/\/audio$/i.test(normalized)) {
+    return false;
+  }
+  if (/^characters$/i.test(normalized)) {
+    return false;
+  }
+  return true;
+}
+
+function addCharacterEntry(out, title, imageUrl) {
+  const normalized = normalizeText(title);
+  if (!normalized || out.has(normalized)) {
+    return;
+  }
+  out.set(normalized, { title: normalized, imageUrl: imageUrl || null });
+}
+
 async function fetchCharacterEntriesFromWiki(baseUrl = 'https://bluearchive.wiki') {
   const url = `${baseUrl}/wiki/Characters`;
   const html = await fetchHtml(url);
   const $ = cheerio.load(html || '');
   const out = new Map();
   const blockedTitles = getCharacterBlockedTitles();
+  const tableRows = $('#mw-content-text table tbody tr');
 
-  $('#mw-content-text a[href^="/wiki/"]').each((_idx, el) => {
-    const href = ($(el).attr('href') || '').trim();
-    const title = decodeWikiTitleFromHref(href);
-    if (!title) {
-      return;
-    }
+  tableRows.each((_idx, row) => {
+    let pickedTitle = null;
 
-    const normalized = normalizeText(title);
-    if (!normalized) {
-      return;
-    }
-    if (blockedTitles.has(normalized)) {
-      return;
-    }
-    if (/\/audio$/i.test(normalized)) {
-      return;
-    }
-    if (/^characters$/i.test(normalized)) {
-      return;
-    }
+    $(row).find('a[href^="/wiki/"]').each((_aIdx, a) => {
+      if (pickedTitle) {
+        return;
+      }
+      const href = ($(a).attr('href') || '').trim();
+      const title = decodeWikiTitleFromHref(href);
+      if (!title || !shouldIncludeCharacterTitle(title, blockedTitles)) {
+        return;
+      }
+      pickedTitle = normalizeText(title);
+    });
 
-    const existing = out.get(normalized);
-    if (existing) {
+    if (!pickedTitle) {
       return;
     }
 
-    const imageUrl = extractImageUrl($, el, baseUrl);
-    out.set(normalized, { title: normalized, imageUrl: imageUrl || null });
+    const imageUrl = extractImageUrl($, row, baseUrl);
+    addCharacterEntry(out, pickedTitle, imageUrl);
   });
+
+  if (!out.size) {
+    $('#mw-content-text a[href^="/wiki/"]').each((_idx, el) => {
+      const href = ($(el).attr('href') || '').trim();
+      const title = decodeWikiTitleFromHref(href);
+      if (!title || !shouldIncludeCharacterTitle(title, blockedTitles)) {
+        return;
+      }
+      const imageUrl = extractImageUrl($, el, baseUrl);
+      addCharacterEntry(out, title, imageUrl);
+    });
+  }
 
   return Array.from(out.values());
 }

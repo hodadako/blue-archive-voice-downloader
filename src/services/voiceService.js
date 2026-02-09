@@ -1,6 +1,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const { pathToFileURL } = require('url');
 const { execFileSync } = require('child_process');
 const axios = require('axios');
 const Fuse = require('fuse.js');
@@ -90,6 +91,8 @@ function normalizeStudentEntry(student) {
     .filter(Boolean)
     .join(' ');
 
+  const imageUrl = normalizeImageUrl(student?.imageUrl);
+
   return {
     href: student?.href || '',
     englishName,
@@ -100,7 +103,7 @@ function normalizeStudentEntry(student) {
     englishType,
     koreanType,
     wikiSearchName: wikiSearchName || englishName || koreanName || '',
-    imageUrl: (student?.imageUrl || '').trim() || null,
+    imageUrl,
     searchText,
   };
 }
@@ -109,6 +112,23 @@ function normalizeStudents(students) {
   return (students || [])
     .map(normalizeStudentEntry)
     .filter((student) => student.href && (student.englishName || student.koreanName));
+}
+
+function normalizeImageUrl(rawImageUrl) {
+  const raw = String(rawImageUrl || '').trim();
+  if (!raw) {
+    return null;
+  }
+  if (/^(https?:)?\/\//i.test(raw) || /^data:/i.test(raw) || /^file:/i.test(raw)) {
+    return raw;
+  }
+
+  const normalizedRelative = raw.replace(/^\.?\//, '');
+  const localPath = path.join(__dirname, '..', normalizedRelative);
+  if (!fs.existsSync(localPath)) {
+    return null;
+  }
+  return pathToFileURL(localPath).toString();
 }
 
 function readBundledStudents() {
