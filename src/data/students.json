@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1770629110829,
+  "updatedAt": 1770655535688,
   "students": [
     {
       "href": "/wiki/Airi",
@@ -10,7 +10,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Airi"
+      "wikiSearchName": "Airi",
+      "imageUrl": "data/images/students/airi.png"
     },
     {
       "href": "/wiki/Airi_(Band)",
@@ -21,7 +22,8 @@
       "typeKey": "band",
       "englishType": "Band",
       "koreanType": "밴드",
-      "wikiSearchName": "Airi (Band)"
+      "wikiSearchName": "Airi (Band)",
+      "imageUrl": "data/images/students/airi_band.png"
     },
     {
       "href": "/wiki/Akane",
@@ -32,7 +34,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Akane"
+      "wikiSearchName": "Akane",
+      "imageUrl": "data/images/students/akane.png"
     },
     {
       "href": "/wiki/Akane_(Bunny_Girl)",
@@ -43,7 +46,8 @@
       "typeKey": "bunny_girl",
       "englishType": "Bunny Girl",
       "koreanType": "바니걸",
-      "wikiSearchName": "Akane (Bunny Girl)"
+      "wikiSearchName": "Akane (Bunny Girl)",
+      "imageUrl": "data/images/students/akane_bunny_girl.png"
     },
     {
       "href": "/wiki/Akari",
@@ -54,7 +58,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Akari"
+      "wikiSearchName": "Akari",
+      "imageUrl": "data/images/students/akari.png"
     },
     {
       "href": "/wiki/Akari_(New_Year)",
@@ -65,7 +70,8 @@
       "typeKey": "new_year",
       "englishType": "New Year",
       "koreanType": "새해",
-      "wikiSearchName": "Akari (New Year)"
+      "wikiSearchName": "Akari (New Year)",
+      "imageUrl": "data/images/students/akari_new_year.png"
     },
     {
       "href": "/wiki/Ako",
@@ -76,7 +82,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Ako"
+      "wikiSearchName": "Ako",
+      "imageUrl": "data/images/students/ako.png"
     },
     {
       "href": "/wiki/Ako_(Dress)",
@@ -87,7 +94,8 @@
       "typeKey": "dress",
       "englishType": "Dress",
       "koreanType": "드레스",
-      "wikiSearchName": "Ako (Dress)"
+      "wikiSearchName": "Ako (Dress)",
+      "imageUrl": "data/images/students/ako_dress.png"
     },
     {
       "href": "/wiki/Aoba",
@@ -98,7 +106,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Aoba"
+      "wikiSearchName": "Aoba",
+      "imageUrl": "data/images/students/aoba.png"
     },
     {
       "href": "/wiki/Arisu",
@@ -109,7 +118,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Arisu"
+      "wikiSearchName": "Arisu",
+      "imageUrl": "data/images/students/arisu.png"
     },
     {
       "href": "/wiki/Arisu_(Battle)",
@@ -120,7 +130,8 @@
       "typeKey": "battle",
       "englishType": "Battle",
       "koreanType": "무장",
-      "wikiSearchName": "Arisu (Battle)"
+      "wikiSearchName": "Arisu (Battle)",
+      "imageUrl": "data/images/students/arisu_battle.png"
     },
     {
       "href": "/wiki/Arisu_(Maid)",
@@ -131,7 +142,8 @@
       "typeKey": "maid",
       "englishType": "Maid",
       "koreanType": "메이드",
-      "wikiSearchName": "Arisu (Maid)"
+      "wikiSearchName": "Arisu (Maid)",
+      "imageUrl": "data/images/students/arisu_maid.png"
     },
     {
       "href": "/wiki/Aru",
@@ -142,7 +154,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Aru"
+      "wikiSearchName": "Aru",
+      "imageUrl": "data/images/students/aru.png"
     },
     {
       "href": "/wiki/Aru_(Dress)",
@@ -153,7 +166,8 @@
       "typeKey": "dress",
       "englishType": "Dress",
       "koreanType": "드레스",
-      "wikiSearchName": "Aru (Dress)"
+      "wikiSearchName": "Aru (Dress)",
+      "imageUrl": "data/images/students/aru_dress.png"
     },
     {
       "href": "/wiki/Aru_(New_Year)",
@@ -164,7 +178,8 @@
       "typeKey": "new_year",
       "englishType": "New Year",
       "koreanType": "새해",
-      "wikiSearchName": "Aru (New Year)"
+      "wikiSearchName": "Aru (New Year)",
+      "imageUrl": "data/images/students/aru_new_year.png"
     },
     {
       "href": "/wiki/Asuna",
@@ -175,7 +190,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Asuna"
+      "wikiSearchName": "Asuna",
+      "imageUrl": "data/images/students/asuna.png"
     },
     {
       "href": "/wiki/Asuna_(Bunny_Girl)",
@@ -186,7 +202,8 @@
       "typeKey": "bunny_girl",
       "englishType": "Bunny Girl",
       "koreanType": "바니걸",
-      "wikiSearchName": "Asuna (Bunny Girl)"
+      "wikiSearchName": "Asuna (Bunny Girl)",
+      "imageUrl": "data/images/students/asuna_bunny_girl.png"
     },
     {
       "href": "/wiki/Asuna_(School_Uniform)",
@@ -197,7 +214,8 @@
       "typeKey": "school_uniform",
       "englishType": "School Uniform",
       "koreanType": "교복",
-      "wikiSearchName": "Asuna (School Uniform)"
+      "wikiSearchName": "Asuna (School Uniform)",
+      "imageUrl": "data/images/students/asuna_school_uniform.png"
     },
     {
       "href": "/wiki/Atsuko",
@@ -208,7 +226,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Atsuko"
+      "wikiSearchName": "Atsuko",
+      "imageUrl": "data/images/students/atsuko.png"
     },
     {
       "href": "/wiki/Atsuko_(Swimsuit)",
@@ -219,7 +238,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Atsuko (Swimsuit)"
+      "wikiSearchName": "Atsuko (Swimsuit)",
+      "imageUrl": "data/images/students/atsuko_swimsuit.png"
     },
     {
       "href": "/wiki/Ayane",
@@ -230,7 +250,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Ayane"
+      "wikiSearchName": "Ayane",
+      "imageUrl": "data/images/students/ayane.png"
     },
     {
       "href": "/wiki/Ayane_(Swimsuit)",
@@ -241,7 +262,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Ayane (Swimsuit)"
+      "wikiSearchName": "Ayane (Swimsuit)",
+      "imageUrl": "data/images/students/ayane_swimsuit.png"
     },
     {
       "href": "/wiki/Azusa",
@@ -252,7 +274,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Azusa"
+      "wikiSearchName": "Azusa",
+      "imageUrl": "data/images/students/azusa.png"
     },
     {
       "href": "/wiki/Azusa_(Swimsuit)",
@@ -263,7 +286,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Azusa (Swimsuit)"
+      "wikiSearchName": "Azusa (Swimsuit)",
+      "imageUrl": "data/images/students/azusa_swimsuit.png"
     },
     {
       "href": "/wiki/Cherino",
@@ -274,7 +298,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Cherino"
+      "wikiSearchName": "Cherino",
+      "imageUrl": "data/images/students/cherino.png"
     },
     {
       "href": "/wiki/Cherino_(Hot_Spring)",
@@ -285,7 +310,8 @@
       "typeKey": "hot_spring",
       "englishType": "Hot Spring",
       "koreanType": "온천",
-      "wikiSearchName": "Cherino (Hot Spring)"
+      "wikiSearchName": "Cherino (Hot Spring)",
+      "imageUrl": "data/images/students/cherino_hot_spring.png"
     },
     {
       "href": "/wiki/Chiaki",
@@ -296,7 +322,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Chiaki"
+      "wikiSearchName": "Chiaki",
+      "imageUrl": "data/images/students/chiaki.png"
     },
     {
       "href": "/wiki/Chihiro",
@@ -307,7 +334,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Chihiro"
+      "wikiSearchName": "Chihiro",
+      "imageUrl": "data/images/students/chihiro.png"
     },
     {
       "href": "/wiki/Chinatsu",
@@ -318,7 +346,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Chinatsu"
+      "wikiSearchName": "Chinatsu",
+      "imageUrl": "data/images/students/chinatsu.png"
     },
     {
       "href": "/wiki/Chinatsu_(Hot_Spring)",
@@ -329,7 +358,8 @@
       "typeKey": "hot_spring",
       "englishType": "Hot Spring",
       "koreanType": "온천",
-      "wikiSearchName": "Chinatsu (Hot Spring)"
+      "wikiSearchName": "Chinatsu (Hot Spring)",
+      "imageUrl": "data/images/students/chinatsu_hot_spring.png"
     },
     {
       "href": "/wiki/Chise",
@@ -340,7 +370,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Chise"
+      "wikiSearchName": "Chise",
+      "imageUrl": "data/images/students/chise.png"
     },
     {
       "href": "/wiki/Chise_(Swimsuit)",
@@ -351,7 +382,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Chise (Swimsuit)"
+      "wikiSearchName": "Chise (Swimsuit)",
+      "imageUrl": "data/images/students/chise_swimsuit.png"
     },
     {
       "href": "/wiki/Eimi",
@@ -362,7 +394,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Eimi"
+      "wikiSearchName": "Eimi",
+      "imageUrl": "data/images/students/eimi.png"
     },
     {
       "href": "/wiki/Eimi_(Swimsuit)",
@@ -373,7 +406,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Eimi (Swimsuit)"
+      "wikiSearchName": "Eimi (Swimsuit)",
+      "imageUrl": "data/images/students/eimi_swimsuit.png"
     },
     {
       "href": "/wiki/Eri",
@@ -384,7 +418,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Eri"
+      "wikiSearchName": "Eri",
+      "imageUrl": "data/images/students/eri.png"
     },
     {
       "href": "/wiki/Fubuki",
@@ -395,7 +430,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Fubuki"
+      "wikiSearchName": "Fubuki",
+      "imageUrl": "data/images/students/fubuki.png"
     },
     {
       "href": "/wiki/Fubuki_(Swimsuit)",
@@ -406,7 +442,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Fubuki (Swimsuit)"
+      "wikiSearchName": "Fubuki (Swimsuit)",
+      "imageUrl": "data/images/students/fubuki_swimsuit.png"
     },
     {
       "href": "/wiki/Fuuka",
@@ -417,7 +454,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Fuuka"
+      "wikiSearchName": "Fuuka",
+      "imageUrl": "data/images/students/fuuka.png"
     },
     {
       "href": "/wiki/Fuuka_(New_Year)",
@@ -428,7 +466,8 @@
       "typeKey": "new_year",
       "englishType": "New Year",
       "koreanType": "새해",
-      "wikiSearchName": "Fuuka (New Year)"
+      "wikiSearchName": "Fuuka (New Year)",
+      "imageUrl": "data/images/students/fuuka_new_year.png"
     },
     {
       "href": "/wiki/Fuyu",
@@ -439,7 +478,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Fuyu"
+      "wikiSearchName": "Fuyu",
+      "imageUrl": "data/images/students/fuyu.png"
     },
     {
       "href": "/wiki/Hanae",
@@ -450,7 +490,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hanae"
+      "wikiSearchName": "Hanae",
+      "imageUrl": "data/images/students/hanae.png"
     },
     {
       "href": "/wiki/Hanae_(Christmas)",
@@ -461,7 +502,8 @@
       "typeKey": "christmas",
       "englishType": "Christmas",
       "koreanType": "크리스마스",
-      "wikiSearchName": "Hanae (Christmas)"
+      "wikiSearchName": "Hanae (Christmas)",
+      "imageUrl": "data/images/students/hanae_christmas.png"
     },
     {
       "href": "/wiki/Hanako",
@@ -472,7 +514,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hanako"
+      "wikiSearchName": "Hanako",
+      "imageUrl": "data/images/students/hanako.png"
     },
     {
       "href": "/wiki/Hanako_(Swimsuit)",
@@ -483,7 +526,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Hanako (Swimsuit)"
+      "wikiSearchName": "Hanako (Swimsuit)",
+      "imageUrl": "data/images/students/hanako_swimsuit.png"
     },
     {
       "href": "/wiki/Hare",
@@ -494,7 +538,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hare"
+      "wikiSearchName": "Hare",
+      "imageUrl": "data/images/students/hare.png"
     },
     {
       "href": "/wiki/Hare_(Camping)",
@@ -505,7 +550,8 @@
       "typeKey": "camping",
       "englishType": "Camping",
       "koreanType": "캠핑",
-      "wikiSearchName": "Hare (Camping)"
+      "wikiSearchName": "Hare (Camping)",
+      "imageUrl": "data/images/students/hare_camping.png"
     },
     {
       "href": "/wiki/Haruka",
@@ -516,7 +562,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Haruka"
+      "wikiSearchName": "Haruka",
+      "imageUrl": "data/images/students/haruka.png"
     },
     {
       "href": "/wiki/Haruka_(New_Year)",
@@ -527,7 +574,8 @@
       "typeKey": "new_year",
       "englishType": "New Year",
       "koreanType": "새해",
-      "wikiSearchName": "Haruka (New Year)"
+      "wikiSearchName": "Haruka (New Year)",
+      "imageUrl": "data/images/students/haruka_new_year.png"
     },
     {
       "href": "/wiki/Haruna",
@@ -538,7 +586,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Haruna"
+      "wikiSearchName": "Haruna",
+      "imageUrl": "data/images/students/haruna.png"
     },
     {
       "href": "/wiki/Haruna_(New_Year)",
@@ -549,7 +598,8 @@
       "typeKey": "new_year",
       "englishType": "New Year",
       "koreanType": "새해",
-      "wikiSearchName": "Haruna (New Year)"
+      "wikiSearchName": "Haruna (New Year)",
+      "imageUrl": "data/images/students/haruna_new_year.png"
     },
     {
       "href": "/wiki/Haruna_(Sportswear)",
@@ -560,7 +610,8 @@
       "typeKey": "sportswear",
       "englishType": "Sportswear",
       "koreanType": "체육복",
-      "wikiSearchName": "Haruna (Sportswear)"
+      "wikiSearchName": "Haruna (Sportswear)",
+      "imageUrl": "data/images/students/haruna_sportswear.png"
     },
     {
       "href": "/wiki/Hasumi",
@@ -571,7 +622,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hasumi"
+      "wikiSearchName": "Hasumi",
+      "imageUrl": "data/images/students/hasumi.png"
     },
     {
       "href": "/wiki/Hasumi_(Sportswear)",
@@ -582,7 +634,8 @@
       "typeKey": "sportswear",
       "englishType": "Sportswear",
       "koreanType": "체육복",
-      "wikiSearchName": "Hasumi (Sportswear)"
+      "wikiSearchName": "Hasumi (Sportswear)",
+      "imageUrl": "data/images/students/hasumi_sportswear.png"
     },
     {
       "href": "/wiki/Hasumi_(Swimsuit)",
@@ -593,7 +646,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Hasumi (Swimsuit)"
+      "wikiSearchName": "Hasumi (Swimsuit)",
+      "imageUrl": "data/images/students/hasumi_swimsuit.png"
     },
     {
       "href": "/wiki/Hatsune_Miku",
@@ -604,7 +658,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hatsune Miku"
+      "wikiSearchName": "Hatsune Miku",
+      "imageUrl": "data/images/students/hatsune_miku.png"
     },
     {
       "href": "/wiki/Hibiki",
@@ -615,7 +670,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hibiki"
+      "wikiSearchName": "Hibiki",
+      "imageUrl": "data/images/students/hibiki.png"
     },
     {
       "href": "/wiki/Hibiki_(Cheerleader)",
@@ -626,7 +682,8 @@
       "typeKey": "cheerleader",
       "englishType": "Cheerleader",
       "koreanType": "치어리더",
-      "wikiSearchName": "Hibiki (Cheerleader)"
+      "wikiSearchName": "Hibiki (Cheerleader)",
+      "imageUrl": "data/images/students/hibiki_cheerleader.png"
     },
     {
       "href": "/wiki/Hifumi",
@@ -637,7 +694,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hifumi"
+      "wikiSearchName": "Hifumi",
+      "imageUrl": "data/images/students/hifumi.png"
     },
     {
       "href": "/wiki/Hifumi_(Swimsuit)",
@@ -648,7 +706,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Hifumi (Swimsuit)"
+      "wikiSearchName": "Hifumi (Swimsuit)",
+      "imageUrl": "data/images/students/hifumi_swimsuit.png"
     },
     {
       "href": "/wiki/Hikari",
@@ -659,7 +718,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hikari"
+      "wikiSearchName": "Hikari",
+      "imageUrl": "data/images/students/hikari.png"
     },
     {
       "href": "/wiki/Himari",
@@ -670,7 +730,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Himari"
+      "wikiSearchName": "Himari",
+      "imageUrl": "data/images/students/himari.png"
     },
     {
       "href": "/wiki/Himari_(Battle)",
@@ -681,7 +742,8 @@
       "typeKey": "battle",
       "englishType": "Battle",
       "koreanType": "무장",
-      "wikiSearchName": "Himari (Battle)"
+      "wikiSearchName": "Himari (Battle)",
+      "imageUrl": "data/images/students/himari_battle.png"
     },
     {
       "href": "/wiki/Hina",
@@ -692,7 +754,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hina"
+      "wikiSearchName": "Hina",
+      "imageUrl": "data/images/students/hina.png"
     },
     {
       "href": "/wiki/Hina_(Dress)",
@@ -703,7 +766,8 @@
       "typeKey": "dress",
       "englishType": "Dress",
       "koreanType": "드레스",
-      "wikiSearchName": "Hina (Dress)"
+      "wikiSearchName": "Hina (Dress)",
+      "imageUrl": "data/images/students/hina_dress.png"
     },
     {
       "href": "/wiki/Hina_(Swimsuit)",
@@ -714,7 +778,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Hina (Swimsuit)"
+      "wikiSearchName": "Hina (Swimsuit)",
+      "imageUrl": "data/images/students/hina_swimsuit.png"
     },
     {
       "href": "/wiki/Hinata",
@@ -725,7 +790,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hinata"
+      "wikiSearchName": "Hinata",
+      "imageUrl": "data/images/students/hinata.png"
     },
     {
       "href": "/wiki/Hinata_(Swimsuit)",
@@ -736,7 +802,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Hinata (Swimsuit)"
+      "wikiSearchName": "Hinata (Swimsuit)",
+      "imageUrl": "data/images/students/hinata_swimsuit.png"
     },
     {
       "href": "/wiki/Hiyori",
@@ -747,7 +814,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hiyori"
+      "wikiSearchName": "Hiyori",
+      "imageUrl": "data/images/students/hiyori.png"
     },
     {
       "href": "/wiki/Hiyori_(Swimsuit)",
@@ -758,7 +826,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Hiyori (Swimsuit)"
+      "wikiSearchName": "Hiyori (Swimsuit)",
+      "imageUrl": "data/images/students/hiyori_swimsuit.png"
     },
     {
       "href": "/wiki/Hoshino",
@@ -769,7 +838,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Hoshino"
+      "wikiSearchName": "Hoshino",
+      "imageUrl": "data/images/students/hoshino.png"
     },
     {
       "href": "/wiki/Hoshino_(Battle)",
@@ -780,7 +850,8 @@
       "typeKey": "battle",
       "englishType": "Battle",
       "koreanType": "무장",
-      "wikiSearchName": "Hoshino (Battle)"
+      "wikiSearchName": "Hoshino (Battle)",
+      "imageUrl": "data/images/students/hoshino_battle.png"
     },
     {
       "href": "/wiki/Hoshino_(Swimsuit)",
@@ -791,7 +862,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Hoshino (Swimsuit)"
+      "wikiSearchName": "Hoshino (Swimsuit)",
+      "imageUrl": "data/images/students/hoshino_swimsuit.png"
     },
     {
       "href": "/wiki/Ibuki",
@@ -802,7 +874,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Ibuki"
+      "wikiSearchName": "Ibuki",
+      "imageUrl": "data/images/students/ibuki.png"
     },
     {
       "href": "/wiki/Ichika",
@@ -813,7 +886,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Ichika"
+      "wikiSearchName": "Ichika",
+      "imageUrl": "data/images/students/ichika.png"
     },
     {
       "href": "/wiki/Ichika_(Swimsuit)",
@@ -824,7 +898,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Ichika (Swimsuit)"
+      "wikiSearchName": "Ichika (Swimsuit)",
+      "imageUrl": "data/images/students/ichika_swimsuit.png"
     },
     {
       "href": "/wiki/Iori",
@@ -835,7 +910,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Iori"
+      "wikiSearchName": "Iori",
+      "imageUrl": "data/images/students/iori.png"
     },
     {
       "href": "/wiki/Iori_(Swimsuit)",
@@ -846,7 +922,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Iori (Swimsuit)"
+      "wikiSearchName": "Iori (Swimsuit)",
+      "imageUrl": "data/images/students/iori_swimsuit.png"
     },
     {
       "href": "/wiki/Iroha",
@@ -857,7 +934,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Iroha"
+      "wikiSearchName": "Iroha",
+      "imageUrl": "data/images/students/iroha.png"
     },
     {
       "href": "/wiki/Izumi",
@@ -868,7 +946,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Izumi"
+      "wikiSearchName": "Izumi",
+      "imageUrl": "data/images/students/izumi.png"
     },
     {
       "href": "/wiki/Izumi_(New_Year)",
@@ -879,7 +958,8 @@
       "typeKey": "new_year",
       "englishType": "New Year",
       "koreanType": "새해",
-      "wikiSearchName": "Izumi (New Year)"
+      "wikiSearchName": "Izumi (New Year)",
+      "imageUrl": "data/images/students/izumi_new_year.png"
     },
     {
       "href": "/wiki/Izumi_(Swimsuit)",
@@ -890,7 +970,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Izumi (Swimsuit)"
+      "wikiSearchName": "Izumi (Swimsuit)",
+      "imageUrl": "data/images/students/izumi_swimsuit.png"
     },
     {
       "href": "/wiki/Izuna",
@@ -901,7 +982,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Izuna"
+      "wikiSearchName": "Izuna",
+      "imageUrl": "data/images/students/izuna.png"
     },
     {
       "href": "/wiki/Izuna_(Swimsuit)",
@@ -912,7 +994,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Izuna (Swimsuit)"
+      "wikiSearchName": "Izuna (Swimsuit)",
+      "imageUrl": "data/images/students/izuna_swimsuit.png"
     },
     {
       "href": "/wiki/Junko",
@@ -923,7 +1006,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Junko"
+      "wikiSearchName": "Junko",
+      "imageUrl": "data/images/students/junko.png"
     },
     {
       "href": "/wiki/Junko_(New_Year)",
@@ -934,7 +1018,8 @@
       "typeKey": "new_year",
       "englishType": "New Year",
       "koreanType": "새해",
-      "wikiSearchName": "Junko (New Year)"
+      "wikiSearchName": "Junko (New Year)",
+      "imageUrl": "data/images/students/junko_new_year.png"
     },
     {
       "href": "/wiki/Juri",
@@ -945,7 +1030,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Juri"
+      "wikiSearchName": "Juri",
+      "imageUrl": "data/images/students/juri.png"
     },
     {
       "href": "/wiki/Juri_(Part-Timer)",
@@ -956,7 +1042,8 @@
       "typeKey": "part_timer",
       "englishType": "Part-Timer",
       "koreanType": "아르바이트",
-      "wikiSearchName": "Juri (Part-Timer)"
+      "wikiSearchName": "Juri (Part-Timer)",
+      "imageUrl": "data/images/students/juri_part_timer.png"
     },
     {
       "href": "/wiki/Kaede",
@@ -967,7 +1054,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kaede"
+      "wikiSearchName": "Kaede",
+      "imageUrl": "data/images/students/kaede.png"
     },
     {
       "href": "/wiki/Kaho",
@@ -978,7 +1066,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kaho"
+      "wikiSearchName": "Kaho",
+      "imageUrl": "data/images/students/kaho.png"
     },
     {
       "href": "/wiki/Kanna",
@@ -989,7 +1078,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kanna"
+      "wikiSearchName": "Kanna",
+      "imageUrl": "data/images/students/kanna.png"
     },
     {
       "href": "/wiki/Kanna_(Swimsuit)",
@@ -1000,7 +1090,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Kanna (Swimsuit)"
+      "wikiSearchName": "Kanna (Swimsuit)",
+      "imageUrl": "data/images/students/kanna_swimsuit.png"
     },
     {
       "href": "/wiki/Kanoe",
@@ -1011,7 +1102,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kanoe"
+      "wikiSearchName": "Kanoe",
+      "imageUrl": "data/images/students/kanoe.png"
     },
     {
       "href": "/wiki/Karin",
@@ -1022,7 +1114,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Karin"
+      "wikiSearchName": "Karin",
+      "imageUrl": "data/images/students/karin.png"
     },
     {
       "href": "/wiki/Karin_(Bunny_Girl)",
@@ -1033,7 +1126,8 @@
       "typeKey": "bunny_girl",
       "englishType": "Bunny Girl",
       "koreanType": "바니걸",
-      "wikiSearchName": "Karin (Bunny Girl)"
+      "wikiSearchName": "Karin (Bunny Girl)",
+      "imageUrl": "data/images/students/karin_bunny_girl.png"
     },
     {
       "href": "/wiki/Karin_(School_Uniform)",
@@ -1044,7 +1138,8 @@
       "typeKey": "school_uniform",
       "englishType": "School Uniform",
       "koreanType": "교복",
-      "wikiSearchName": "Karin (School Uniform)"
+      "wikiSearchName": "Karin (School Uniform)",
+      "imageUrl": "data/images/students/karin_school_uniform.png"
     },
     {
       "href": "/wiki/Kasumi",
@@ -1055,7 +1150,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kasumi"
+      "wikiSearchName": "Kasumi",
+      "imageUrl": "data/images/students/kasumi.png"
     },
     {
       "href": "/wiki/Kayoko",
@@ -1066,7 +1162,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kayoko"
+      "wikiSearchName": "Kayoko",
+      "imageUrl": "data/images/students/kayoko.png"
     },
     {
       "href": "/wiki/Kayoko_(Dress)",
@@ -1077,7 +1174,8 @@
       "typeKey": "dress",
       "englishType": "Dress",
       "koreanType": "드레스",
-      "wikiSearchName": "Kayoko (Dress)"
+      "wikiSearchName": "Kayoko (Dress)",
+      "imageUrl": "data/images/students/kayoko_dress.png"
     },
     {
       "href": "/wiki/Kayoko_(New_Year)",
@@ -1088,7 +1186,8 @@
       "typeKey": "new_year",
       "englishType": "New Year",
       "koreanType": "새해",
-      "wikiSearchName": "Kayoko (New Year)"
+      "wikiSearchName": "Kayoko (New Year)",
+      "imageUrl": "data/images/students/kayoko_new_year.png"
     },
     {
       "href": "/wiki/Kazusa",
@@ -1099,7 +1198,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kazusa"
+      "wikiSearchName": "Kazusa",
+      "imageUrl": "data/images/students/kazusa.png"
     },
     {
       "href": "/wiki/Kazusa_(Band)",
@@ -1110,7 +1210,8 @@
       "typeKey": "band",
       "englishType": "Band",
       "koreanType": "밴드",
-      "wikiSearchName": "Kazusa (Band)"
+      "wikiSearchName": "Kazusa (Band)",
+      "imageUrl": "data/images/students/kazusa_band.png"
     },
     {
       "href": "/wiki/Kei",
@@ -1121,7 +1222,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kei"
+      "wikiSearchName": "Kei",
+      "imageUrl": "data/images/students/kei.png"
     },
     {
       "href": "/wiki/Kikyou",
@@ -1132,7 +1234,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kikyou"
+      "wikiSearchName": "Kikyou",
+      "imageUrl": "data/images/students/kikyou.png"
     },
     {
       "href": "/wiki/Kikyou_(Swimsuit)",
@@ -1143,7 +1246,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Kikyou (Swimsuit)"
+      "wikiSearchName": "Kikyou (Swimsuit)",
+      "imageUrl": "data/images/students/kikyou_swimsuit.png"
     },
     {
       "href": "/wiki/Kirara",
@@ -1154,7 +1258,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kirara"
+      "wikiSearchName": "Kirara",
+      "imageUrl": "data/images/students/kirara.png"
     },
     {
       "href": "/wiki/Kirino",
@@ -1165,7 +1270,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kirino"
+      "wikiSearchName": "Kirino",
+      "imageUrl": "data/images/students/kirino.png"
     },
     {
       "href": "/wiki/Kirino_(Swimsuit)",
@@ -1176,7 +1282,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Kirino (Swimsuit)"
+      "wikiSearchName": "Kirino (Swimsuit)",
+      "imageUrl": "data/images/students/kirino_swimsuit.png"
     },
     {
       "href": "/wiki/Kisaki",
@@ -1187,7 +1294,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kisaki"
+      "wikiSearchName": "Kisaki",
+      "imageUrl": "data/images/students/kisaki.png"
     },
     {
       "href": "/wiki/Koharu",
@@ -1198,7 +1306,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Koharu"
+      "wikiSearchName": "Koharu",
+      "imageUrl": "data/images/students/koharu.png"
     },
     {
       "href": "/wiki/Koharu_(Swimsuit)",
@@ -1209,7 +1318,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Koharu (Swimsuit)"
+      "wikiSearchName": "Koharu (Swimsuit)",
+      "imageUrl": "data/images/students/koharu_swimsuit.png"
     },
     {
       "href": "/wiki/Kokona",
@@ -1220,7 +1330,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kokona"
+      "wikiSearchName": "Kokona",
+      "imageUrl": "data/images/students/kokona.png"
     },
     {
       "href": "/wiki/Kotama",
@@ -1231,7 +1342,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kotama"
+      "wikiSearchName": "Kotama",
+      "imageUrl": "data/images/students/kotama.png"
     },
     {
       "href": "/wiki/Kotama_(Camping)",
@@ -1242,7 +1354,8 @@
       "typeKey": "camping",
       "englishType": "Camping",
       "koreanType": "캠핑",
-      "wikiSearchName": "Kotama (Camping)"
+      "wikiSearchName": "Kotama (Camping)",
+      "imageUrl": "data/images/students/kotama_camping.png"
     },
     {
       "href": "/wiki/Kotori",
@@ -1253,7 +1366,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Kotori"
+      "wikiSearchName": "Kotori",
+      "imageUrl": "data/images/students/kotori.png"
     },
     {
       "href": "/wiki/Kotori_(Cheerleader)",
@@ -1264,7 +1378,8 @@
       "typeKey": "cheerleader",
       "englishType": "Cheerleader",
       "koreanType": "치어리더",
-      "wikiSearchName": "Kotori (Cheerleader)"
+      "wikiSearchName": "Kotori (Cheerleader)",
+      "imageUrl": "data/images/students/kotori_cheerleader.png"
     },
     {
       "href": "/wiki/Koyuki",
@@ -1275,7 +1390,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Koyuki"
+      "wikiSearchName": "Koyuki",
+      "imageUrl": "data/images/students/koyuki.png"
     },
     {
       "href": "/wiki/Maki",
@@ -1286,7 +1402,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Maki"
+      "wikiSearchName": "Maki",
+      "imageUrl": "data/images/students/maki.png"
     },
     {
       "href": "/wiki/Maki_(Camping)",
@@ -1297,7 +1414,8 @@
       "typeKey": "camping",
       "englishType": "Camping",
       "koreanType": "캠핑",
-      "wikiSearchName": "Maki (Camping)"
+      "wikiSearchName": "Maki (Camping)",
+      "imageUrl": "data/images/students/maki_camping.png"
     },
     {
       "href": "/wiki/Makoto",
@@ -1308,7 +1426,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Makoto"
+      "wikiSearchName": "Makoto",
+      "imageUrl": "data/images/students/makoto.png"
     },
     {
       "href": "/wiki/Mari",
@@ -1319,7 +1438,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Mari"
+      "wikiSearchName": "Mari",
+      "imageUrl": "data/images/students/mari.png"
     },
     {
       "href": "/wiki/Mari_(Idol)",
@@ -1330,7 +1450,8 @@
       "typeKey": "idol",
       "englishType": "Idol",
       "koreanType": "아이돌",
-      "wikiSearchName": "Mari (Idol)"
+      "wikiSearchName": "Mari (Idol)",
+      "imageUrl": "data/images/students/mari_idol.png"
     },
     {
       "href": "/wiki/Mari_(Sportswear)",
@@ -1341,7 +1462,8 @@
       "typeKey": "sportswear",
       "englishType": "Sportswear",
       "koreanType": "체육복",
-      "wikiSearchName": "Mari (Sportswear)"
+      "wikiSearchName": "Mari (Sportswear)",
+      "imageUrl": "data/images/students/mari_sportswear.png"
     },
     {
       "href": "/wiki/Marina",
@@ -1352,7 +1474,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Marina"
+      "wikiSearchName": "Marina",
+      "imageUrl": "data/images/students/marina.png"
     },
     {
       "href": "/wiki/Marina_(Qipao)",
@@ -1363,7 +1486,8 @@
       "typeKey": "qipao",
       "englishType": "Qipao",
       "koreanType": "치파오",
-      "wikiSearchName": "Marina (Qipao)"
+      "wikiSearchName": "Marina (Qipao)",
+      "imageUrl": "data/images/students/marina_qipao.png"
     },
     {
       "href": "/wiki/Mashiro",
@@ -1374,7 +1498,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Mashiro"
+      "wikiSearchName": "Mashiro",
+      "imageUrl": "data/images/students/mashiro.png"
     },
     {
       "href": "/wiki/Mashiro_(Swimsuit)",
@@ -1385,7 +1510,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Mashiro (Swimsuit)"
+      "wikiSearchName": "Mashiro (Swimsuit)",
+      "imageUrl": "data/images/students/mashiro_swimsuit.png"
     },
     {
       "href": "/wiki/Megu",
@@ -1396,7 +1522,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Megu"
+      "wikiSearchName": "Megu",
+      "imageUrl": "data/images/students/megu.png"
     },
     {
       "href": "/wiki/Meru",
@@ -1407,7 +1534,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Meru"
+      "wikiSearchName": "Meru",
+      "imageUrl": "data/images/students/meru.png"
     },
     {
       "href": "/wiki/Michiru",
@@ -1418,7 +1546,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Michiru"
+      "wikiSearchName": "Michiru",
+      "imageUrl": "data/images/students/michiru.png"
     },
     {
       "href": "/wiki/Michiru_(Dress)",
@@ -1429,7 +1558,8 @@
       "typeKey": "dress",
       "englishType": "Dress",
       "koreanType": "드레스",
-      "wikiSearchName": "Michiru (Dress)"
+      "wikiSearchName": "Michiru (Dress)",
+      "imageUrl": "data/images/students/michiru_dress.png"
     },
     {
       "href": "/wiki/Midori",
@@ -1440,7 +1570,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Midori"
+      "wikiSearchName": "Midori",
+      "imageUrl": "data/images/students/midori.png"
     },
     {
       "href": "/wiki/Midori_(Maid)",
@@ -1451,7 +1582,8 @@
       "typeKey": "maid",
       "englishType": "Maid",
       "koreanType": "메이드",
-      "wikiSearchName": "Midori (Maid)"
+      "wikiSearchName": "Midori (Maid)",
+      "imageUrl": "data/images/students/midori_maid.png"
     },
     {
       "href": "/wiki/Mika",
@@ -1462,7 +1594,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Mika"
+      "wikiSearchName": "Mika",
+      "imageUrl": "data/images/students/mika.png"
     },
     {
       "href": "/wiki/Mika_(Swimsuit)",
@@ -1473,7 +1606,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Mika (Swimsuit)"
+      "wikiSearchName": "Mika (Swimsuit)",
+      "imageUrl": "data/images/students/mika_swimsuit.png"
     },
     {
       "href": "/wiki/Mimori",
@@ -1484,7 +1618,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Mimori"
+      "wikiSearchName": "Mimori",
+      "imageUrl": "data/images/students/mimori.png"
     },
     {
       "href": "/wiki/Mimori_(Swimsuit)",
@@ -1495,7 +1630,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Mimori (Swimsuit)"
+      "wikiSearchName": "Mimori (Swimsuit)",
+      "imageUrl": "data/images/students/mimori_swimsuit.png"
     },
     {
       "href": "/wiki/Mina",
@@ -1506,7 +1642,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Mina"
+      "wikiSearchName": "Mina",
+      "imageUrl": "data/images/students/mina.png"
     },
     {
       "href": "/wiki/Mine",
@@ -1517,7 +1654,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Mine"
+      "wikiSearchName": "Mine",
+      "imageUrl": "data/images/students/mine.png"
     },
     {
       "href": "/wiki/Mine_(Idol)",
@@ -1528,7 +1666,8 @@
       "typeKey": "idol",
       "englishType": "Idol",
       "koreanType": "아이돌",
-      "wikiSearchName": "Mine (Idol)"
+      "wikiSearchName": "Mine (Idol)",
+      "imageUrl": "data/images/students/mine_idol.png"
     },
     {
       "href": "/wiki/Minori",
@@ -1539,7 +1678,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Minori"
+      "wikiSearchName": "Minori",
+      "imageUrl": "data/images/students/minori.png"
     },
     {
       "href": "/wiki/Misaka_Mikoto",
@@ -1550,7 +1690,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Misaka Mikoto"
+      "wikiSearchName": "Misaka Mikoto",
+      "imageUrl": "data/images/students/misaka_mikoto.png"
     },
     {
       "href": "/wiki/Misaki",
@@ -1561,7 +1702,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Misaki"
+      "wikiSearchName": "Misaki",
+      "imageUrl": "data/images/students/misaki.png"
     },
     {
       "href": "/wiki/Misaki_(Swimsuit)",
@@ -1572,7 +1714,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Misaki (Swimsuit)"
+      "wikiSearchName": "Misaki (Swimsuit)",
+      "imageUrl": "data/images/students/misaki_swimsuit.png"
     },
     {
       "href": "/wiki/Miyako",
@@ -1583,7 +1726,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Miyako"
+      "wikiSearchName": "Miyako",
+      "imageUrl": "data/images/students/miyako.png"
     },
     {
       "href": "/wiki/Miyako_(Swimsuit)",
@@ -1594,7 +1738,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Miyako (Swimsuit)"
+      "wikiSearchName": "Miyako (Swimsuit)",
+      "imageUrl": "data/images/students/miyako_swimsuit.png"
     },
     {
       "href": "/wiki/Miyo",
@@ -1605,7 +1750,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Miyo"
+      "wikiSearchName": "Miyo",
+      "imageUrl": "data/images/students/miyo.png"
     },
     {
       "href": "/wiki/Miyu",
@@ -1616,7 +1762,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Miyu"
+      "wikiSearchName": "Miyu",
+      "imageUrl": "data/images/students/miyu.png"
     },
     {
       "href": "/wiki/Miyu_(Swimsuit)",
@@ -1627,7 +1774,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Miyu (Swimsuit)"
+      "wikiSearchName": "Miyu (Swimsuit)",
+      "imageUrl": "data/images/students/miyu_swimsuit.png"
     },
     {
       "href": "/wiki/Moe",
@@ -1638,7 +1786,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Moe"
+      "wikiSearchName": "Moe",
+      "imageUrl": "data/images/students/moe.png"
     },
     {
       "href": "/wiki/Moe_(Swimsuit)",
@@ -1649,7 +1798,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Moe (Swimsuit)"
+      "wikiSearchName": "Moe (Swimsuit)",
+      "imageUrl": "data/images/students/moe_swimsuit.png"
     },
     {
       "href": "/wiki/Momiji",
@@ -1660,7 +1810,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Momiji"
+      "wikiSearchName": "Momiji",
+      "imageUrl": "data/images/students/momiji.png"
     },
     {
       "href": "/wiki/Momoi",
@@ -1671,7 +1822,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Momoi"
+      "wikiSearchName": "Momoi",
+      "imageUrl": "data/images/students/momoi.png"
     },
     {
       "href": "/wiki/Momoi_(Maid)",
@@ -1682,7 +1834,8 @@
       "typeKey": "maid",
       "englishType": "Maid",
       "koreanType": "메이드",
-      "wikiSearchName": "Momoi (Maid)"
+      "wikiSearchName": "Momoi (Maid)",
+      "imageUrl": "data/images/students/momoi_maid.png"
     },
     {
       "href": "/wiki/Mutsuki",
@@ -1693,7 +1846,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Mutsuki"
+      "wikiSearchName": "Mutsuki",
+      "imageUrl": "data/images/students/mutsuki.png"
     },
     {
       "href": "/wiki/Mutsuki_(New_Year)",
@@ -1704,7 +1858,8 @@
       "typeKey": "new_year",
       "englishType": "New Year",
       "koreanType": "새해",
-      "wikiSearchName": "Mutsuki (New Year)"
+      "wikiSearchName": "Mutsuki (New Year)",
+      "imageUrl": "data/images/students/mutsuki_new_year.png"
     },
     {
       "href": "/wiki/Nagisa",
@@ -1715,7 +1870,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Nagisa"
+      "wikiSearchName": "Nagisa",
+      "imageUrl": "data/images/students/nagisa.png"
     },
     {
       "href": "/wiki/Nagisa_(Swimsuit)",
@@ -1726,7 +1882,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Nagisa (Swimsuit)"
+      "wikiSearchName": "Nagisa (Swimsuit)",
+      "imageUrl": "data/images/students/nagisa_swimsuit.png"
     },
     {
       "href": "/wiki/Nagusa",
@@ -1737,7 +1894,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Nagusa"
+      "wikiSearchName": "Nagusa",
+      "imageUrl": "data/images/students/nagusa.png"
     },
     {
       "href": "/wiki/Natsu",
@@ -1748,7 +1906,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Natsu"
+      "wikiSearchName": "Natsu",
+      "imageUrl": "data/images/students/natsu.png"
     },
     {
       "href": "/wiki/Natsu_(Band)",
@@ -1759,7 +1918,8 @@
       "typeKey": "band",
       "englishType": "Band",
       "koreanType": "밴드",
-      "wikiSearchName": "Natsu (Band)"
+      "wikiSearchName": "Natsu (Band)",
+      "imageUrl": "data/images/students/natsu_band.png"
     },
     {
       "href": "/wiki/Neru",
@@ -1770,7 +1930,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Neru"
+      "wikiSearchName": "Neru",
+      "imageUrl": "data/images/students/neru.png"
     },
     {
       "href": "/wiki/Neru_(Bunny_Girl)",
@@ -1781,7 +1942,8 @@
       "typeKey": "bunny_girl",
       "englishType": "Bunny Girl",
       "koreanType": "바니걸",
-      "wikiSearchName": "Neru (Bunny Girl)"
+      "wikiSearchName": "Neru (Bunny Girl)",
+      "imageUrl": "data/images/students/neru_bunny_girl.png"
     },
     {
       "href": "/wiki/Neru_(School_Uniform)",
@@ -1792,7 +1954,8 @@
       "typeKey": "school_uniform",
       "englishType": "School Uniform",
       "koreanType": "교복",
-      "wikiSearchName": "Neru (School Uniform)"
+      "wikiSearchName": "Neru (School Uniform)",
+      "imageUrl": "data/images/students/neru_school_uniform.png"
     },
     {
       "href": "/wiki/Niya",
@@ -1803,7 +1966,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Niya"
+      "wikiSearchName": "Niya",
+      "imageUrl": "data/images/students/niya.png"
     },
     {
       "href": "/wiki/Noa",
@@ -1814,7 +1978,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Noa"
+      "wikiSearchName": "Noa",
+      "imageUrl": "data/images/students/noa.png"
     },
     {
       "href": "/wiki/Noa_(Pajama)",
@@ -1825,7 +1990,8 @@
       "typeKey": "pajama",
       "englishType": "Pajama",
       "koreanType": "파자마",
-      "wikiSearchName": "Noa (Pajama)"
+      "wikiSearchName": "Noa (Pajama)",
+      "imageUrl": "data/images/students/noa_pajama.png"
     },
     {
       "href": "/wiki/Nodoka",
@@ -1836,7 +2002,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Nodoka"
+      "wikiSearchName": "Nodoka",
+      "imageUrl": "data/images/students/nodoka.png"
     },
     {
       "href": "/wiki/Nodoka_(Hot_Spring)",
@@ -1847,7 +2014,8 @@
       "typeKey": "hot_spring",
       "englishType": "Hot Spring",
       "koreanType": "온천",
-      "wikiSearchName": "Nodoka (Hot Spring)"
+      "wikiSearchName": "Nodoka (Hot Spring)",
+      "imageUrl": "data/images/students/nodoka_hot_spring.png"
     },
     {
       "href": "/wiki/Nonomi",
@@ -1858,7 +2026,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Nonomi"
+      "wikiSearchName": "Nonomi",
+      "imageUrl": "data/images/students/nonomi.png"
     },
     {
       "href": "/wiki/Nonomi_(Swimsuit)",
@@ -1869,7 +2038,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Nonomi (Swimsuit)"
+      "wikiSearchName": "Nonomi (Swimsuit)",
+      "imageUrl": "data/images/students/nonomi_swimsuit.png"
     },
     {
       "href": "/wiki/Nozomi",
@@ -1880,7 +2050,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Nozomi"
+      "wikiSearchName": "Nozomi",
+      "imageUrl": "data/images/students/nozomi.png"
     },
     {
       "href": "/wiki/Pina",
@@ -1891,7 +2062,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Pina"
+      "wikiSearchName": "Pina",
+      "imageUrl": "data/images/students/pina.png"
     },
     {
       "href": "/wiki/Pina_(Guide)",
@@ -1902,7 +2074,8 @@
       "typeKey": "guide",
       "englishType": "Guide",
       "koreanType": "가이드",
-      "wikiSearchName": "Pina (Guide)"
+      "wikiSearchName": "Pina (Guide)",
+      "imageUrl": "data/images/students/pina_guide.png"
     },
     {
       "href": "/wiki/Rabu",
@@ -1913,7 +2086,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Rabu"
+      "wikiSearchName": "Rabu",
+      "imageUrl": "data/images/students/rabu.png"
     },
     {
       "href": "/wiki/Rei",
@@ -1924,7 +2098,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Rei"
+      "wikiSearchName": "Rei",
+      "imageUrl": "data/images/students/rei.png"
     },
     {
       "href": "/wiki/Reijo",
@@ -1935,7 +2110,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Reijo"
+      "wikiSearchName": "Reijo",
+      "imageUrl": "data/images/students/reijo.png"
     },
     {
       "href": "/wiki/Reisa",
@@ -1946,7 +2122,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Reisa"
+      "wikiSearchName": "Reisa",
+      "imageUrl": "data/images/students/reisa.png"
     },
     {
       "href": "/wiki/Reisa_(Magical)",
@@ -1957,7 +2134,8 @@
       "typeKey": "magical",
       "englishType": "Magical",
       "koreanType": "매지컬",
-      "wikiSearchName": "Reisa (Magical)"
+      "wikiSearchName": "Reisa (Magical)",
+      "imageUrl": "data/images/students/reisa_magical.png"
     },
     {
       "href": "/wiki/Renge",
@@ -1968,7 +2146,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Renge"
+      "wikiSearchName": "Renge",
+      "imageUrl": "data/images/students/renge.png"
     },
     {
       "href": "/wiki/Renge_(Swimsuit)",
@@ -1979,7 +2158,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Renge (Swimsuit)"
+      "wikiSearchName": "Renge (Swimsuit)",
+      "imageUrl": "data/images/students/renge_swimsuit.png"
     },
     {
       "href": "/wiki/Rio",
@@ -1990,7 +2170,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Rio"
+      "wikiSearchName": "Rio",
+      "imageUrl": "data/images/students/rio.png"
     },
     {
       "href": "/wiki/Rio_(Battle)",
@@ -2001,7 +2182,8 @@
       "typeKey": "battle",
       "englishType": "Battle",
       "koreanType": "무장",
-      "wikiSearchName": "Rio (Battle)"
+      "wikiSearchName": "Rio (Battle)",
+      "imageUrl": "data/images/students/rio_battle.png"
     },
     {
       "href": "/wiki/Ritsu",
@@ -2012,7 +2194,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Ritsu"
+      "wikiSearchName": "Ritsu",
+      "imageUrl": "data/images/students/ritsu.png"
     },
     {
       "href": "/wiki/Rumi",
@@ -2023,7 +2206,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Rumi"
+      "wikiSearchName": "Rumi",
+      "imageUrl": "data/images/students/rumi.png"
     },
     {
       "href": "/wiki/Saki",
@@ -2034,7 +2218,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Saki"
+      "wikiSearchName": "Saki",
+      "imageUrl": "data/images/students/saki.png"
     },
     {
       "href": "/wiki/Saki_(Swimsuit)",
@@ -2045,7 +2230,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Saki (Swimsuit)"
+      "wikiSearchName": "Saki (Swimsuit)",
+      "imageUrl": "data/images/students/saki_swimsuit.png"
     },
     {
       "href": "/wiki/Sakurako",
@@ -2056,7 +2242,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Sakurako"
+      "wikiSearchName": "Sakurako",
+      "imageUrl": "data/images/students/sakurako.png"
     },
     {
       "href": "/wiki/Sakurako_(Idol)",
@@ -2067,7 +2254,8 @@
       "typeKey": "idol",
       "englishType": "Idol",
       "koreanType": "아이돌",
-      "wikiSearchName": "Sakurako (Idol)"
+      "wikiSearchName": "Sakurako (Idol)",
+      "imageUrl": "data/images/students/sakurako_idol.png"
     },
     {
       "href": "/wiki/Saori",
@@ -2078,7 +2266,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Saori"
+      "wikiSearchName": "Saori",
+      "imageUrl": "data/images/students/saori.png"
     },
     {
       "href": "/wiki/Saori_(Dress)",
@@ -2089,7 +2278,8 @@
       "typeKey": "dress",
       "englishType": "Dress",
       "koreanType": "드레스",
-      "wikiSearchName": "Saori (Dress)"
+      "wikiSearchName": "Saori (Dress)",
+      "imageUrl": "data/images/students/saori_dress.png"
     },
     {
       "href": "/wiki/Saori_(Swimsuit)",
@@ -2100,7 +2290,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Saori (Swimsuit)"
+      "wikiSearchName": "Saori (Swimsuit)",
+      "imageUrl": "data/images/students/saori_swimsuit.png"
     },
     {
       "href": "/wiki/Saten_Ruiko",
@@ -2111,7 +2302,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Saten Ruiko"
+      "wikiSearchName": "Saten Ruiko",
+      "imageUrl": "data/images/students/saten_ruiko.png"
     },
     {
       "href": "/wiki/Satsuki",
@@ -2122,7 +2314,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Satsuki"
+      "wikiSearchName": "Satsuki",
+      "imageUrl": "data/images/students/satsuki.png"
     },
     {
       "href": "/wiki/Saya",
@@ -2133,7 +2326,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Saya"
+      "wikiSearchName": "Saya",
+      "imageUrl": "data/images/students/saya.png"
     },
     {
       "href": "/wiki/Saya_(Casual)",
@@ -2144,7 +2338,8 @@
       "typeKey": "casual",
       "englishType": "Casual",
       "koreanType": "사복",
-      "wikiSearchName": "Saya (Casual)"
+      "wikiSearchName": "Saya (Casual)",
+      "imageUrl": "data/images/students/saya_casual.png"
     },
     {
       "href": "/wiki/Seia",
@@ -2155,7 +2350,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Seia"
+      "wikiSearchName": "Seia",
+      "imageUrl": "data/images/students/seia.png"
     },
     {
       "href": "/wiki/Seia_(Swimsuit)",
@@ -2166,7 +2362,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Seia (Swimsuit)"
+      "wikiSearchName": "Seia (Swimsuit)",
+      "imageUrl": "data/images/students/seia_swimsuit.png"
     },
     {
       "href": "/wiki/Sena",
@@ -2177,7 +2374,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Sena"
+      "wikiSearchName": "Sena",
+      "imageUrl": "data/images/students/sena.png"
     },
     {
       "href": "/wiki/Sena_(Casual)",
@@ -2188,7 +2386,8 @@
       "typeKey": "casual",
       "englishType": "Casual",
       "koreanType": "사복",
-      "wikiSearchName": "Sena (Casual)"
+      "wikiSearchName": "Sena (Casual)",
+      "imageUrl": "data/images/students/sena_casual.png"
     },
     {
       "href": "/wiki/Serika",
@@ -2199,7 +2398,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Serika"
+      "wikiSearchName": "Serika",
+      "imageUrl": "data/images/students/serika.png"
     },
     {
       "href": "/wiki/Serika_(New_Year)",
@@ -2210,7 +2410,8 @@
       "typeKey": "new_year",
       "englishType": "New Year",
       "koreanType": "새해",
-      "wikiSearchName": "Serika (New Year)"
+      "wikiSearchName": "Serika (New Year)",
+      "imageUrl": "data/images/students/serika_new_year.png"
     },
     {
       "href": "/wiki/Serika_(Swimsuit)",
@@ -2221,7 +2422,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Serika (Swimsuit)"
+      "wikiSearchName": "Serika (Swimsuit)",
+      "imageUrl": "data/images/students/serika_swimsuit.png"
     },
     {
       "href": "/wiki/Serina",
@@ -2232,7 +2434,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Serina"
+      "wikiSearchName": "Serina",
+      "imageUrl": "data/images/students/serina.png"
     },
     {
       "href": "/wiki/Serina_(Christmas)",
@@ -2243,7 +2446,8 @@
       "typeKey": "christmas",
       "englishType": "Christmas",
       "koreanType": "크리스마스",
-      "wikiSearchName": "Serina (Christmas)"
+      "wikiSearchName": "Serina (Christmas)",
+      "imageUrl": "data/images/students/serina_christmas.png"
     },
     {
       "href": "/wiki/Shigure",
@@ -2254,7 +2458,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Shigure"
+      "wikiSearchName": "Shigure",
+      "imageUrl": "data/images/students/shigure.png"
     },
     {
       "href": "/wiki/Shigure_(Hot_Spring)",
@@ -2265,7 +2470,8 @@
       "typeKey": "hot_spring",
       "englishType": "Hot Spring",
       "koreanType": "온천",
-      "wikiSearchName": "Shigure (Hot Spring)"
+      "wikiSearchName": "Shigure (Hot Spring)",
+      "imageUrl": "data/images/students/shigure_hot_spring.png"
     },
     {
       "href": "/wiki/Shimiko",
@@ -2276,7 +2482,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Shimiko"
+      "wikiSearchName": "Shimiko",
+      "imageUrl": "data/images/students/shimiko.png"
     },
     {
       "href": "/wiki/Shiroko",
@@ -2287,7 +2494,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Shiroko"
+      "wikiSearchName": "Shiroko",
+      "imageUrl": "data/images/students/shiroko.png"
     },
     {
       "href": "/wiki/Shiroko_(Riding)",
@@ -2298,7 +2506,8 @@
       "typeKey": "riding",
       "englishType": "Riding",
       "koreanType": "라이딩",
-      "wikiSearchName": "Shiroko (Riding)"
+      "wikiSearchName": "Shiroko (Riding)",
+      "imageUrl": "data/images/students/shiroko_riding.png"
     },
     {
       "href": "/wiki/Shiroko_(Swimsuit)",
@@ -2309,7 +2518,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Shiroko (Swimsuit)"
+      "wikiSearchName": "Shiroko (Swimsuit)",
+      "imageUrl": "data/images/students/shiroko_swimsuit.png"
     },
     {
       "href": "/wiki/Shiroko%EF%BC%8ATerror",
@@ -2320,7 +2530,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Shiroko＊Terror"
+      "wikiSearchName": "Shiroko＊Terror",
+      "imageUrl": "data/images/students/shiroko_terror.png"
     },
     {
       "href": "/wiki/Shizuko",
@@ -2331,7 +2542,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Shizuko"
+      "wikiSearchName": "Shizuko",
+      "imageUrl": "data/images/students/shizuko.png"
     },
     {
       "href": "/wiki/Shizuko_(Swimsuit)",
@@ -2342,7 +2554,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Shizuko (Swimsuit)"
+      "wikiSearchName": "Shizuko (Swimsuit)",
+      "imageUrl": "data/images/students/shizuko_swimsuit.png"
     },
     {
       "href": "/wiki/Shokuhou_Misaki",
@@ -2353,7 +2566,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Shokuhou Misaki"
+      "wikiSearchName": "Shokuhou Misaki",
+      "imageUrl": "data/images/students/shokuhou_misaki.png"
     },
     {
       "href": "/wiki/Shun",
@@ -2364,7 +2578,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Shun"
+      "wikiSearchName": "Shun",
+      "imageUrl": "data/images/students/shun.png"
     },
     {
       "href": "/wiki/Shun_(Kid)",
@@ -2375,7 +2590,8 @@
       "typeKey": "kid",
       "englishType": "Kid",
       "koreanType": "어린이",
-      "wikiSearchName": "Shun (Kid)"
+      "wikiSearchName": "Shun (Kid)",
+      "imageUrl": "data/images/students/shun_kid.png"
     },
     {
       "href": "/wiki/Subaru",
@@ -2386,7 +2602,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Subaru"
+      "wikiSearchName": "Subaru",
+      "imageUrl": "data/images/students/subaru.png"
     },
     {
       "href": "/wiki/Sumire",
@@ -2397,7 +2614,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Sumire"
+      "wikiSearchName": "Sumire",
+      "imageUrl": "data/images/students/sumire.png"
     },
     {
       "href": "/wiki/Sumire_(Part-Timer)",
@@ -2408,7 +2626,8 @@
       "typeKey": "part_timer",
       "englishType": "Part-Timer",
       "koreanType": "아르바이트",
-      "wikiSearchName": "Sumire (Part-Timer)"
+      "wikiSearchName": "Sumire (Part-Timer)",
+      "imageUrl": "data/images/students/sumire_part_timer.png"
     },
     {
       "href": "/wiki/Suzumi",
@@ -2419,7 +2638,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Suzumi"
+      "wikiSearchName": "Suzumi",
+      "imageUrl": "data/images/students/suzumi.png"
     },
     {
       "href": "/wiki/Suzumi_(Magical)",
@@ -2430,7 +2650,8 @@
       "typeKey": "magical",
       "englishType": "Magical",
       "koreanType": "매지컬",
-      "wikiSearchName": "Suzumi (Magical)"
+      "wikiSearchName": "Suzumi (Magical)",
+      "imageUrl": "data/images/students/suzumi_magical.png"
     },
     {
       "href": "/wiki/Takane",
@@ -2441,7 +2662,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Takane"
+      "wikiSearchName": "Takane",
+      "imageUrl": "data/images/students/takane.png"
     },
     {
       "href": "/wiki/Toki",
@@ -2452,7 +2674,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Toki"
+      "wikiSearchName": "Toki",
+      "imageUrl": "data/images/students/toki.png"
     },
     {
       "href": "/wiki/Toki_(Battle)",
@@ -2463,7 +2686,8 @@
       "typeKey": "battle",
       "englishType": "Battle",
       "koreanType": "무장",
-      "wikiSearchName": "Toki (Battle)"
+      "wikiSearchName": "Toki (Battle)",
+      "imageUrl": "data/images/students/toki_battle.png"
     },
     {
       "href": "/wiki/Toki_(Bunny_Girl)",
@@ -2474,7 +2698,8 @@
       "typeKey": "bunny_girl",
       "englishType": "Bunny Girl",
       "koreanType": "바니걸",
-      "wikiSearchName": "Toki (Bunny Girl)"
+      "wikiSearchName": "Toki (Bunny Girl)",
+      "imageUrl": "data/images/students/toki_bunny_girl.png"
     },
     {
       "href": "/wiki/Tomoe",
@@ -2485,7 +2710,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Tomoe"
+      "wikiSearchName": "Tomoe",
+      "imageUrl": "data/images/students/tomoe.png"
     },
     {
       "href": "/wiki/Tomoe_(Qipao)",
@@ -2496,7 +2722,8 @@
       "typeKey": "qipao",
       "englishType": "Qipao",
       "koreanType": "치파오",
-      "wikiSearchName": "Tomoe (Qipao)"
+      "wikiSearchName": "Tomoe (Qipao)",
+      "imageUrl": "data/images/students/tomoe_qipao.png"
     },
     {
       "href": "/wiki/Tsubaki",
@@ -2507,7 +2734,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Tsubaki"
+      "wikiSearchName": "Tsubaki",
+      "imageUrl": "data/images/students/tsubaki.png"
     },
     {
       "href": "/wiki/Tsubaki_(Guide)",
@@ -2518,7 +2746,8 @@
       "typeKey": "guide",
       "englishType": "Guide",
       "koreanType": "가이드",
-      "wikiSearchName": "Tsubaki (Guide)"
+      "wikiSearchName": "Tsubaki (Guide)",
+      "imageUrl": "data/images/students/tsubaki_guide.png"
     },
     {
       "href": "/wiki/Tsukuyo",
@@ -2529,7 +2758,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Tsukuyo"
+      "wikiSearchName": "Tsukuyo",
+      "imageUrl": "data/images/students/tsukuyo.png"
     },
     {
       "href": "/wiki/Tsukuyo_(Dress)",
@@ -2540,7 +2770,8 @@
       "typeKey": "dress",
       "englishType": "Dress",
       "koreanType": "드레스",
-      "wikiSearchName": "Tsukuyo (Dress)"
+      "wikiSearchName": "Tsukuyo (Dress)",
+      "imageUrl": "data/images/students/tsukuyo_dress.png"
     },
     {
       "href": "/wiki/Tsurugi",
@@ -2551,7 +2782,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Tsurugi"
+      "wikiSearchName": "Tsurugi",
+      "imageUrl": "data/images/students/tsurugi.png"
     },
     {
       "href": "/wiki/Tsurugi_(Swimsuit)",
@@ -2562,7 +2794,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Tsurugi (Swimsuit)"
+      "wikiSearchName": "Tsurugi (Swimsuit)",
+      "imageUrl": "data/images/students/tsurugi_swimsuit.png"
     },
     {
       "href": "/wiki/Ui",
@@ -2573,7 +2806,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Ui"
+      "wikiSearchName": "Ui",
+      "imageUrl": "data/images/students/ui.png"
     },
     {
       "href": "/wiki/Ui_(Swimsuit)",
@@ -2584,7 +2818,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Ui (Swimsuit)"
+      "wikiSearchName": "Ui (Swimsuit)",
+      "imageUrl": "data/images/students/ui_swimsuit.png"
     },
     {
       "href": "/wiki/Umika",
@@ -2595,7 +2830,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Umika"
+      "wikiSearchName": "Umika",
+      "imageUrl": "data/images/students/umika.png"
     },
     {
       "href": "/wiki/Utaha",
@@ -2606,7 +2842,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Utaha"
+      "wikiSearchName": "Utaha",
+      "imageUrl": "data/images/students/utaha.png"
     },
     {
       "href": "/wiki/Utaha_(Cheerleader)",
@@ -2617,7 +2854,8 @@
       "typeKey": "cheerleader",
       "englishType": "Cheerleader",
       "koreanType": "치어리더",
-      "wikiSearchName": "Utaha (Cheerleader)"
+      "wikiSearchName": "Utaha (Cheerleader)",
+      "imageUrl": "data/images/students/utaha_cheerleader.png"
     },
     {
       "href": "/wiki/Wakamo",
@@ -2628,7 +2866,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Wakamo"
+      "wikiSearchName": "Wakamo",
+      "imageUrl": "data/images/students/wakamo.png"
     },
     {
       "href": "/wiki/Wakamo_(Swimsuit)",
@@ -2639,7 +2878,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Wakamo (Swimsuit)"
+      "wikiSearchName": "Wakamo (Swimsuit)",
+      "imageUrl": "data/images/students/wakamo_swimsuit.png"
     },
     {
       "href": "/wiki/Yakumo",
@@ -2650,7 +2890,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Yakumo"
+      "wikiSearchName": "Yakumo",
+      "imageUrl": "data/images/students/yakumo.png"
     },
     {
       "href": "/wiki/Yoshimi",
@@ -2661,7 +2902,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Yoshimi"
+      "wikiSearchName": "Yoshimi",
+      "imageUrl": "data/images/students/yoshimi.png"
     },
     {
       "href": "/wiki/Yoshimi_(Band)",
@@ -2672,7 +2914,8 @@
       "typeKey": "band",
       "englishType": "Band",
       "koreanType": "밴드",
-      "wikiSearchName": "Yoshimi (Band)"
+      "wikiSearchName": "Yoshimi (Band)",
+      "imageUrl": "data/images/students/yoshimi_band.png"
     },
     {
       "href": "/wiki/Yukari",
@@ -2683,7 +2926,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Yukari"
+      "wikiSearchName": "Yukari",
+      "imageUrl": "data/images/students/yukari.png"
     },
     {
       "href": "/wiki/Yukari_(Swimsuit)",
@@ -2694,7 +2938,8 @@
       "typeKey": "swimsuit",
       "englishType": "Swimsuit",
       "koreanType": "수영복",
-      "wikiSearchName": "Yukari (Swimsuit)"
+      "wikiSearchName": "Yukari (Swimsuit)",
+      "imageUrl": "data/images/students/yukari_swimsuit.png"
     },
     {
       "href": "/wiki/Yuuka",
@@ -2705,7 +2950,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Yuuka"
+      "wikiSearchName": "Yuuka",
+      "imageUrl": "data/images/students/yuuka.png"
     },
     {
       "href": "/wiki/Yuuka_(Pajama)",
@@ -2716,7 +2962,8 @@
       "typeKey": "pajama",
       "englishType": "Pajama",
       "koreanType": "파자마",
-      "wikiSearchName": "Yuuka (Pajama)"
+      "wikiSearchName": "Yuuka (Pajama)",
+      "imageUrl": "data/images/students/yuuka_pajama.png"
     },
     {
       "href": "/wiki/Yuuka_(Sportswear)",
@@ -2727,7 +2974,8 @@
       "typeKey": "sportswear",
       "englishType": "Sportswear",
       "koreanType": "체육복",
-      "wikiSearchName": "Yuuka (Sportswear)"
+      "wikiSearchName": "Yuuka (Sportswear)",
+      "imageUrl": "data/images/students/yuuka_sportswear.png"
     },
     {
       "href": "/wiki/Yuzu",
@@ -2738,7 +2986,8 @@
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
-      "wikiSearchName": "Yuzu"
+      "wikiSearchName": "Yuzu",
+      "imageUrl": "data/images/students/yuzu.png"
     },
     {
       "href": "/wiki/Yuzu_(Maid)",
@@ -2749,7 +2998,8 @@
       "typeKey": "maid",
       "englishType": "Maid",
       "koreanType": "메이드",
-      "wikiSearchName": "Yuzu (Maid)"
+      "wikiSearchName": "Yuzu (Maid)",
+      "imageUrl": "data/images/students/yuzu_maid.png"
     }
   ]
 }
