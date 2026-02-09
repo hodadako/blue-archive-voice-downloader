@@ -26,7 +26,7 @@ const translations = {
     langLabel: '언어',
     themeLabel: '다크모드',
     searchLabel: '학생 이름 검색',
-    searchPlaceholder: 'Aru',
+    searchPlaceholder: 'Aru, 아루',
     searchBtn: '검색',
     resolveBtn: '음성 파일 조회',
     voiceListTitle: '음성 파일 목록',
