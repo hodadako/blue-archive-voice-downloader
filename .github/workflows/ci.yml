@@ -9,18 +9,30 @@ on:
 
 jobs:
   build-matrix:
-    name: Build (${{ matrix.os }})
+    name: Build (${{ matrix.os }} / ${{ matrix.arch }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: macos-latest
-            npm_script: build:mac
+            arch: x64
+            npm_script: build:mac:x64
+          - os: macos-latest
+            arch: arm64
+            npm_script: build:mac:arm64
           - os: windows-latest
+            arch: x64
             npm_script: build:win:x64
+          - os: windows-latest
+            arch: arm64
+            npm_script: build:win:arm64
           - os: ubuntu-latest
+            arch: x64
             npm_script: build:linux:x64
+          - os: ubuntu-latest
+            arch: arm64
+            npm_script: build:linux:arm64
 
     env:
       CSC_IDENTITY_AUTO_DISCOVERY: false
@@ -42,5 +54,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ci-${{ runner.os }}-build
+          name: ci-${{ runner.os }}-${{ matrix.arch }}-build
           path: dist/*
