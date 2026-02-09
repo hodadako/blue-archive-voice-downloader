@@ -28,3 +28,12 @@ Examples:
 ## Do Not Modify Formulas
 - Never edit `src/data/student-name-formulas.json`.
 - Never edit `src/data/student-type-formulas.json`.
+
+## Versioning (SemVer)
+
+Follow Semantic Versioning: https://semver.org/
+
+- `MAJOR` (`X.0.0`): incompatible/breaking changes.
+- `MINOR` (`0.X.0`): backward-compatible feature additions.
+- `PATCH` (`0.0.X`): backward-compatible bug fixes.
+- Pre-release tags are allowed when needed (e.g. `1.2.0-beta.1`).

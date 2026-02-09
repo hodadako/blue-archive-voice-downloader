@@ -8,20 +8,35 @@ on:
 
 jobs:
   build:
-    name: Build (${{ matrix.os }})
+    name: Build (${{ matrix.os }} / ${{ matrix.arch }})
     strategy:
       fail-fast: false
       matrix:
         include:
           - os: macos-latest
-            npm_script: build:mac
-            artifact_name: macOS-build
+            arch: x64
+            npm_script: build:mac:x64
+            artifact_name: macOS-x64-build
+          - os: macos-latest
+            arch: arm64
+            npm_script: build:mac:arm64
+            artifact_name: macOS-arm64-build
           - os: windows-latest
+            arch: x64
             npm_script: build:win:x64
-            artifact_name: Windows-build
+            artifact_name: Windows-x64-build
+          - os: windows-latest
+            arch: arm64
+            npm_script: build:win:arm64
+            artifact_name: Windows-arm64-build
           - os: ubuntu-latest
+            arch: x64
             npm_script: build:linux:x64
-            artifact_name: Linux-build
+            artifact_name: Linux-x64-build
+          - os: ubuntu-latest
+            arch: arm64
+            npm_script: build:linux:arm64
+            artifact_name: Linux-arm64-build
     runs-on: ${{ matrix.os }}
 
     env:
