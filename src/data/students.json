@@ -1,17 +1,6 @@
 {
-  "updatedAt": 1770628537405,
+  "updatedAt": 1770629110829,
   "students": [
-    {
-      "href": "/wiki/Affinity",
-      "englishName": "affinity",
-      "koreanName": null,
-      "baseEnglishName": "affinity",
-      "baseKoreanName": null,
-      "typeKey": null,
-      "englishType": null,
-      "koreanType": null,
-      "wikiSearchName": "Affinity"
-    },
     {
       "href": "/wiki/Airi",
       "englishName": "airi",
@@ -275,39 +264,6 @@
       "englishType": "Swimsuit",
       "koreanType": "수영복",
       "wikiSearchName": "Azusa (Swimsuit)"
-    },
-    {
-      "href": "/wiki/Characters_image_list",
-      "englishName": "characters_image_list",
-      "koreanName": null,
-      "baseEnglishName": "characters",
-      "baseKoreanName": null,
-      "typeKey": "image_list",
-      "englishType": null,
-      "koreanType": null,
-      "wikiSearchName": "Characters image list"
-    },
-    {
-      "href": "/wiki/Characters_StatChart",
-      "englishName": "characters_statchart",
-      "koreanName": null,
-      "baseEnglishName": "characters",
-      "baseKoreanName": null,
-      "typeKey": "statchart",
-      "englishType": null,
-      "koreanType": null,
-      "wikiSearchName": "Characters StatChart"
-    },
-    {
-      "href": "/wiki/Characters_trivia_list",
-      "englishName": "characters_trivia_list",
-      "koreanName": null,
-      "baseEnglishName": "characters",
-      "baseKoreanName": null,
-      "typeKey": "trivia_list",
-      "englishType": null,
-      "koreanType": null,
-      "wikiSearchName": "Characters trivia list"
     },
     {
       "href": "/wiki/Cherino",
@@ -643,9 +599,9 @@
       "href": "/wiki/Hatsune_Miku",
       "englishName": "hatsune_miku",
       "koreanName": "하츠네 미쿠",
-      "baseEnglishName": "hatsune",
+      "baseEnglishName": "hatsune_miku",
       "baseKoreanName": "하츠네 미쿠",
-      "typeKey": "miku",
+      "typeKey": null,
       "englishType": null,
       "koreanType": null,
       "wikiSearchName": "Hatsune Miku"
@@ -1589,9 +1545,9 @@
       "href": "/wiki/Misaka_Mikoto",
       "englishName": "misaka_mikoto",
       "koreanName": "미사카 미코토",
-      "baseEnglishName": "misaka",
+      "baseEnglishName": "misaka_mikoto",
       "baseKoreanName": "미사카 미코토",
-      "typeKey": "mikoto",
+      "typeKey": null,
       "englishType": null,
       "koreanType": null,
       "wikiSearchName": "Misaka Mikoto"
@@ -2150,9 +2106,9 @@
       "href": "/wiki/Saten_Ruiko",
       "englishName": "saten_ruiko",
       "koreanName": "사텐 루이코",
-      "baseEnglishName": "saten",
+      "baseEnglishName": "saten_ruiko",
       "baseKoreanName": "사텐 루이코",
-      "typeKey": "ruiko",
+      "typeKey": null,
       "englishType": null,
       "koreanType": null,
       "wikiSearchName": "Saten Ruiko"
@@ -2392,9 +2348,9 @@
       "href": "/wiki/Shokuhou_Misaki",
       "englishName": "shokuhou_misaki",
       "koreanName": "쇼쿠호 미사키",
-      "baseEnglishName": "shokuhou",
+      "baseEnglishName": "shokuhou_misaki",
       "baseKoreanName": "쇼쿠호 미사키",
-      "typeKey": "misaki",
+      "typeKey": null,
       "englishType": null,
       "koreanType": null,
       "wikiSearchName": "Shokuhou Misaki"
@@ -2640,28 +2596,6 @@
       "englishType": null,
       "koreanType": null,
       "wikiSearchName": "Umika"
-    },
-    {
-      "href": "/wiki/Unique_gear_list",
-      "englishName": "unique_gear_list",
-      "koreanName": null,
-      "baseEnglishName": "unique",
-      "baseKoreanName": null,
-      "typeKey": "gear_list",
-      "englishType": null,
-      "koreanType": null,
-      "wikiSearchName": "Unique gear list"
-    },
-    {
-      "href": "/wiki/Unique_weapons_list",
-      "englishName": "unique_weapons_list",
-      "koreanName": null,
-      "baseEnglishName": "unique",
-      "baseKoreanName": null,
-      "typeKey": "weapons_list",
-      "englishType": null,
-      "koreanType": null,
-      "wikiSearchName": "Unique weapons list"
     },
     {
       "href": "/wiki/Utaha",

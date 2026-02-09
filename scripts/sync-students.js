@@ -85,7 +85,7 @@ function buildFormulaMaps() {
   const baseMapRaw = nameFormula?.baseNameMap || {};
   const baseNameMap = {};
   for (const [key, value] of Object.entries(baseMapRaw)) {
-    const baseKey = normalizeTypeKey(key).split('_')[0];
+    const baseKey = normalizeTypeKey(key);
     if (!baseKey) {
       continue;
     }
@@ -164,9 +164,15 @@ async function main() {
       continue;
     }
 
-    const { baseEnglishName, typeKey } = splitEnglishNameAndType(englishName);
-    const englishType = typeKey ? englishTypeMap[typeKey] || null : null;
-    const koreanType = typeKey ? koreanTypeMap[typeKey] || null : null;
+    let { baseEnglishName, typeKey } = splitEnglishNameAndType(englishName);
+    let englishType = typeKey ? englishTypeMap[typeKey] || null : null;
+    let koreanType = typeKey ? koreanTypeMap[typeKey] || null : null;
+    if (typeKey && !englishType) {
+      baseEnglishName = englishName;
+      typeKey = null;
+      englishType = null;
+      koreanType = null;
+    }
     const baseKoreanName = baseEnglishName ? baseNameMap[baseEnglishName] || null : null;
 
     if (baseEnglishName && !baseKoreanName) {

@@ -63,6 +63,14 @@ async function fetchCharacterTitlesFromWiki(baseUrl = 'https://bluearchive.wiki'
   const html = await fetchHtml(url);
   const $ = cheerio.load(html || '');
   const out = new Set();
+  const blockedTitles = new Set([
+    'Affinity',
+    'Characters StatChart',
+    'Characters image list',
+    'Characters trivia list',
+    'Unique gear list',
+    'Unique weapons list',
+  ]);
 
   $('#mw-content-text a[href^="/wiki/"]').each((_idx, el) => {
     const href = ($(el).attr('href') || '').trim();
@@ -73,6 +81,9 @@ async function fetchCharacterTitlesFromWiki(baseUrl = 'https://bluearchive.wiki'
 
     const normalized = normalizeText(title);
     if (!normalized) {
+      return;
+    }
+    if (blockedTitles.has(normalized)) {
       return;
     }
     if (/\/audio$/i.test(normalized)) {
