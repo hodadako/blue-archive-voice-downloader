@@ -226,6 +226,13 @@ input {
   overflow: hidden;
 }
 
+#progressFile {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+  word-break: break-all;
+}
+
 #progressFill {
   width: 0%;
   height: 100%;

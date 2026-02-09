@@ -7,6 +7,7 @@ const themeToggle = document.getElementById('themeToggle');
 const progressArea = document.getElementById('progressArea');
 const progressValue = document.getElementById('progressValue');
 const progressFill = document.getElementById('progressFill');
+const progressFile = document.getElementById('progressFile');
 
 const voiceStatus = document.getElementById('voiceStatus');
 const searchResult = document.getElementById('searchResult');
@@ -43,6 +44,7 @@ const translations = {
     statusDownloadFail: '다운로드 실패: {error}',
     statusDownloadDone: '다운로드 완료',
     progressLabel: '다운로드 진행',
+    progressFile: '현재 파일: {file}',
     resultEmpty: '검색 결과가 없습니다.',
     nameMissing: '이름없음',
   },
@@ -71,6 +73,7 @@ const translations = {
     statusDownloadFail: 'Download failed: {error}',
     statusDownloadDone: 'Download complete',
     progressLabel: 'Download progress',
+    progressFile: 'Current file: {file}',
     resultEmpty: 'No search results.',
     nameMissing: 'Unknown',
   },
@@ -105,10 +108,12 @@ function setLanguage(lang) {
   applyTranslations();
 }
 
-function setTheme(isDark) {
+function setTheme(isDark, persist = true) {
   themeToggle.checked = isDark;
   document.body.dataset.theme = isDark ? 'dark' : 'light';
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  if (persist) {
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
 }
 
 function formatStudentLabel(item) {
@@ -259,6 +264,7 @@ downloadBtn.addEventListener('click', async () => {
   progressArea.classList.remove('hidden');
   progressFill.style.width = '0%';
   progressValue.textContent = `0 / ${selectedFiles.length}`;
+  progressFile.textContent = '';
   try {
     const result = await window.voiceApi.downloadVoices({
       studentName: selectedStudent.koreanName || selectedStudent.englishName || 'unknown',
@@ -268,8 +274,14 @@ downloadBtn.addEventListener('click', async () => {
     });
 
     setVoiceStatus(result.message || t('statusDownloadDone'));
+    setTimeout(() => {
+      progressArea.classList.add('hidden');
+    }, 1500);
   } catch (error) {
     setVoiceStatus(t('statusDownloadFail', { error: error.message }));
+    setTimeout(() => {
+      progressArea.classList.add('hidden');
+    }, 1500);
   }
 });
 
@@ -283,6 +295,11 @@ window.voiceApi.onDownloadProgress((payload) => {
   progressValue.textContent = `${completed} / ${total}`;
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
   progressFill.style.width = `${percent}%`;
+  if (payload.currentFile) {
+    progressFile.textContent = t('progressFile', {
+      file: payload.currentFile.replace(/^File:/, ''),
+    });
+  }
 });
 
 langSelect.addEventListener('change', (event) => {
@@ -290,10 +307,19 @@ langSelect.addEventListener('change', (event) => {
 });
 
 themeToggle.addEventListener('change', (event) => {
-  setTheme(event.target.checked);
+  setTheme(event.target.checked, true);
 });
 
 const savedLanguage = localStorage.getItem('language');
 const savedTheme = localStorage.getItem('theme');
 setLanguage(savedLanguage || 'ko');
-setTheme(savedTheme === 'dark');
+const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+const hasSavedTheme = savedTheme === 'dark' || savedTheme === 'light';
+setTheme(hasSavedTheme ? savedTheme === 'dark' : systemPrefersDark.matches, hasSavedTheme);
+systemPrefersDark.addEventListener('change', (event) => {
+  const currentSavedTheme = localStorage.getItem('theme');
+  if (currentSavedTheme === 'dark' || currentSavedTheme === 'light') {
+    return;
+  }
+  setTheme(event.matches, false);
+});
