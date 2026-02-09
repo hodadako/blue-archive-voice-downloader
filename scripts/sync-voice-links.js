@@ -28,7 +28,8 @@ async function main() {
 
   let successCount = 0;
   let failCount = 0;
-  const concurrency = Number(process.env.VOICE_SYNC_CONCURRENCY || '6');
+  const requestedConcurrency = Number(process.env.VOICE_SYNC_CONCURRENCY || '6');
+  const concurrency = Math.min(4, Math.max(1, requestedConcurrency));
   const queryFilter = (process.env.VOICE_SYNC_QUERY || '').trim();
   const linkFilter = (process.env.VOICE_SYNC_LINK || '').trim();
   const forceSync = String(process.env.VOICE_SYNC_FORCE || '').toLowerCase() === 'true';
