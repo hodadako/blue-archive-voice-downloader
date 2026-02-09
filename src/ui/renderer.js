@@ -17,6 +17,9 @@ let selectedStudent = null;
 let resolvedFiles = [];
 let resolvedFileLinksByTitle = {};
 let currentLanguage = 'ko';
+let searchDebounceTimer = null;
+let isInputComposing = false;
+let searchRequestSeq = 0;
 
 const translations = {
   ko: {
@@ -203,25 +206,73 @@ function renderVoiceList(fileTitles) {
   });
 }
 
-async function doSearch() {
+function clearSearchResult() {
+  searchResult.innerHTML = '';
+  selectedStudent = null;
+}
+
+async function doSearch(options = {}) {
+  const { silentEmpty = false, silentError = false } = options;
   const query = studentInput.value.trim();
   if (!query) {
-    setVoiceStatus(t('statusNeedName'));
+    if (!silentEmpty) {
+      setVoiceStatus(t('statusNeedName'));
+    } else {
+      clearSearchResult();
+    }
     return;
   }
 
+  const requestSeq = ++searchRequestSeq;
   try {
     const items = await window.voiceApi.searchStudents(query);
+    if (requestSeq !== searchRequestSeq) {
+      return;
+    }
     selectedStudent = items[0] || null;
     renderSearchItems(items);
   } catch (error) {
-    setVoiceStatus(t('statusSearchFail', { error: error.message }));
+    if (requestSeq !== searchRequestSeq) {
+      return;
+    }
+    if (!silentError) {
+      setVoiceStatus(t('statusSearchFail', { error: error.message }));
+    }
   }
 }
 
 searchBtn.addEventListener('click', doSearch);
+studentInput.addEventListener('compositionstart', () => {
+  isInputComposing = true;
+});
+
+studentInput.addEventListener('compositionend', () => {
+  isInputComposing = false;
+  if (searchDebounceTimer) {
+    clearTimeout(searchDebounceTimer);
+  }
+  searchDebounceTimer = setTimeout(() => {
+    doSearch({ silentEmpty: true, silentError: true });
+  }, 180);
+});
+
+studentInput.addEventListener('input', () => {
+  if (isInputComposing) {
+    return;
+  }
+  if (searchDebounceTimer) {
+    clearTimeout(searchDebounceTimer);
+  }
+  searchDebounceTimer = setTimeout(() => {
+    doSearch({ silentEmpty: true, silentError: true });
+  }, 180);
+});
+
 studentInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
+    if (searchDebounceTimer) {
+      clearTimeout(searchDebounceTimer);
+    }
     doSearch();
   }
 });

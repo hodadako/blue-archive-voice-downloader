@@ -240,11 +240,121 @@ function hasHangul(value) {
   return /[가-힣]/.test(value || '');
 }
 
+function normalizeLatinText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[_()\-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function escapeRegExp(value) {
+  return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function scoreHangulCandidate(candidate, query) {
+  if (!candidate || !query) {
+    return null;
+  }
+  if (candidate === query) {
+    return 0;
+  }
+  if (candidate.startsWith(query)) {
+    return 1;
+  }
+  if (candidate.includes(query)) {
+    return 2;
+  }
+  return null;
+}
+
+function scoreLatinCandidate(candidate, query) {
+  if (!candidate || !query) {
+    return null;
+  }
+
+  const normalizedCandidate = normalizeLatinText(candidate);
+  if (!normalizedCandidate) {
+    return null;
+  }
+
+  if (normalizedCandidate === query) {
+    return 0;
+  }
+  if (normalizedCandidate.startsWith(query)) {
+    return 1;
+  }
+
+  const tokenPrefixMatch = normalizedCandidate
+    .split(' ')
+    .filter(Boolean)
+    .some((token) => token.startsWith(query));
+  if (tokenPrefixMatch) {
+    return 2;
+  }
+
+  const boundaryPattern = new RegExp(`(^|\\s)${escapeRegExp(query)}`);
+  if (boundaryPattern.test(normalizedCandidate)) {
+    return 3;
+  }
+
+  return null;
+}
+
+function rankStudentsByQuery(students, rawQuery) {
+  const isHangulQuery = hasHangul(rawQuery);
+  const normalizedQuery = isHangulQuery ? rawQuery.trim() : normalizeLatinText(rawQuery);
+  if (!normalizedQuery) {
+    return [];
+  }
+
+  const ranked = [];
+  for (const student of students) {
+    let bestScore = null;
+    if (isHangulQuery) {
+      const candidates = [student.koreanName, student.baseKoreanName];
+      for (const candidate of candidates) {
+        const score = scoreHangulCandidate(String(candidate || '').trim(), normalizedQuery);
+        if (score === null) {
+          continue;
+        }
+        bestScore = bestScore === null ? score : Math.min(bestScore, score);
+      }
+    } else {
+      const candidates = [student.englishName, student.baseEnglishName, student.wikiSearchName];
+      for (const candidate of candidates) {
+        const score = scoreLatinCandidate(candidate, normalizedQuery);
+        if (score === null) {
+          continue;
+        }
+        bestScore = bestScore === null ? score : Math.min(bestScore, score);
+      }
+    }
+
+    if (bestScore === null) {
+      continue;
+    }
+    ranked.push({ student, score: bestScore });
+  }
+
+  ranked.sort((a, b) => {
+    if (a.score !== b.score) {
+      return a.score - b.score;
+    }
+    const aName = (a.student.englishName || a.student.koreanName || '').toLowerCase();
+    const bName = (b.student.englishName || b.student.koreanName || '').toLowerCase();
+    return aName.localeCompare(bName);
+  });
+
+  return ranked.map((entry) => entry.student);
+}
+
 function buildFuse(students) {
   return new Fuse(students, {
     includeScore: true,
-    threshold: 0.4,
-    keys: ['englishName', 'koreanName', 'searchText'],
+    threshold: 0.24,
+    ignoreLocation: true,
+    keys: ['englishName', 'koreanName', 'baseEnglishName', 'baseKoreanName', 'wikiSearchName'],
   });
 }
 
@@ -255,15 +365,13 @@ async function searchStudents(userDataDir, query) {
   }
 
   const students = await loadStudentMap(userDataDir, false);
-  const fuse = buildFuse(students);
-
-  let matches = fuse.search(q).map((entry) => entry.item);
-
-  if (hasHangul(q)) {
-    const exact = students.filter((s) => s.koreanName === q);
-    matches = [...exact, ...matches];
+  const ranked = rankStudentsByQuery(students, q);
+  if (ranked.length > 0) {
+    return ranked.slice(0, 15);
   }
 
+  const fuse = buildFuse(students);
+  const matches = fuse.search(q).map((entry) => entry.item);
   const dedup = new Map();
   for (const item of matches) {
     const key = item.href;
