@@ -20,6 +20,8 @@ let currentLanguage = 'ko';
 let searchDebounceTimer = null;
 let isInputComposing = false;
 let searchRequestSeq = 0;
+let searchSuggestions = [];
+let activeSuggestionIndex = -1;
 
 const translations = {
   ko: {
@@ -134,16 +136,20 @@ function setVoiceStatus(text) {
 
 function renderSearchItems(items) {
   searchResult.innerHTML = '';
+  searchSuggestions = Array.isArray(items) ? items : [];
+  activeSuggestionIndex = -1;
+  selectedStudent = null;
 
-  if (!items.length) {
+  if (!searchSuggestions.length) {
     const li = document.createElement('li');
     li.textContent = t('resultEmpty');
     searchResult.appendChild(li);
     return;
   }
 
-  items.forEach((item, idx) => {
+  searchSuggestions.forEach((item, idx) => {
     const li = document.createElement('li');
+    li.dataset.searchIndex = String(idx);
     const row = document.createElement('div');
     row.className = 'student-row';
 
@@ -163,24 +169,13 @@ function renderSearchItems(items) {
     li.appendChild(row);
 
     li.addEventListener('click', () => {
-      selectedStudent = item;
-      studentInput.value = item.koreanName || item.englishName;
-
-      Array.from(searchResult.children).forEach((child) => {
-        child.classList.remove('active');
-      });
-      li.classList.add('active');
-
-      setVoiceStatus(t('statusSelected', { name: formatStudentLabel(item) }));
+      setActiveSearchSuggestion(idx, { applyInputValue: true, announceSelection: true });
     });
-
-    if (idx === 0 && !selectedStudent) {
-      li.classList.add('active');
-      selectedStudent = item;
-    }
 
     searchResult.appendChild(li);
   });
+
+  setActiveSearchSuggestion(0, { applyInputValue: false, announceSelection: false });
 }
 
 function renderVoiceList(fileTitles) {
@@ -208,7 +203,65 @@ function renderVoiceList(fileTitles) {
 
 function clearSearchResult() {
   searchResult.innerHTML = '';
+  searchSuggestions = [];
+  activeSuggestionIndex = -1;
   selectedStudent = null;
+}
+
+function getSuggestionElement(index) {
+  return searchResult.querySelector(`li[data-search-index="${index}"]`);
+}
+
+function setActiveSearchSuggestion(
+  index,
+  { applyInputValue = false, announceSelection = true } = {}
+) {
+  if (!searchSuggestions.length) {
+    return;
+  }
+  if (index < 0 || index >= searchSuggestions.length) {
+    return;
+  }
+
+  const item = searchSuggestions[index];
+  if (!item) {
+    return;
+  }
+
+  activeSuggestionIndex = index;
+  selectedStudent = item;
+
+  Array.from(searchResult.querySelectorAll('li[data-search-index]')).forEach((node) => {
+    node.classList.remove('active');
+  });
+
+  const activeNode = getSuggestionElement(index);
+  if (activeNode) {
+    activeNode.classList.add('active');
+    activeNode.scrollIntoView({ block: 'nearest' });
+  }
+
+  if (applyInputValue) {
+    studentInput.value = item.koreanName || item.englishName || '';
+  }
+  if (announceSelection) {
+    setVoiceStatus(t('statusSelected', { name: formatStudentLabel(item) }));
+  }
+}
+
+function moveActiveSearchSuggestion(step) {
+  if (!searchSuggestions.length) {
+    return false;
+  }
+  if (activeSuggestionIndex < 0) {
+    setActiveSearchSuggestion(0, { applyInputValue: true, announceSelection: true });
+    return true;
+  }
+
+  const total = searchSuggestions.length;
+  const next = (activeSuggestionIndex + step + total) % total;
+  setActiveSearchSuggestion(next, { applyInputValue: true, announceSelection: true });
+  return true;
 }
 
 async function doSearch(options = {}) {
@@ -229,7 +282,6 @@ async function doSearch(options = {}) {
     if (requestSeq !== searchRequestSeq) {
       return;
     }
-    selectedStudent = items[0] || null;
     renderSearchItems(items);
   } catch (error) {
     if (requestSeq !== searchRequestSeq) {
@@ -269,7 +321,27 @@ studentInput.addEventListener('input', () => {
 });
 
 studentInput.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowDown') {
+    if (moveActiveSearchSuggestion(1)) {
+      event.preventDefault();
+    }
+    return;
+  }
+  if (event.key === 'ArrowUp') {
+    if (moveActiveSearchSuggestion(-1)) {
+      event.preventDefault();
+    }
+    return;
+  }
   if (event.key === 'Enter') {
+    if (searchSuggestions.length > 0 && activeSuggestionIndex >= 0) {
+      event.preventDefault();
+      setActiveSearchSuggestion(activeSuggestionIndex, {
+        applyInputValue: true,
+        announceSelection: true,
+      });
+      return;
+    }
     if (searchDebounceTimer) {
       clearTimeout(searchDebounceTimer);
     }
