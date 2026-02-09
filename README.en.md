@@ -2,7 +2,7 @@
 
 A desktop app for searching Blue Archive students in Korean/English and downloading voice files from `bluearchive.wiki`.
 
-Korean README: `README.md`
+[Korean README](README.md)
 
 ## User Guide
 
@@ -49,3 +49,7 @@ This project source code is licensed under MIT.
 - Blue Archive related IP and assets belong to Nexon Games and Yostar.
 - This project is a non-commercial fan utility.
 - Use voice/assets according to the rights holders' policies.
+
+## Issue Reporting
+
+- Please use the GitHub Issue template for bug reports and feature requests.
