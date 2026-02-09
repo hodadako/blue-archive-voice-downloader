@@ -30,6 +30,12 @@ function titleToEnglishSlug(title) {
     .toLowerCase();
 }
 
+function toWikiHref(title) {
+  const normalized = normalizeText(title).replace(/\s+/g, '_');
+  const encoded = encodeURIComponent(normalized).replace(/%2F/g, '/');
+  return `/wiki/${encoded}`;
+}
+
 function splitEnglishNameAndType(englishName) {
   const tokens = normalizeText(englishName).split('_').filter(Boolean);
   if (!tokens.length) {
@@ -176,7 +182,7 @@ async function main() {
       : (existingRow?.koreanName || null);
 
     outByEnglish.set(englishName, {
-      href: `/student-detail/${englishName}`,
+      href: toWikiHref(wikiSearchName),
       englishName,
       koreanName,
       baseEnglishName,

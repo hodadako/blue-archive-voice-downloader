@@ -24,3 +24,7 @@ Examples:
 - `feat(sync): add student map sync command`
 - `fix(download): use direct static audio URL for ogg files`
 - `docs(readme): add students sync usage`
+
+## Do Not Modify Formulas
+- Never edit `src/data/student-name-formulas.json`.
+- Never edit `src/data/student-type-formulas.json`.
