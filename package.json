@@ -15,9 +15,9 @@
     "build:mac:x64": "electron-builder --mac dmg --x64",
     "build:mac:arm64": "electron-builder --mac dmg --arm64",
     "build:mac:universal": "electron-builder --mac dmg --universal",
-    "build:win": "electron-builder --win nsis",
-    "build:win:x64": "electron-builder --win nsis --x64",
-    "build:win:arm64": "electron-builder --win nsis --arm64",
+    "build:win": "electron-builder --win portable --x64",
+    "build:win:x64": "electron-builder --win portable --x64",
+    "build:win:arm64": "electron-builder --win portable --arm64",
     "build:linux:x64": "electron-builder --linux AppImage --x64",
     "build:linux:arm64": "electron-builder --linux AppImage --arm64"
   },
@@ -53,9 +53,10 @@
       "icon": "icons/icon.png",
       "target": [
         {
-          "target": "nsis",
+          "target": "portable",
           "arch": [
-            "x64"
+            "x64",
+            "arm64"
           ]
         }
       ]

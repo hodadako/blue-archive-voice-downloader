@@ -112,6 +112,7 @@ jobs:
           mkdir -p release-files
           find release-assets -type f \
             \( -name "*.dmg" -o -name "*.exe" -o -name "*.AppImage" -o -name "*.deb" -o -name "*.rpm" \) \
+            ! -name "*Setup*.exe" \
             -exec cp {} release-files/ \;
 
       - name: Publish GitHub Release
