@@ -157,10 +157,38 @@ jobs:
             exit 1
           fi
 
+      - name: Resolve release-drafter notes
+        id: drafter_notes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tag = context.ref.replace('refs/tags/', '');
+            const releases = await github.paginate(github.rest.repos.listReleases, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
+
+            const draftByTag = releases.find((r) => r.draft && r.tag_name === tag);
+            const latestDraft = releases.find((r) => r.draft);
+            const picked = draftByTag || latestDraft || null;
+
+            if (!picked) {
+              core.info('No draft release from release-drafter was found.');
+              core.setOutput('release_name', `Release ${tag}`);
+              core.setOutput('release_body', '');
+              return;
+            }
+
+            core.info(`Using draft release notes from: ${picked.name || picked.tag_name}`);
+            core.setOutput('release_name', picked.name || `Release ${tag}`);
+            core.setOutput('release_body', picked.body || '');
+
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          name: Release ${{ github.ref_name }}
+          name: ${{ steps.drafter_notes.outputs.release_name }}
+          body: ${{ steps.drafter_notes.outputs.release_body }}
           generate_release_notes: true
           overwrite_files: false
           files: release-files/*
