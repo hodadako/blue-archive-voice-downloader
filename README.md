@@ -41,6 +41,11 @@
 3. `음성 파일 조회` 클릭
 4. 원하는 파일 선택 후 다운로드
 
+## 데이터 기준 안내
+
+- 음성 파일은 `bluearchive.wiki`에서 가져옵니다.
+- 모든 학생 업데이트 기준 페이지는 `https://bluearchive.wiki/wiki/Characters#` 입니다.
+
 ## DMG 빌드(앱 버전 테스트용)
 
 macOS에서 직접 테스트 빌드를 만들려면:

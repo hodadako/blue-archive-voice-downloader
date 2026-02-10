@@ -37,3 +37,8 @@ Follow Semantic Versioning: https://semver.org/
 - `MINOR` (`0.X.0`): backward-compatible feature additions.
 - `PATCH` (`0.0.X`): backward-compatible bug fixes.
 - Pre-release tags are allowed when needed (e.g. `1.2.0-beta.1`).
+
+## README Sync Rule
+
+When modifying `README.md`, update all README variants in the repository together
+(for example `README.en.md`) in the same change.

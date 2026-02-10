@@ -41,6 +41,11 @@ Typical usage flow:
 3. Click `Resolve voices`
 4. Select files and download
 
+## Data Source Policy
+
+- Voice files are fetched from `bluearchive.wiki`.
+- All student update references are based on `https://bluearchive.wiki/wiki/Characters#`.
+
 ## Build DMG (for local app version testing)
 
 To build a testable macOS package on macOS:
