@@ -10,6 +10,29 @@ Download the installer for your OS from the Releases page.
 
 - macOS: `.dmg`
 - Windows: `.exe`
+- Linux: `.AppImage`
+
+## Installation
+
+### macOS (`.dmg`)
+
+1. Download the `.dmg` file from Releases
+2. Open it and drag the app into `Applications`
+3. Launch the app
+
+### Windows (`.exe`)
+
+1. Download the `Setup` or `.exe` installer from Releases
+2. Run the installer and follow the setup steps
+3. Launch from Start Menu
+
+### Linux (`.AppImage`)
+
+1. Download the `.AppImage` file from Releases
+2. Make it executable:
+   `chmod +x BlueArchiveVoiceDownloader-*.AppImage`
+3. Run it:
+   `./BlueArchiveVoiceDownloader-*.AppImage`
 
 Typical usage flow:
 
@@ -17,14 +40,6 @@ Typical usage flow:
 2. Select a student from the result list
 3. Click `Resolve voices`
 4. Select files and download
-
-## Search Behavior (Detailed)
-
-- Korean/English autocomplete: results update while you type.
-- Korean query ranking: exact and prefix matches are prioritized.
-- English query ranking: exact, prefix, and word-boundary matches are prioritized to reduce unrelated results.
-- Fuzzy fallback: typo-tolerant fuzzy matching runs only when strict matching finds no result.
-- Quick action: the top result is preselected so you can immediately continue to voice resolving.
 
 ## Build DMG (for local app version testing)
 
