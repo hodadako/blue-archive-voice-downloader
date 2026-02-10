@@ -54,7 +54,7 @@ jobs:
       - name: Upload artifacts (installers only)
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.artifact_name }}
+          name: ci-${{ runner.os }}-${{ matrix.arch }}-build
           path: |
             dist/*.dmg
             dist/*.exe
