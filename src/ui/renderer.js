@@ -48,6 +48,8 @@ const translations = {
     statusDownloading: '다운로드 중...',
     statusDownloadFail: '다운로드 실패: {error}',
     statusDownloadDone: '다운로드 완료',
+    statusDownloadFailSummary: '실패 사유',
+    statusDownloadMore: '외 {count}건',
     progressLabel: '다운로드 진행',
     progressFile: '현재 파일: {file}',
     resultEmpty: '검색 결과가 없습니다.',
@@ -77,6 +79,8 @@ const translations = {
     statusDownloading: 'Downloading...',
     statusDownloadFail: 'Download failed: {error}',
     statusDownloadDone: 'Download complete',
+    statusDownloadFailSummary: 'Failure reasons',
+    statusDownloadMore: '{count} more',
     progressLabel: 'Download progress',
     progressFile: 'Current file: {file}',
     resultEmpty: 'No search results.',
@@ -132,6 +136,24 @@ function formatStudentLabel(item) {
 
 function setVoiceStatus(text) {
   voiceStatus.textContent = text;
+}
+
+function buildDownloadStatusMessage(result) {
+  const base = result?.message || t('statusDownloadDone');
+  const failures = Array.isArray(result?.results)
+    ? result.results.filter((entry) => !entry?.ok && entry?.reason)
+    : [];
+  if (!failures.length) {
+    return base;
+  }
+
+  const shown = failures.slice(0, 3).map((entry) => {
+    const name = String(entry.fileTitle || 'unknown').replace(/^File:/, '');
+    return `${name}: ${entry.reason}`;
+  });
+  const extraCount = failures.length - shown.length;
+  const extraText = extraCount > 0 ? ` (${t('statusDownloadMore', { count: extraCount })})` : '';
+  return `${base} | ${t('statusDownloadFailSummary')}: ${shown.join(' / ')}${extraText}`;
 }
 
 function renderSearchItems(items) {
@@ -416,7 +438,7 @@ downloadBtn.addEventListener('click', async () => {
       language: currentLanguage,
     });
 
-    setVoiceStatus(result.message || t('statusDownloadDone'));
+    setVoiceStatus(buildDownloadStatusMessage(result));
     setTimeout(() => {
       progressArea.classList.add('hidden');
     }, 1500);

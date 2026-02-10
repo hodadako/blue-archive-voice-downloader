@@ -415,6 +415,24 @@ function createZipFromDirectory(sourceDir, zipPath) {
   execFileSync('zip', ['-rq', zipPath, '.'], { cwd: sourceDir, stdio: 'ignore' });
 }
 
+function logDownload(level, message, extra = null) {
+  const stamp = new Date().toISOString();
+  const line = `[voice-download][${stamp}] ${message}`;
+  if (level === 'error') {
+    if (extra) {
+      console.error(line, extra);
+      return;
+    }
+    console.error(line);
+    return;
+  }
+  if (extra) {
+    console.log(line, extra);
+    return;
+  }
+  console.log(line);
+}
+
 async function resolveStudentAndVoices(userDataDir, studentName) {
   const searchResult = await searchStudents(userDataDir, studentName);
   if (!searchResult.length) {
@@ -466,6 +484,7 @@ async function downloadVoiceFiles(
   const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ba-voice-'));
   const downloadRoot = path.join(tempRoot, sanitizeForDir(studentName));
   ensureDir(downloadRoot);
+  logDownload('info', `start student="${studentName}" files=${fileTitles.length}`);
 
   const { buildStaticAudioUrl } = getScraper();
   const results = [];
@@ -490,6 +509,7 @@ async function downloadVoiceFiles(
     }
 
     if (!candidates.length) {
+      logDownload('error', `no candidates student="${studentName}" file="${fileTitle}"`);
       results.push({
         fileTitle,
         ok: false,
@@ -526,10 +546,19 @@ async function downloadVoiceFiles(
         break;
       } catch (error) {
         lastError = error;
+        logDownload(
+          'error',
+          `request failed student="${studentName}" file="${fileTitle}" url="${url}"`,
+          { message: error?.message || 'unknown error' }
+        );
       }
     }
 
     if (!downloaded) {
+      logDownload('error', `all urls failed student="${studentName}" file="${fileTitle}"`, {
+        candidates,
+        lastError: lastError?.message || '다운로드 실패',
+      });
       results.push({
         fileTitle,
         ok: false,
@@ -556,6 +585,9 @@ async function downloadVoiceFiles(
     try {
       createZipFromDirectory(downloadRoot, zipPath);
     } catch (error) {
+      logDownload('error', `zip failed student="${studentName}" zip="${zipPath}"`, {
+        message: error?.message || 'unknown error',
+      });
       fs.rmSync(tempRoot, { recursive: true, force: true });
       return {
         ok: false,
@@ -566,6 +598,7 @@ async function downloadVoiceFiles(
       };
     }
     fs.rmSync(tempRoot, { recursive: true, force: true });
+    logDownload('info', `done student="${studentName}" success=${successCount}/${results.length}`);
     return {
       ok: true,
       successCount,
@@ -577,6 +610,7 @@ async function downloadVoiceFiles(
   }
 
   fs.rmSync(tempRoot, { recursive: true, force: true });
+  logDownload('error', `done with no success student="${studentName}" total=${results.length}`);
   return {
     ok: false,
     successCount,
