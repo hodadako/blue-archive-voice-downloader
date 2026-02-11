@@ -12,6 +12,12 @@
 - Windows: `.exe`
 - Linux: `.AppImage`
 
+## 아키텍처 선택 가이드
+
+- `x64`: 일반적인 Intel/AMD 64비트 PC
+- `arm64`: ARM 기반 기기 (예: Apple Silicon, Windows on ARM)
+- 릴리스 파일명에 `-macOS-x64`, `-Windows-arm64`처럼 OS/아키텍처가 함께 표기됩니다.
+
 ## 설치 방법
 
 ### macOS (`.dmg`)
@@ -22,9 +28,8 @@
 
 ### Windows (`.exe`)
 
-1. 릴리스에서 `Setup` 또는 `.exe` 파일 다운로드
-2. 설치 파일 실행 후 안내에 따라 설치
-3. 시작 메뉴에서 앱 실행
+1. 릴리스에서 자신의 아키텍처(`x64` 또는 `arm64`)에 맞는 `.exe` 다운로드
+2. 파일 실행 (포터블 실행 파일)
 
 ### Linux (`.AppImage`)
 

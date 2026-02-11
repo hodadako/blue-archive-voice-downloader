@@ -12,6 +12,12 @@ Download the installer for your OS from the Releases page.
 - Windows: `.exe`
 - Linux: `.AppImage`
 
+## Architecture Guide
+
+- `x64`: standard Intel/AMD 64-bit PCs
+- `arm64`: ARM-based devices (for example Apple Silicon, Windows on ARM)
+- Release filenames include both OS and architecture, such as `-macOS-x64` or `-Windows-arm64`.
+
 ## Installation
 
 ### macOS (`.dmg`)
@@ -22,9 +28,8 @@ Download the installer for your OS from the Releases page.
 
 ### Windows (`.exe`)
 
-1. Download the `Setup` or `.exe` installer from Releases
-2. Run the installer and follow the setup steps
-3. Launch from Start Menu
+1. Download the `.exe` matching your architecture (`x64` or `arm64`) from Releases
+2. Run the file directly (portable executable)
 
 ### Linux (`.AppImage`)
 
