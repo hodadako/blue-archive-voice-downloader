@@ -111,33 +111,6 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Delete existing release assets for this tag
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const tag = context.ref.replace('refs/tags/', '');
-            let release;
-            try {
-              const res = await github.rest.repos.getReleaseByTag({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                tag
-              });
-              release = res.data;
-            } catch (error) {
-              core.info(`No existing release for tag ${tag}: ${error.message}`);
-              return;
-            }
-
-            for (const asset of release.assets || []) {
-              core.info(`Deleting old asset: ${asset.name}`);
-              await github.rest.repos.deleteReleaseAsset({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                asset_id: asset.id
-              });
-            }
-
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
@@ -170,25 +143,63 @@ jobs:
             });
 
             const draftByTag = releases.find((r) => r.draft && r.tag_name === tag);
-            const latestDraft = releases.find((r) => r.draft);
-            const picked = draftByTag || latestDraft || null;
+            const picked = draftByTag || null;
 
             if (!picked) {
-              core.info('No draft release from release-drafter was found.');
+              core.info(`No tag-matched draft release from release-drafter for ${tag} was found.`);
+              core.setOutput('has_draft', 'false');
               core.setOutput('release_name', `Release ${tag}`);
               core.setOutput('release_body', '');
               return;
             }
 
             core.info(`Using draft release notes from: ${picked.name || picked.tag_name}`);
+            core.setOutput('has_draft', 'true');
             core.setOutput('release_name', picked.name || `Release ${tag}`);
             core.setOutput('release_body', picked.body || '');
 
-      - name: Publish GitHub Release
+      - name: Delete existing release assets for this tag
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tag = context.ref.replace('refs/tags/', '');
+            let release;
+            try {
+              const res = await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag
+              });
+              release = res.data;
+            } catch (error) {
+              core.info(`No existing release for tag ${tag}: ${error.message}`);
+              return;
+            }
+
+            for (const asset of release.assets || []) {
+              core.info(`Deleting old asset: ${asset.name}`);
+              await github.rest.repos.deleteReleaseAsset({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                asset_id: asset.id
+              });
+            }
+
+      - name: Publish GitHub Release (from release-drafter)
+        if: steps.drafter_notes.outputs.has_draft == 'true'
         uses: softprops/action-gh-release@v2
         with:
           name: ${{ steps.drafter_notes.outputs.release_name }}
           body: ${{ steps.drafter_notes.outputs.release_body }}
+          generate_release_notes: false
+          overwrite_files: false
+          files: release-files/*
+
+      - name: Publish GitHub Release (auto notes fallback)
+        if: steps.drafter_notes.outputs.has_draft != 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ steps.drafter_notes.outputs.release_name }}
           generate_release_notes: true
           overwrite_files: false
           files: release-files/*
