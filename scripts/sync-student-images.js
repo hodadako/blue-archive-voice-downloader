@@ -54,18 +54,6 @@ function extractImageExt(url) {
   return '.png';
 }
 
-function makeUniqueName(baseName, ext, used) {
-  const cleanBase = sanitizeFileStem(baseName) || 'student';
-  let name = `${cleanBase}${ext}`;
-  let idx = 2;
-  while (used.has(name)) {
-    name = `${cleanBase}_${idx}${ext}`;
-    idx += 1;
-  }
-  used.add(name);
-  return name;
-}
-
 async function downloadFile(url, outputPath) {
   const response = await http.get(url);
   fs.writeFileSync(outputPath, Buffer.from(response.data));
@@ -99,14 +87,6 @@ async function main() {
     byHref.set(href, imageUrl);
   }
 
-  const usedNames = new Set();
-  const existingFiles = fs.readdirSync(imageDir, { withFileTypes: true });
-  for (const entry of existingFiles) {
-    if (entry.isFile()) {
-      usedNames.add(entry.name);
-    }
-  }
-
   let ok = 0;
   let failed = 0;
   let skipped = 0;
@@ -121,7 +101,7 @@ async function main() {
 
     const ext = extractImageExt(remoteImageUrl);
     const baseName = student?.englishName || href.replace(/^\/wiki\//, '');
-    const fileName = makeUniqueName(baseName, ext, usedNames);
+    const fileName = `${sanitizeFileStem(baseName) || 'student'}${ext}`;
     const outputPath = path.join(imageDir, fileName);
 
     try {
