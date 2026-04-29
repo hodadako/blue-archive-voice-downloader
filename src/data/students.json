@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1770655535688,
+  "updatedAt": 1777420232561,
   "students": [
     {
       "href": "/wiki/Airi",
@@ -48,6 +48,18 @@
       "koreanType": "바니걸",
       "wikiSearchName": "Akane (Bunny Girl)",
       "imageUrl": "data/images/students/akane_bunny_girl.png"
+    },
+    {
+      "href": "/wiki/Akane_(School_Uniform)",
+      "englishName": "akane_school_uniform",
+      "koreanName": "아카네_교복",
+      "baseEnglishName": "akane",
+      "baseKoreanName": "아카네",
+      "typeKey": "school_uniform",
+      "englishType": "School Uniform",
+      "koreanType": "교복",
+      "wikiSearchName": "Akane (School Uniform)",
+      "imageUrl": "data/images/students/akane_school_uniform.png"
     },
     {
       "href": "/wiki/Akari",
@@ -396,6 +408,18 @@
       "koreanType": null,
       "wikiSearchName": "Eimi",
       "imageUrl": "data/images/students/eimi.png"
+    },
+    {
+      "href": "/wiki/Eimi_(Battle)",
+      "englishName": "eimi_battle",
+      "koreanName": "에이미_무장",
+      "baseEnglishName": "eimi",
+      "baseKoreanName": "에이미",
+      "typeKey": "battle",
+      "englishType": "Battle",
+      "koreanType": "무장",
+      "wikiSearchName": "Eimi (Battle)",
+      "imageUrl": "data/images/students/eimi_battle.png"
     },
     {
       "href": "/wiki/Eimi_(Swimsuit)",
@@ -1334,6 +1358,18 @@
       "imageUrl": "data/images/students/kokona.png"
     },
     {
+      "href": "/wiki/Konoka",
+      "englishName": "konoka",
+      "koreanName": "코노카",
+      "baseEnglishName": "konoka",
+      "baseKoreanName": "코노카",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Konoka",
+      "imageUrl": "data/images/students/konoka.png"
+    },
+    {
       "href": "/wiki/Kotama",
       "englishName": "kotama",
       "koreanName": "코타마",
@@ -1392,6 +1428,30 @@
       "koreanType": null,
       "wikiSearchName": "Koyuki",
       "imageUrl": "data/images/students/koyuki.png"
+    },
+    {
+      "href": "/wiki/Koyuki_(Pajama)",
+      "englishName": "koyuki_pajama",
+      "koreanName": "코유키_파자마",
+      "baseEnglishName": "koyuki",
+      "baseKoreanName": "코유키",
+      "typeKey": "pajama",
+      "englishType": "Pajama",
+      "koreanType": "파자마",
+      "wikiSearchName": "Koyuki (Pajama)",
+      "imageUrl": "data/images/students/koyuki_pajama.png"
+    },
+    {
+      "href": "/wiki/Kurumi",
+      "englishName": "kurumi",
+      "koreanName": "쿠루미",
+      "baseEnglishName": "kurumi",
+      "baseKoreanName": "쿠루미",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Kurumi",
+      "imageUrl": "data/images/students/kurumi.png"
     },
     {
       "href": "/wiki/Maki",
@@ -1958,6 +2018,18 @@
       "imageUrl": "data/images/students/neru_school_uniform.png"
     },
     {
+      "href": "/wiki/Niko",
+      "englishName": "niko",
+      "koreanName": "니코",
+      "baseEnglishName": "niko",
+      "baseKoreanName": "니코",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Niko",
+      "imageUrl": "data/images/students/niko.png"
+    },
+    {
       "href": "/wiki/Niya",
       "englishName": "niya",
       "koreanName": "니야",
@@ -2054,6 +2126,18 @@
       "imageUrl": "data/images/students/nozomi.png"
     },
     {
+      "href": "/wiki/Otogi",
+      "englishName": "otogi",
+      "koreanName": "오토기",
+      "baseEnglishName": "otogi",
+      "baseKoreanName": "오토기",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Otogi",
+      "imageUrl": "data/images/students/otogi.png"
+    },
+    {
       "href": "/wiki/Pina",
       "englishName": "pina",
       "koreanName": "피나",
@@ -2136,6 +2220,18 @@
       "koreanType": "매지컬",
       "wikiSearchName": "Reisa (Magical)",
       "imageUrl": "data/images/students/reisa_magical.png"
+    },
+    {
+      "href": "/wiki/Rena",
+      "englishName": "rena",
+      "koreanName": "레나",
+      "baseEnglishName": "rena",
+      "baseKoreanName": "레나",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Rena",
+      "imageUrl": "data/images/students/rena.png"
     },
     {
       "href": "/wiki/Renge",
@@ -2988,6 +3084,18 @@
       "koreanType": null,
       "wikiSearchName": "Yuzu",
       "imageUrl": "data/images/students/yuzu.png"
+    },
+    {
+      "href": "/wiki/Yuzu_(Battle)",
+      "englishName": "yuzu_battle",
+      "koreanName": "유즈_무장",
+      "baseEnglishName": "yuzu",
+      "baseKoreanName": "유즈",
+      "typeKey": "battle",
+      "englishType": "Battle",
+      "koreanType": "무장",
+      "wikiSearchName": "Yuzu (Battle)",
+      "imageUrl": "data/images/students/yuzu_battle.png"
     },
     {
       "href": "/wiki/Yuzu_(Maid)",
