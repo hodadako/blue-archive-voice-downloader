@@ -32,9 +32,31 @@ function normalizeHref(href) {
   return href.replace(/^https?:\/\/[^/]+/i, '').replace(/\/$/, '');
 }
 
-async function fetchHtml(url) {
-  const response = await http.get(url);
-  return response.data;
+async function fetchWikiParsedHtml(title, baseUrl) {
+  const response = await http.get(`${baseUrl}/w/api.php`, {
+    params: {
+      action: 'parse',
+      page: title,
+      prop: 'text',
+      format: 'json',
+      formatversion: 2,
+    },
+  });
+
+  const payload = response.data || {};
+  if (payload.error) {
+    throw new Error(`Wiki API parse failed for ${title}: ${payload.error.info || payload.error.code}`);
+  }
+
+  const parsedText = payload.parse?.text;
+  if (typeof parsedText === 'string') {
+    return parsedText;
+  }
+  if (typeof parsedText?.['*'] === 'string') {
+    return parsedText['*'];
+  }
+
+  throw new Error(`Wiki API returned no parsed HTML for ${title}`);
 }
 
 function decodeWikiTitleFromHref(href) {
@@ -50,12 +72,6 @@ function decodeWikiTitleFromHref(href) {
   }
 
   return decodeURIComponent(titlePart.replace(/_/g, ' '));
-}
-
-function toWikiPageUrl(baseUrl, title) {
-  const normalizedTitle = normalizeText(title).replace(/\s+/g, '_');
-  const encodedTitle = encodeURIComponent(normalizedTitle).replace(/%2F/g, '/');
-  return `${baseUrl}/wiki/${encodedTitle}`;
 }
 
 function extractImageUrl($, el, baseUrl) {
@@ -111,12 +127,12 @@ function addCharacterEntry(out, title, imageUrl) {
 }
 
 async function fetchCharacterEntriesFromWiki(baseUrl = 'https://bluearchive.wiki') {
-  const url = `${baseUrl}/wiki/Characters`;
-  const html = await fetchHtml(url);
+  const html = await fetchWikiParsedHtml('Characters', baseUrl);
   const $ = cheerio.load(html || '');
   const out = new Map();
   const blockedTitles = getCharacterBlockedTitles();
-  const tableRows = $('#mw-content-text table tbody tr');
+  const contentRoot = $('#mw-content-text').length ? $('#mw-content-text') : $.root();
+  const tableRows = contentRoot.find('table tbody tr');
 
   tableRows.each((_idx, row) => {
     let pickedTitle = null;
@@ -142,7 +158,7 @@ async function fetchCharacterEntriesFromWiki(baseUrl = 'https://bluearchive.wiki
   });
 
   if (!out.size) {
-    $('#mw-content-text a[href^="/wiki/"]').each((_idx, el) => {
+    contentRoot.find('a[href^="/wiki/"]').each((_idx, el) => {
       const href = ($(el).attr('href') || '').trim();
       const title = decodeWikiTitleFromHref(href);
       if (!title || !shouldIncludeCharacterTitle(title, blockedTitles)) {
@@ -163,24 +179,22 @@ async function fetchCharacterTitlesFromWiki(baseUrl = 'https://bluearchive.wiki'
 
 async function searchAudioPageByWeb(name, baseUrl) {
   const query = `${normalizeText(name)}/audio`;
-  const url = `${baseUrl}/wiki/Special:Search?query=${encodeURIComponent(query)}`;
-  const html = await fetchHtml(url);
-  const $ = cheerio.load(html);
-
-  let bestTitle = null;
-  $('a[href*="/wiki/"]').each((_idx, el) => {
-    if (bestTitle) {
-      return;
-    }
-    const href = $(el).attr('href') || '';
-    const title = decodeWikiTitleFromHref(href);
-    if (!title) {
-      return;
-    }
-    if (/\/audio$/i.test(title)) {
-      bestTitle = title;
-    }
+  const response = await http.get(`${baseUrl}/w/api.php`, {
+    params: {
+      action: 'query',
+      list: 'search',
+      srsearch: query,
+      srnamespace: 0,
+      srlimit: 10,
+      format: 'json',
+      formatversion: 2,
+    },
   });
+
+  const searchResults = response.data?.query?.search || [];
+  const bestTitle = searchResults
+    .map((result) => normalizeText(result?.title))
+    .find((title) => /\/audio$/i.test(title));
 
   if (bestTitle) {
     return bestTitle;
@@ -191,8 +205,7 @@ async function searchAudioPageByWeb(name, baseUrl) {
 }
 
 async function fetchAudioFileTitlesFromWikiPage(audioPageTitle, baseUrl) {
-  const url = toWikiPageUrl(baseUrl, audioPageTitle);
-  const html = await fetchHtml(url);
+  const html = await fetchWikiParsedHtml(audioPageTitle, baseUrl);
   return parseFileTitlesFromHtml(html);
 }
 
@@ -243,79 +256,13 @@ function toAbsoluteUrl(baseUrl, href) {
   }
 }
 
-function sortAudioLinkCandidates(urls) {
-  return [...urls].sort((a, b) => {
-    const score = (url) => {
-      const lower = url.toLowerCase();
-      let n = 0;
-      if (lower.includes('static.wikitide.net')) n += 100;
-      if (lower.includes('/transcoded/')) n += 80;
-      if (/\.mp3(\?|$)/i.test(lower)) n += 60;
-      if (/download/i.test(lower)) n += 30;
-      if (/\.ogg(\?|$)/i.test(lower)) n += 20;
-      return n;
-    };
-    return score(b) - score(a);
-  });
-}
-
 async function fetchFilePageAudioLinks(fileTitle, baseUrl) {
   const title = normalizeText((fileTitle || '').replace(/^File:/i, ''));
   if (!title) {
     return [];
   }
-
-  const url = toWikiPageUrl(baseUrl, `File:${title}`);
-  const html = await fetchHtml(url);
-  const $ = cheerio.load(html || '');
-  const out = new Set();
-
-  $('source[src], audio[src]').each((_idx, el) => {
-    const src = ($(el).attr('src') || '').trim();
-    if (!src) {
-      return;
-    }
-    const abs = toAbsoluteUrl(baseUrl, src);
-    if (!abs) {
-      return;
-    }
-    const lower = abs.toLowerCase();
-    const isDownloadableStatic =
-      lower.startsWith('https://static.') &&
-      lower.includes('?download') &&
-      (/\.mp3(\?|$)/i.test(lower) || /\.ogg(\?|$)/i.test(lower) || lower.includes('/transcoded/'));
-    if (isDownloadableStatic) {
-      out.add(abs);
-    }
-  });
-
-  $('a[href]').each((_idx, el) => {
-    const href = ($(el).attr('href') || '').trim();
-    if (!href) {
-      return;
-    }
-    const abs = toAbsoluteUrl(baseUrl, href);
-    if (!abs) {
-      return;
-    }
-
-    const lower = abs.toLowerCase();
-    const seemsAudio =
-      lower.startsWith('https://static.') &&
-      lower.includes('?download') &&
-      (/\.mp3(\?|$)/i.test(lower) || /\.ogg(\?|$)/i.test(lower) || lower.includes('/transcoded/'));
-
-    if (seemsAudio) {
-      out.add(abs);
-    }
-  });
-
   const fallback = buildStaticAudioUrl(fileTitle);
-  if (fallback) {
-    out.add(fallback);
-  }
-
-  return sortAudioLinkCandidates(Array.from(out));
+  return fallback ? [fallback] : [];
 }
 
 async function resolveAudioFilesWithLinksWithoutApi(name) {

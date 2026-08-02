@@ -19,10 +19,6 @@ async function main() {
 
   const studentsPayload = readJson(studentsPath);
   const students = Array.isArray(studentsPayload?.students) ? studentsPayload.students : [];
-  const out = {
-    updatedAt: Date.now(),
-    students: {},
-  };
   const existing = fs.existsSync(outputPath) ? readJson(outputPath) : null;
   const existingStudents = existing?.students && typeof existing.students === 'object' ? existing.students : {};
 
@@ -33,6 +29,11 @@ async function main() {
   const queryFilter = (process.env.VOICE_SYNC_QUERY || '').trim();
   const linkFilter = (process.env.VOICE_SYNC_LINK || '').trim();
   const forceSync = String(process.env.VOICE_SYNC_FORCE || '').toLowerCase() === 'true';
+  const isPartialSync = Boolean(queryFilter || linkFilter);
+  const out = {
+    updatedAt: Date.now(),
+    students: isPartialSync ? { ...existingStudents } : {},
+  };
   let cursor = 0;
 
   const filteredStudents = students.filter((student) => {

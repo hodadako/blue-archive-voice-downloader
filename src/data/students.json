@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1777420232561,
+  "updatedAt": 1785687329783,
   "students": [
     {
       "href": "/wiki/Airi",
@@ -338,6 +338,18 @@
       "imageUrl": "data/images/students/chiaki.png"
     },
     {
+      "href": "/wiki/Chiaki_(Swimsuit)",
+      "englishName": "chiaki_swimsuit",
+      "koreanName": "치아키_수영복",
+      "baseEnglishName": "chiaki",
+      "baseKoreanName": "치아키",
+      "typeKey": "swimsuit",
+      "englishType": "Swimsuit",
+      "koreanType": "수영복",
+      "wikiSearchName": "Chiaki (Swimsuit)",
+      "imageUrl": "data/images/students/chiaki_swimsuit.png"
+    },
+    {
       "href": "/wiki/Chihiro",
       "englishName": "chihiro",
       "koreanName": "치히로",
@@ -444,6 +456,18 @@
       "koreanType": null,
       "wikiSearchName": "Eri",
       "imageUrl": "data/images/students/eri.png"
+    },
+    {
+      "href": "/wiki/Erika",
+      "englishName": "erika",
+      "koreanName": null,
+      "baseEnglishName": "erika",
+      "baseKoreanName": null,
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Erika",
+      "imageUrl": "data/images/students/erika.png"
     },
     {
       "href": "/wiki/Fubuki",
@@ -588,6 +612,18 @@
       "koreanType": null,
       "wikiSearchName": "Haruka",
       "imageUrl": "data/images/students/haruka.png"
+    },
+    {
+      "href": "/wiki/Haruka_(Dress)",
+      "englishName": "haruka_dress",
+      "koreanName": "하루카_드레스",
+      "baseEnglishName": "haruka",
+      "baseKoreanName": "하루카",
+      "typeKey": "dress",
+      "englishType": "Dress",
+      "koreanType": "드레스",
+      "wikiSearchName": "Haruka (Dress)",
+      "imageUrl": "data/images/students/haruka_dress.png"
     },
     {
       "href": "/wiki/Haruka_(New_Year)",
@@ -878,6 +914,18 @@
       "imageUrl": "data/images/students/hoshino_battle.png"
     },
     {
+      "href": "/wiki/Hoshino_(Battle)_Attacker",
+      "englishName": "hoshino_battle_attacker",
+      "koreanName": null,
+      "baseEnglishName": "hoshino_battle_attacker",
+      "baseKoreanName": null,
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Hoshino (Battle) Attacker",
+      "imageUrl": "data/images/students/hoshino_battle_attacker.png"
+    },
+    {
       "href": "/wiki/Hoshino_(Swimsuit)",
       "englishName": "hoshino_swimsuit",
       "koreanName": "호시노_수영복",
@@ -900,6 +948,18 @@
       "koreanType": null,
       "wikiSearchName": "Ibuki",
       "imageUrl": "data/images/students/ibuki.png"
+    },
+    {
+      "href": "/wiki/Ibuki_(Swimsuit)",
+      "englishName": "ibuki_swimsuit",
+      "koreanName": "이부키_수영복",
+      "baseEnglishName": "ibuki",
+      "baseKoreanName": "이부키",
+      "typeKey": "swimsuit",
+      "englishType": "Swimsuit",
+      "koreanType": "수영복",
+      "wikiSearchName": "Ibuki (Swimsuit)",
+      "imageUrl": "data/images/students/ibuki_swimsuit.png"
     },
     {
       "href": "/wiki/Ichika",
@@ -960,6 +1020,18 @@
       "koreanType": null,
       "wikiSearchName": "Iroha",
       "imageUrl": "data/images/students/iroha.png"
+    },
+    {
+      "href": "/wiki/Iroha_(Swimsuit)",
+      "englishName": "iroha_swimsuit",
+      "koreanName": "이로하_수영복",
+      "baseEnglishName": "iroha",
+      "baseKoreanName": "이로하",
+      "typeKey": "swimsuit",
+      "englishType": "Swimsuit",
+      "koreanType": "수영복",
+      "wikiSearchName": "Iroha (Swimsuit)",
+      "imageUrl": "data/images/students/iroha_swimsuit.png"
     },
     {
       "href": "/wiki/Izumi",
@@ -1322,6 +1394,18 @@
       "imageUrl": "data/images/students/kisaki.png"
     },
     {
+      "href": "/wiki/Kisaki_(Swimsuit)",
+      "englishName": "kisaki_swimsuit",
+      "koreanName": "키사키_수영복",
+      "baseEnglishName": "kisaki",
+      "baseKoreanName": "키사키",
+      "typeKey": "swimsuit",
+      "englishType": "Swimsuit",
+      "koreanType": "수영복",
+      "wikiSearchName": "Kisaki (Swimsuit)",
+      "imageUrl": "data/images/students/kisaki_swimsuit.png"
+    },
+    {
       "href": "/wiki/Koharu",
       "englishName": "koharu",
       "koreanName": "코하루",
@@ -1488,6 +1572,18 @@
       "koreanType": null,
       "wikiSearchName": "Makoto",
       "imageUrl": "data/images/students/makoto.png"
+    },
+    {
+      "href": "/wiki/Makoto_(Swimsuit)",
+      "englishName": "makoto_swimsuit",
+      "koreanName": "마코토_수영복",
+      "baseEnglishName": "makoto",
+      "baseKoreanName": "마코토",
+      "typeKey": "swimsuit",
+      "englishType": "Swimsuit",
+      "koreanType": "수영복",
+      "wikiSearchName": "Makoto (Swimsuit)",
+      "imageUrl": "data/images/students/makoto_swimsuit.png"
     },
     {
       "href": "/wiki/Mari",
@@ -1910,6 +2006,18 @@
       "imageUrl": "data/images/students/mutsuki.png"
     },
     {
+      "href": "/wiki/Mutsuki_(Dress)",
+      "englishName": "mutsuki_dress",
+      "koreanName": "무츠키_드레스",
+      "baseEnglishName": "mutsuki",
+      "baseKoreanName": "무츠키",
+      "typeKey": "dress",
+      "englishType": "Dress",
+      "koreanType": "드레스",
+      "wikiSearchName": "Mutsuki (Dress)",
+      "imageUrl": "data/images/students/mutsuki_dress.png"
+    },
+    {
       "href": "/wiki/Mutsuki_(New_Year)",
       "englishName": "mutsuki_new_year",
       "koreanName": "무츠키_새해",
@@ -1956,6 +2064,18 @@
       "koreanType": null,
       "wikiSearchName": "Nagusa",
       "imageUrl": "data/images/students/nagusa.png"
+    },
+    {
+      "href": "/wiki/Nagusa_(Swimsuit)",
+      "englishName": "nagusa_swimsuit",
+      "koreanName": "나구사_수영복",
+      "baseEnglishName": "nagusa",
+      "baseKoreanName": "나구사",
+      "typeKey": "swimsuit",
+      "englishType": "Swimsuit",
+      "koreanType": "수영복",
+      "wikiSearchName": "Nagusa (Swimsuit)",
+      "imageUrl": "data/images/students/nagusa_swimsuit.png"
     },
     {
       "href": "/wiki/Natsu",
@@ -2414,6 +2534,18 @@
       "imageUrl": "data/images/students/satsuki.png"
     },
     {
+      "href": "/wiki/Satsuki_(Swimsuit)",
+      "englishName": "satsuki_swimsuit",
+      "koreanName": "사츠키_수영복",
+      "baseEnglishName": "satsuki",
+      "baseKoreanName": "사츠키",
+      "typeKey": "swimsuit",
+      "englishType": "Swimsuit",
+      "koreanType": "수영복",
+      "wikiSearchName": "Satsuki (Swimsuit)",
+      "imageUrl": "data/images/students/satsuki_swimsuit.png"
+    },
+    {
       "href": "/wiki/Saya",
       "englishName": "saya",
       "koreanName": "사야",
@@ -2688,6 +2820,30 @@
       "koreanType": "어린이",
       "wikiSearchName": "Shun (Kid)",
       "imageUrl": "data/images/students/shun_kid.png"
+    },
+    {
+      "href": "/wiki/Shun_(Swimsuit)",
+      "englishName": "shun_swimsuit",
+      "koreanName": "슌_수영복",
+      "baseEnglishName": "shun",
+      "baseKoreanName": "슌",
+      "typeKey": "swimsuit",
+      "englishType": "Swimsuit",
+      "koreanType": "수영복",
+      "wikiSearchName": "Shun (Swimsuit)",
+      "imageUrl": "data/images/students/shun_swimsuit.png"
+    },
+    {
+      "href": "/wiki/Shun_(Swimsuit)_Kid",
+      "englishName": "shun_swimsuit_kid",
+      "koreanName": null,
+      "baseEnglishName": "shun_swimsuit_kid",
+      "baseKoreanName": null,
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Shun (Swimsuit) Kid",
+      "imageUrl": "data/images/students/shun_swimsuit_kid.png"
     },
     {
       "href": "/wiki/Subaru",
