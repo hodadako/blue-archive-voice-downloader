@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1785687329783,
+  "updatedAt": 1785769463310,
   "students": [
     {
       "href": "/wiki/Airi",
@@ -460,9 +460,9 @@
     {
       "href": "/wiki/Erika",
       "englishName": "erika",
-      "koreanName": null,
+      "koreanName": "에리카",
       "baseEnglishName": "erika",
-      "baseKoreanName": null,
+      "baseKoreanName": "에리카",
       "typeKey": null,
       "englishType": null,
       "koreanType": null,
@@ -912,18 +912,6 @@
       "koreanType": "무장",
       "wikiSearchName": "Hoshino (Battle)",
       "imageUrl": "data/images/students/hoshino_battle.png"
-    },
-    {
-      "href": "/wiki/Hoshino_(Battle)_Attacker",
-      "englishName": "hoshino_battle_attacker",
-      "koreanName": null,
-      "baseEnglishName": "hoshino_battle_attacker",
-      "baseKoreanName": null,
-      "typeKey": null,
-      "englishType": null,
-      "koreanType": null,
-      "wikiSearchName": "Hoshino (Battle) Attacker",
-      "imageUrl": "data/images/students/hoshino_battle_attacker.png"
     },
     {
       "href": "/wiki/Hoshino_(Swimsuit)",
@@ -2836,9 +2824,9 @@
     {
       "href": "/wiki/Shun_(Swimsuit)_Kid",
       "englishName": "shun_swimsuit_kid",
-      "koreanName": null,
+      "koreanName": "슈에링_수영복",
       "baseEnglishName": "shun_swimsuit_kid",
-      "baseKoreanName": null,
+      "baseKoreanName": "슈에링_수영복",
       "typeKey": null,
       "englishType": null,
       "koreanType": null,

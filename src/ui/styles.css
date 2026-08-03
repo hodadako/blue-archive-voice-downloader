@@ -163,6 +163,18 @@ input {
   flex-wrap: wrap;
 }
 
+.updateControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.updateStatus {
+  max-width: 220px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
 .control {
   display: flex;
   gap: 8px;

@@ -1,6 +1,6 @@
 {
   "name": "bluearchive-voice-downloader",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Blue Archive voice downloader desktop app",
   "main": "src/main.js",
   "author": "Daniel",

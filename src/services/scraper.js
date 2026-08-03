@@ -98,6 +98,7 @@ function getCharacterBlockedTitles() {
     'Characters trivia list',
     'Unique gear list',
     'Unique weapons list',
+    'Hoshino (Battle) Attacker',
   ]);
 }
 
