@@ -30,9 +30,22 @@ async function main() {
   const linkFilter = (process.env.VOICE_SYNC_LINK || '').trim();
   const forceSync = String(process.env.VOICE_SYNC_FORCE || '').toLowerCase() === 'true';
   const isPartialSync = Boolean(queryFilter || linkFilter);
+  const studentKeys = new Set(
+    students
+      .map((student) => student?.href || student?.englishName || student?.koreanName)
+      .filter(Boolean)
+  );
+  const initialStudents = isPartialSync ? { ...existingStudents } : {};
+  if (!isPartialSync) {
+    for (const [key, value] of Object.entries(existingStudents)) {
+      if (studentKeys.has(key)) {
+        initialStudents[key] = value;
+      }
+    }
+  }
   const out = {
     updatedAt: Date.now(),
-    students: isPartialSync ? { ...existingStudents } : {},
+    students: initialStudents,
   };
   let cursor = 0;
 

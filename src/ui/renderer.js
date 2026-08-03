@@ -4,6 +4,8 @@ const resolveBtn = document.getElementById('resolveBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 const langSelect = document.getElementById('langSelect');
 const themeToggle = document.getElementById('themeToggle');
+const updateBtn = document.getElementById('updateBtn');
+const updateStatus = document.getElementById('updateStatus');
 const progressArea = document.getElementById('progressArea');
 const progressValue = document.getElementById('progressValue');
 const progressFill = document.getElementById('progressFill');
@@ -22,6 +24,7 @@ let isInputComposing = false;
 let searchRequestSeq = 0;
 let searchSuggestions = [];
 let activeSuggestionIndex = -1;
+let updateDownloadReady = false;
 
 const translations = {
   ko: {
@@ -30,6 +33,12 @@ const translations = {
       '한국어/영어 이름으로 학생을 검색하고, <code>bluearchive.wiki</code> 음성 파일을 내려받습니다.',
     langLabel: '언어',
     themeLabel: '다크모드',
+    updateCheck: '업데이트 확인',
+    updateChecking: '업데이트 확인 중...',
+    updateLatest: '최신 버전입니다 (v{version}).',
+    updateAvailable: '새 버전 v{version}이 있습니다.',
+    updateDownload: '업데이트 다운로드',
+    updateError: '업데이트 확인 실패: {error}',
     searchLabel: '학생 이름 검색',
     searchPlaceholder: 'Aru, 아루',
     searchBtn: '검색',
@@ -61,6 +70,12 @@ const translations = {
       'Search students by Korean/English names and download <code>bluearchive.wiki</code> voice files.',
     langLabel: 'Language',
     themeLabel: 'Dark mode',
+    updateCheck: 'Check for updates',
+    updateChecking: 'Checking for updates...',
+    updateLatest: 'You are up to date (v{version}).',
+    updateAvailable: 'Version v{version} is available.',
+    updateDownload: 'Download update',
+    updateError: 'Update check failed: {error}',
     searchLabel: 'Search student name',
     searchPlaceholder: 'Aru',
     searchBtn: 'Search',
@@ -109,12 +124,17 @@ function applyTranslations() {
   });
 }
 
+function updateButtonLabel() {
+  updateBtn.textContent = updateDownloadReady ? t('updateDownload') : t('updateCheck');
+}
+
 function setLanguage(lang) {
   currentLanguage = lang === 'en' ? 'en' : 'ko';
   langSelect.value = currentLanguage;
   document.documentElement.lang = currentLanguage === 'en' ? 'en' : 'ko';
   localStorage.setItem('language', currentLanguage);
   applyTranslations();
+  updateButtonLabel();
 }
 
 function setTheme(isDark, persist = true) {
@@ -320,6 +340,43 @@ async function doSearch(options = {}) {
 }
 
 searchBtn.addEventListener('click', doSearch);
+
+updateBtn.addEventListener('click', async () => {
+  if (updateDownloadReady) {
+    try {
+      const result = await window.voiceApi.openUpdate();
+      if (!result?.ok) {
+        updateStatus.textContent = result?.message || t('updateError', { error: 'download unavailable' });
+      }
+    } catch (error) {
+      updateStatus.textContent = t('updateError', { error: error.message });
+    }
+    return;
+  }
+
+  updateBtn.disabled = true;
+  updateStatus.textContent = t('updateChecking');
+  try {
+    const result = await window.voiceApi.checkForUpdates();
+    if (!result?.ok) {
+      updateDownloadReady = false;
+      updateStatus.textContent = t('updateError', { error: result?.message || 'unknown error' });
+      return;
+    }
+
+    updateDownloadReady = Boolean(result.updateAvailable);
+    updateStatus.textContent = result.updateAvailable
+      ? t('updateAvailable', { version: result.latestVersion })
+      : t('updateLatest', { version: result.currentVersion });
+  } catch (error) {
+    updateDownloadReady = false;
+    updateStatus.textContent = t('updateError', { error: error.message });
+  } finally {
+    updateBtn.disabled = false;
+    updateButtonLabel();
+  }
+});
+
 studentInput.addEventListener('compositionstart', () => {
   isInputComposing = true;
 });

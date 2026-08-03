@@ -1,11 +1,14 @@
 const path = require('path');
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron');
 
 const {
   searchStudents,
   resolveStudentAndVoices,
   downloadVoiceFiles,
 } = require('./services/voiceService');
+const { checkForUpdates } = require('./services/updateService');
+
+let latestUpdateTarget = null;
 
 function createWindow() {
   const windowIcon = path.join(__dirname, '..', 'icons', 'icon.png');
@@ -45,6 +48,33 @@ ipcMain.handle('students:search', async (_event, query) => {
 
 ipcMain.handle('voices:resolve', async (_event, studentName) => {
   return resolveStudentAndVoices(app.getPath('userData'), studentName);
+});
+
+ipcMain.handle('app:check-update', async () => {
+  latestUpdateTarget = null;
+  try {
+    const result = await checkForUpdates({
+      currentVersion: app.getVersion(),
+      platform: process.platform,
+      arch: process.arch,
+    });
+    latestUpdateTarget = result.updateAvailable ? result.downloadUrl : null;
+    return result;
+  } catch (error) {
+    return {
+      ok: false,
+      currentVersion: app.getVersion(),
+      message: error.message || 'Unable to check for updates.',
+    };
+  }
+});
+
+ipcMain.handle('app:open-update', async () => {
+  if (!latestUpdateTarget) {
+    return { ok: false, message: 'No update is ready to download.' };
+  }
+  await shell.openExternal(latestUpdateTarget);
+  return { ok: true };
 });
 
 ipcMain.handle('voices:download', async (_event, payload) => {

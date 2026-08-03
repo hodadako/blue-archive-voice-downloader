@@ -3,6 +3,8 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('voiceApi', {
   searchStudents: (query) => ipcRenderer.invoke('students:search', query),
   resolveVoices: (studentName) => ipcRenderer.invoke('voices:resolve', studentName),
+  checkForUpdates: () => ipcRenderer.invoke('app:check-update'),
+  openUpdate: () => ipcRenderer.invoke('app:open-update'),
   downloadVoices: (payload) => ipcRenderer.invoke('voices:download', payload),
   onDownloadProgress: (callback) => {
     if (typeof callback !== 'function') {
