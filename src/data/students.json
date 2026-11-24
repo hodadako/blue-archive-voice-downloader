@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1785769463310,
+  "updatedAt": 1795506076627,
   "students": [
     {
       "href": "/wiki/Airi",
@@ -108,6 +108,18 @@
       "koreanType": "드레스",
       "wikiSearchName": "Ako (Dress)",
       "imageUrl": "data/images/students/ako_dress.png"
+    },
+    {
+      "href": "/wiki/Anna",
+      "englishName": "anna",
+      "koreanName": "안나",
+      "baseEnglishName": "anna",
+      "baseKoreanName": "안나",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Anna",
+      "imageUrl": "data/images/students/anna.png"
     },
     {
       "href": "/wiki/Aoba",
@@ -290,6 +302,18 @@
       "imageUrl": "data/images/students/azusa.png"
     },
     {
+      "href": "/wiki/Azusa_(Racing)",
+      "englishName": "azusa_racing",
+      "koreanName": "아즈사_레이싱",
+      "baseEnglishName": "azusa",
+      "baseKoreanName": "아즈사",
+      "typeKey": "racing",
+      "englishType": "Racing",
+      "koreanType": "레이싱",
+      "wikiSearchName": "Azusa (Racing)",
+      "imageUrl": "data/images/students/azusa_racing.png"
+    },
+    {
       "href": "/wiki/Azusa_(Swimsuit)",
       "englishName": "azusa_swimsuit",
       "koreanName": "아즈사_수영복",
@@ -468,6 +492,18 @@
       "koreanType": null,
       "wikiSearchName": "Erika",
       "imageUrl": "data/images/students/erika.png"
+    },
+    {
+      "href": "/wiki/Erina",
+      "englishName": "erina",
+      "koreanName": "에리나",
+      "baseEnglishName": "erina",
+      "baseKoreanName": "에리나",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Erina",
+      "imageUrl": "data/images/students/erina.png"
     },
     {
       "href": "/wiki/Fubuki",
@@ -756,6 +792,18 @@
       "koreanType": null,
       "wikiSearchName": "Hifumi",
       "imageUrl": "data/images/students/hifumi.png"
+    },
+    {
+      "href": "/wiki/Hifumi_(Racing)",
+      "englishName": "hifumi_racing",
+      "koreanName": "히후미_레이싱",
+      "baseEnglishName": "hifumi",
+      "baseKoreanName": "히후미",
+      "typeKey": "racing",
+      "englishType": "Racing",
+      "koreanType": "레이싱",
+      "wikiSearchName": "Hifumi (Racing)",
+      "imageUrl": "data/images/students/hifumi_racing.png"
     },
     {
       "href": "/wiki/Hifumi_(Swimsuit)",
@@ -1238,6 +1286,18 @@
       "imageUrl": "data/images/students/kasumi.png"
     },
     {
+      "href": "/wiki/Kasumi_(Swimsuit)",
+      "englishName": "kasumi_swimsuit",
+      "koreanName": "카스미_수영복",
+      "baseEnglishName": "kasumi",
+      "baseKoreanName": "카스미",
+      "typeKey": "swimsuit",
+      "englishType": "Swimsuit",
+      "koreanType": "수영복",
+      "wikiSearchName": "Kasumi (Swimsuit)",
+      "imageUrl": "data/images/students/kasumi_swimsuit.png"
+    },
+    {
       "href": "/wiki/Kayoko",
       "englishName": "kayoko",
       "koreanName": "카요코",
@@ -1430,6 +1490,18 @@
       "imageUrl": "data/images/students/kokona.png"
     },
     {
+      "href": "/wiki/Kokoro",
+      "englishName": "kokoro",
+      "koreanName": "코코로",
+      "baseEnglishName": "kokoro",
+      "baseKoreanName": "코코로",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Kokoro",
+      "imageUrl": "data/images/students/kokoro.png"
+    },
+    {
       "href": "/wiki/Konoka",
       "englishName": "konoka",
       "koreanName": "코노카",
@@ -1464,6 +1536,18 @@
       "koreanType": "캠핑",
       "wikiSearchName": "Kotama (Camping)",
       "imageUrl": "data/images/students/kotama_camping.png"
+    },
+    {
+      "href": "/wiki/Kotone",
+      "englishName": "kotone",
+      "koreanName": "코토네",
+      "baseEnglishName": "kotone",
+      "baseKoreanName": "코토네",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Kotone",
+      "imageUrl": "data/images/students/kotone.png"
     },
     {
       "href": "/wiki/Kotori",
@@ -2282,6 +2366,18 @@
       "imageUrl": "data/images/students/rabu.png"
     },
     {
+      "href": "/wiki/Rana",
+      "englishName": "rana",
+      "koreanName": "라나",
+      "baseEnglishName": "rana",
+      "baseKoreanName": "라나",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Rana",
+      "imageUrl": "data/images/students/rana.png"
+    },
+    {
       "href": "/wiki/Rei",
       "englishName": "rei",
       "koreanName": "레이",
@@ -3012,6 +3108,18 @@
       "koreanType": "드레스",
       "wikiSearchName": "Tsukuyo (Dress)",
       "imageUrl": "data/images/students/tsukuyo_dress.png"
+    },
+    {
+      "href": "/wiki/Tsumugi",
+      "englishName": "tsumugi",
+      "koreanName": "츠무기",
+      "baseEnglishName": "tsumugi",
+      "baseKoreanName": "츠무기",
+      "typeKey": null,
+      "englishType": null,
+      "koreanType": null,
+      "wikiSearchName": "Tsumugi",
+      "imageUrl": "data/images/students/tsumugi.png"
     },
     {
       "href": "/wiki/Tsurugi",

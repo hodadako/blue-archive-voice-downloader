@@ -166,16 +166,19 @@ async function main() {
       continue;
     }
 
+    const existingRow = existingByEnglish.get(englishName);
     let { baseEnglishName, typeKey } = splitEnglishNameAndType(englishName);
-    let englishType = typeKey ? englishTypeMap[typeKey] || null : null;
-    let koreanType = typeKey ? koreanTypeMap[typeKey] || null : null;
+    const existingType = typeKey && existingRow?.typeKey === typeKey ? existingRow : null;
+    let englishType = typeKey ? englishTypeMap[typeKey] || existingType?.englishType || null : null;
+    let koreanType = typeKey ? koreanTypeMap[typeKey] || existingType?.koreanType || null : null;
     if (typeKey && !englishType) {
       baseEnglishName = englishName;
       typeKey = null;
       englishType = null;
       koreanType = null;
     }
-    const baseKoreanName = baseEnglishName ? baseNameMap[baseEnglishName] || null : null;
+    const baseKoreanName = baseNameMap[baseEnglishName] ||
+      (existingRow?.baseEnglishName === baseEnglishName ? existingRow?.baseKoreanName : null) || null;
 
     if (baseEnglishName && !baseKoreanName) {
       missingBase.add(baseEnglishName);
@@ -184,7 +187,6 @@ async function main() {
       missingType.add(typeKey);
     }
 
-    const existingRow = existingByEnglish.get(englishName);
     const koreanName = baseKoreanName
       ? (koreanType ? `${baseKoreanName}_${koreanType}` : baseKoreanName)
       : (existingRow?.koreanName || null);
